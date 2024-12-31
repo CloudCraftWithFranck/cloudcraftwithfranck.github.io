@@ -32,25 +32,7 @@ This is a Next.js-based portfolio and blog project designed to showcase professi
 ---
 
 ## Installation
-
-1. Clone the repository:
+Clone the repository:
    ```bash
    git clone https://github.com/your-username/CloudCraftWithFranck.git
    cd CloudCraftWithFranck
-
-## Project Structure
-.
-├── src/
-│   ├── app/
-│   │   ├── [locale]/
-│   │   │   ├── metadata.ts       # Server-side metadata generation
-│   │   │   ├── page.tsx          # Main page component (Client Component)
-│   │   ├── resources.ts          # Locale-based content definitions
-│   ├── components/
-│   │   ├── work/Projects.tsx     # Project section component
-│   │   ├── blog/Posts.tsx        # Blog posts section
-│   │   └── Mailchimp.tsx         # Newsletter subscription form
-│   └── once-ui/                  # Reusable UI components
-├── public/images/                # Static assets (student images, etc.)
-├── README.md                     # Project documentation
-└── package.json                  # Dependencies and scripts
