@@ -1,0 +1,81 @@
+{
+    "person": {
+        "role": "Cloud Advocate"
+    },
+    "newsletter": {
+        "title": "Subscribe to {firstName}'s Newsletter",
+        "description": "I occasionally write about cloud, AI, security, and share thoughts on the problem solving and critical solutions for cloud engineering",
+        "button": "Sign up"
+    },
+    "home": {
+        "label": "Home",
+        "title": "{name}'s Portfolio",
+        "description": "Portfolio website showcasing my work as a {role}",
+        "headline": "Cloud Advocate and Instructor",
+        "subline": "I'm Franck, a Cloud Advocate at CLOUDCRAFTWITHFRANCK, where I craft cloud solutions for engineers. After hours, I build my own projects."
+    },
+    "about": {
+        "label": "About",
+        "title": "About me",
+        "description": "Meet {name}, {role} from {location}",
+        "intro": {
+            "title": "Introduction",
+            "description": "Franck Kengne is a US-based Cloud Advocate with a passion for transforming complex cloud challenges into simple, and straightforward solutions. His work spans cloud challenges, problem solving, and critical thinking as well as interviews in cloud technology."
+        },
+        "work": {
+            "title": "Work Experience",
+            "experiences": {
+                "CSE": {
+                    "timeframe": "2023 - Present",
+                    "role": "Senior Azure Cloud Engineer",
+                    "achievements": "Redesigned, architected and managed Microsoft PowerApps solutions in enterprise Azure environments, integrating custom APIs, automation workflows, and complex logic apps"
+                },
+                "The OpenNMS Group": {
+                    "timeframe": "2022 - 2023",
+                    "role": "Senior IT Operations Engineer",
+                    "achievements": "Developed a Proficient in Infrastructure as Code (IaC) using Terraform, automating infrastructure provisioning and configuration for both on-premises and cloud environments."
+                }
+            }
+        },
+        "studies": {
+            "title": "Studies",
+            "institutions": {
+                "University of Maryland Global Campus": {
+                    "description": "Studied software engineering and cybersecurity"
+                },
+                "Rowan College Burlington County": {
+                    "description": "Studied information insurance and cybersecurity."
+                }
+            }
+        },
+        "technical": {
+            "title": "Technical skills",
+            "skills": {
+                "Azure": {
+                    "description": "Able to configure, deploy, and manage any azure service."
+                },
+                "Terraform": {
+                    "description": "Building scalable infrastructure using terraform is my passion."
+                }
+            }
+        }
+    },
+    "blog": {
+        "label": "Blog",
+        "title": "Writing about cloud, AI and security...",
+        "description": "Read what {name} has been up to recently"
+    },
+    "work": {
+        "label": "Work",
+        "title": "My projects",
+        "description": "Design and dev projects by {name}"
+    },
+    "gallery": {
+        "label": "Gallery",
+        "title": "My photo gallery",
+        "description": "A photo collection by {name}"
+    },
+    "projectCard": {
+        "label": "Read Case Study"
+    }
+}
