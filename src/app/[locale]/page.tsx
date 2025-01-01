@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Arrow } from '@/once-ui/components';
 import { Projects } from '@/components/work/Projects';
@@ -67,6 +67,17 @@ export default function Home(
         },
     ];
 
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    // Automatically change the testimonial every 2 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+        }, 2000);
+
+        return () => clearInterval(interval);
+    }, [testimonials.length]);
+
     return (
         <Flex
             maxWidth="m"
@@ -97,138 +108,11 @@ export default function Home(
                     }),
                 }}
             />
-            <Flex
-                fillWidth
-                direction="row"
-                alignItems="flex-start"
-                justifyContent="space-between"
-                paddingY="l"
-                gap="l"
-            >
-                {/* Left Column: Text Content */}
-                <Flex
-                    direction="column"
-                    fillWidth
-                    flex={2}
-                >
-                    <RevealFx
-                        translateY="4"
-                        fillWidth
-                        justifyContent="flex-start"
-                        paddingBottom="m"
-                    >
-                        <Heading
-                            wrap="balance"
-                            variant="display-strong-l"
-                        >
-                            {home.headline}
-                        </Heading>
-                    </RevealFx>
-                    <RevealFx
-                        translateY="8"
-                        delay={0.2}
-                        fillWidth
-                        justifyContent="flex-start"
-                        paddingBottom="m"
-                    >
-                        <Text
-                            wrap="balance"
-                            onBackground="neutral-weak"
-                            variant="heading-default-xl"
-                        >
-                            {home.subline}
-                        </Text>
-                    </RevealFx>
-                    <RevealFx translateY="12" delay={0.4}>
-                        <Flex fillWidth>
-                            <Button
-                                id="about"
-                                data-border="rounded"
-                                href={`/${locale}/about`}
-                                variant="tertiary"
-                                size="m"
-                            >
-                                <Flex gap="8" alignItems="center">
-                                    {about.avatar.display && (
-                                        <Avatar
-                                            style={{
-                                                marginLeft: '-0.75rem',
-                                                marginRight: '0.25rem',
-                                            }}
-                                            src={person.avatar}
-                                            size="m"
-                                        />
-                                    )}
-                                    {t('about.title')}
-                                    <Arrow trigger="#about" />
-                                </Flex>
-                            </Button>
-                        </Flex>
-                    </RevealFx>
-                </Flex>
-
-                {/* Right Column: CloudCraft With Me */}
-                <Flex
-                    direction="column"
-                    flex={1}
-                    padding="20"
-                    border="neutral-medium"
-                    borderStyle="solid-1"
-                    radius="m"
-                    background="neutral-strong"
-                    style={{ textAlign: 'center' }}
-                >
-                    <Heading
-                        as="h2"
-                        variant="display-strong-s"
-                        marginBottom="m"
-                    >
-                        CloudCraft With Me
-                    </Heading>
-                    <iframe
-                        src="https://www.youtube.com/embed/example-video-id"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        style={{
-                            width: '100%',
-                            height: '300px',
-                            borderRadius: '8px',
-                        }}
-                    ></iframe>
-                </Flex>
-            </Flex>
-
-            <RevealFx translateY="16" delay={0.6}>
-                <Projects range={[1, 1]} locale={locale} />
-            </RevealFx>
-            {routes['/blog'] && (
-                <Flex
-                    fillWidth
-                    gap="24"
-                    mobileDirection="column"
-                >
-                    <Flex flex={1} paddingLeft="l">
-                        <Heading
-                            as="h2"
-                            variant="display-strong-xs"
-                            wrap="balance"
-                        >
-                            Latest from the blog
-                        </Heading>
-                    </Flex>
-                    <Flex flex={3} paddingX="20">
-                        <Posts range={[1, 2]} columns="2" locale={locale} />
-                    </Flex>
-                </Flex>
-            )}
-            <Projects range={[2]} locale={locale} />
-
             {/* Testimonials Section */}
             <Flex
                 direction="column"
                 alignItems="center"
-                style={{ marginTop: '4rem' }}
+                style={{ marginTop: '4rem', overflow: 'hidden', width: '100%' }}
             >
                 <Heading as="h2" variant="display-strong-l" marginBottom="m">
                     What People Are Saying
@@ -236,9 +120,10 @@ export default function Home(
                 <Flex
                     direction="row"
                     style={{
-                        flexWrap: 'wrap',
-                        gap: '16px',
+                        width: '100%',
                         justifyContent: 'center',
+                        transform: `translateX(-${currentIndex * 100}%)`,
+                        transition: 'transform 0.5s ease-in-out',
                     }}
                 >
                     {testimonials.map((testimonial, index) => (
@@ -254,6 +139,7 @@ export default function Home(
                                 maxWidth: '300px',
                                 textAlign: 'center',
                                 margin: '8px',
+                                flex: '0 0 100%',
                             }}
                         >
                             <Text variant="body-strong-s">
