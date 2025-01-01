@@ -226,7 +226,7 @@ export default function Home(
                             direction="column"
                             padding="m"
                             radius="m"
-                            background="surface"
+                            background="neutral-weak"
                             style={{
                                 width: '300px',
                                 boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
