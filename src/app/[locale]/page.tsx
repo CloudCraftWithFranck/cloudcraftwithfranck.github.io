@@ -157,7 +157,7 @@ export default function Home(
                     border="neutral-medium"
                     borderStyle="solid-1"
                     radius="m"
-                    background="#111"
+                    backgroundColor="#111"
                     style={{ textAlign: 'center' }}
                 >
                     <Heading
