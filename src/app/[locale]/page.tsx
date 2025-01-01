@@ -42,30 +42,30 @@ export async function generateMetadata(
     };
 }
 
-const testimonials = [
-    {
-        feedback: "This platform has transformed the way I approach cloud projects.",
-        name: "John Doe",
-        username: "@johndoe",
-    },
-    {
-        feedback: "A fantastic tool for beginners and experts alike!",
-        name: "Jane Smith",
-        username: "@janesmith",
-    },
-    {
-        feedback: "The resources available here are second to none.",
-        name: "Alice Johnson",
-        username: "@alicejohnson",
-    },
-];
-
 export default function Home(
     { params: { locale } }: { params: { locale: string } }
 ) {
     unstable_setRequestLocale(locale);
     const t = useTranslations();
     const { home, about, person, newsletter } = renderContent(t);
+
+    const testimonials = [
+        {
+            feedback: 'This platform has transformed the way I approach cloud projects.',
+            name: 'John Doe',
+            username: '@johndoe',
+        },
+        {
+            feedback: 'A fantastic tool for beginners and experts alike!',
+            name: 'Jane Smith',
+            username: '@janesmith',
+        },
+        {
+            feedback: 'The resources available here are second to none.',
+            name: 'Alice Johnson',
+            username: '@alicejohnson',
+        },
+    ];
 
     return (
         <Flex
@@ -202,50 +202,6 @@ export default function Home(
             <RevealFx translateY="16" delay={0.6}>
                 <Projects range={[1, 1]} locale={locale} />
             </RevealFx>
-
-            {/* Testimonials Section */}
-            <Flex
-                direction="column"
-                alignItems="center"
-                marginTop="4rem"
-            >
-                <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                    What People Are Saying
-                </Heading>
-                <Flex
-                    direction="row"
-                    wrap={true}
-                    gap="l"
-                    justifyContent="center"
-                >
-                    {testimonials.map((testimonial, index) => (
-                        <Flex
-                            key={index}
-                            direction="column"
-                            padding="l"
-                            borderRadius="m"
-                            style={{
-                                textAlign: "center",
-                                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                                maxWidth: "300px",
-                            }}
-                        >
-                            <Text variant="body-strong-s" marginBottom="s">
-                                {testimonial.feedback}
-                            </Text>
-                            <Text
-                                variant="body-default-s"
-                                onBackground="neutral-weak"
-                                marginTop="m"
-                            >
-                                - {testimonial.name} {" "}
-                                <span style={{ color: "#bbb" }}>{testimonial.username}</span>
-                            </Text>
-                        </Flex>
-                    ))}
-                </Flex>
-            </Flex>
-
             {routes['/blog'] && (
                 <Flex
                     fillWidth
@@ -266,7 +222,49 @@ export default function Home(
                     </Flex>
                 </Flex>
             )}
-            <Projects range={[2]} locale={locale} />
+
+            {/* Testimonials Section */}
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem' }} // Inline style for spacing
+            >
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    What People Are Saying
+                </Heading>
+                <Flex
+                    direction="row"
+                    flexWrap="wrap"
+                    gap="l"
+                    justifyContent="center"
+                >
+                    {testimonials.map((testimonial, index) => (
+                        <Flex
+                            key={index}
+                            direction="column"
+                            alignItems="center"
+                            padding="l"
+                            style={{
+                                borderRadius: '8px',
+                                background: '#000',
+                                color: '#fff',
+                                maxWidth: '300px',
+                                textAlign: 'center',
+                            }}
+                        >
+                            <Text variant="body-strong-s">{testimonial.feedback}</Text>
+                            <Text
+                                variant="body-default-s"
+                                marginTop="m"
+                                style={{ color: '#bbb' }}
+                            >
+                                - {testimonial.name} <span>@{testimonial.username}</span>
+                            </Text>
+                        </Flex>
+                    ))}
+                </Flex>
+            </Flex>
+
             {newsletter.display && <Mailchimp newsletter={newsletter} />}
         </Flex>
     );
