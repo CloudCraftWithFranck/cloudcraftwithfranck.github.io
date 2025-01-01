@@ -9,6 +9,17 @@ import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
+const testimonials = [
+    { name: "Lyes", username: "@lyker_zi", feedback: "There is an easier option. Deploying literally anything on @Railway" },
+    { name: "Benjamin Klieger", username: "@BenjaminKlieger", feedback: '"Ship your apps, databases, and more to production in seconds." @Railway is a breeze to deploy.' },
+    { name: "kinsyu", username: "@kinsyudev", feedback: "Addicted to organizing my services in @Railway" },
+    { name: "Sam Newby", username: "@SamNewby_", feedback: "The UX in deploying a new app on @Railway is probably the best I’ve ever used." },
+    { name: "Wilson Wilson", username: "@euboid", feedback: "@Railway has the best support among every PaaS I’ve tried. < 1 minute responses. Every. Single. Time." },
+    { name: "teo", username: "@teodor_io", feedback: "Railway is really good. Incredible developer experience." },
+    { name: "Kyle McDonald", username: "@kpmdev", feedback: "Damn, @Railway is by far the fastest I’ve ever got up and running on a host." },
+    { name: "caeser_kv", username: "@caesar_kv", feedback: "@Railway for postgres, railway for everything ❤️" },
+];
+
 export async function generateMetadata(
     { params: { locale } }: { params: { locale: string } }
 ) {
@@ -205,6 +216,45 @@ export default function Home(
                 </Flex>
             )}
             <Projects range={[2]} locale={locale} />
+
+            {/* Testimonials Section */}
+            <Flex
+                direction="column"
+                fillWidth
+                padding="xl"
+                backgroundColor="neutral-strong"
+                style={{ textAlign: 'center', marginTop: '2rem' }}
+            >
+                <Heading as="h2" variant="display-strong-s" marginBottom="m">
+                    What People Are Saying
+                </Heading>
+                <Flex
+                    direction="row"
+                    wrap
+                    gap="l"
+                    justifyContent="center"
+                >
+                    {testimonials.map((testimonial, index) => (
+                        <Flex
+                            key={index}
+                            direction="column"
+                            padding="m"
+                            radius="m"
+                            background="neutral-weak"
+                            style={{
+                                width: '300px',
+                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                            }}
+                        >
+                            <Text variant="body-strong">{testimonial.feedback}</Text>
+                            <Text variant="caption-default" marginTop="m" onBackground="neutral-weak">
+                                - {testimonial.name} <span style={{ color: '#bbb' }}>{testimonial.username}</span>
+                            </Text>
+                        </Flex>
+                    ))}
+                </Flex>
+            </Flex>
+
             {newsletter.display && <Mailchimp newsletter={newsletter} />}
         </Flex>
     );
