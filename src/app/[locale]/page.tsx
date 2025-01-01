@@ -53,17 +53,17 @@ export default function Home(
         {
             feedback: 'This platform has transformed the way I approach cloud projects.',
             name: 'John Doe',
-            username: '@johndoe',
+            username: 'johndoe',
         },
         {
             feedback: 'A fantastic tool for beginners and experts alike!',
             name: 'Jane Smith',
-            username: '@janesmith',
+            username: 'janesmith',
         },
         {
             feedback: 'The resources available here are second to none.',
             name: 'Alice Johnson',
-            username: '@alicejohnson',
+            username: 'alicejohnson',
         },
     ];
 
@@ -222,21 +222,24 @@ export default function Home(
                     </Flex>
                 </Flex>
             )}
+            <Projects range={[2]} locale={locale} />
 
             {/* Testimonials Section */}
             <Flex
                 direction="column"
                 alignItems="center"
-                style={{ marginTop: '4rem' }} // Inline style for spacing
+                style={{ marginTop: '4rem' }}
             >
                 <Heading as="h2" variant="display-strong-l" marginBottom="m">
                     What People Are Saying
                 </Heading>
                 <Flex
                     direction="row"
-                    flexWrap="wrap"
-                    gap="l"
-                    justifyContent="center"
+                    style={{
+                        flexWrap: 'wrap',
+                        gap: '16px',
+                        justifyContent: 'center',
+                    }}
                 >
                     {testimonials.map((testimonial, index) => (
                         <Flex
@@ -250,15 +253,19 @@ export default function Home(
                                 color: '#fff',
                                 maxWidth: '300px',
                                 textAlign: 'center',
+                                margin: '8px',
                             }}
                         >
-                            <Text variant="body-strong-s">{testimonial.feedback}</Text>
+                            <Text variant="body-strong-s">
+                                {testimonial.feedback}
+                            </Text>
                             <Text
                                 variant="body-default-s"
                                 marginTop="m"
                                 style={{ color: '#bbb' }}
                             >
-                                - {testimonial.name} <span>@{testimonial.username}</span>
+                                - {testimonial.name}{' '}
+                                <span>@{testimonial.username}</span>
                             </Text>
                         </Flex>
                     ))}
