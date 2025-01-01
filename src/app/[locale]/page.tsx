@@ -216,7 +216,7 @@ export default function Home(
                 </Heading>
                 <Flex
                     direction="row"
-                    flexWrap="wrap"
+                    Wrap="wrap"
                     gap="l"
                     justifyContent="center"
                 >
