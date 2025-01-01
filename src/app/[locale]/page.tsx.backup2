@@ -44,19 +44,19 @@ export async function generateMetadata(
 
 const testimonials = [
     {
-        feedback: "This platform has transformed the way I approach cloud projects.",
-        name: "John Doe",
-        username: "@johndoe",
+        feedback: 'This platform has transformed the way I approach cloud projects.',
+        name: 'John Doe',
+        username: '@johndoe',
     },
     {
-        feedback: "A fantastic tool for beginners and experts alike!",
-        name: "Jane Smith",
-        username: "@janesmith",
+        feedback: 'A fantastic tool for beginners and experts alike!',
+        name: 'Jane Smith',
+        username: '@janesmith',
     },
     {
-        feedback: "The resources available here are second to none.",
-        name: "Alice Johnson",
-        username: "@alicejohnson",
+        feedback: 'The resources available here are second to none.',
+        name: 'Alice Johnson',
+        username: '@alicejohnson',
     },
 ];
 
@@ -206,15 +206,17 @@ export default function Home(
             {/* Testimonials Section */}
             <Flex
                 direction="column"
-                alignItems="center"
-                marginTop="4rem"
+                fillWidth
+                padding="xl"
+                background="neutral-strong"
+                style={{ textAlign: 'center', marginTop: '2rem' }}
             >
-                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                <Heading as="h2" variant="display-strong-s" marginBottom="m">
                     What People Are Saying
                 </Heading>
                 <Flex
                     direction="row"
-                    wrap={true}
+                    wrap
                     gap="l"
                     justifyContent="center"
                 >
@@ -222,24 +224,22 @@ export default function Home(
                         <Flex
                             key={index}
                             direction="column"
-                            padding="l"
-                            borderRadius="m"
+                            padding="m"
+                            radius="m"
+                            background="neutral-weak"
                             style={{
-                                textAlign: "center",
-                                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                                maxWidth: "300px",
+                                width: '300px',
+                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                             }}
                         >
-                            <Text variant="body-strong-s" marginBottom="s">
-                                {testimonial.feedback}
-                            </Text>
+                            <Text variant="body-strong-s">{testimonial.feedback}</Text>
                             <Text
                                 variant="body-default-s"
-                                onBackground="neutral-weak"
                                 marginTop="m"
+                                onBackground="neutral-weak"
                             >
-                                - {testimonial.name} {" "}
-                                <span style={{ color: "#bbb" }}>{testimonial.username}</span>
+                                - {testimonial.name}{' '}
+                                <span style={{ color: '#bbb' }}>{testimonial.username}</span>
                             </Text>
                         </Flex>
                     ))}
