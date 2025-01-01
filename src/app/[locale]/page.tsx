@@ -9,15 +9,23 @@ import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
+// Dummy Testimonials Data
 const testimonials = [
-    { name: "Lyes", username: "@lyker_zi", feedback: "There is an easier option. Deploying literally anything on @Railway" },
-    { name: "Benjamin Klieger", username: "@BenjaminKlieger", feedback: '"Ship your apps, databases, and more to production in seconds." @Railway is a breeze to deploy.' },
-    { name: "kinsyu", username: "@kinsyudev", feedback: "Addicted to organizing my services in @Railway" },
-    { name: "Sam Newby", username: "@SamNewby_", feedback: "The UX in deploying a new app on @Railway is probably the best I’ve ever used." },
-    { name: "Wilson Wilson", username: "@euboid", feedback: "@Railway has the best support among every PaaS I’ve tried. < 1 minute responses. Every. Single. Time." },
-    { name: "teo", username: "@teodor_io", feedback: "Railway is really good. Incredible developer experience." },
-    { name: "Kyle McDonald", username: "@kpmdev", feedback: "Damn, @Railway is by far the fastest I’ve ever got up and running on a host." },
-    { name: "caeser_kv", username: "@caesar_kv", feedback: "@Railway for postgres, railway for everything ❤️" },
+    {
+        feedback: 'This is an amazing product!',
+        name: 'John Doe',
+        username: '@johndoe',
+    },
+    {
+        feedback: 'I absolutely love using this service!',
+        name: 'Jane Smith',
+        username: '@janesmith',
+    },
+    {
+        feedback: 'A seamless experience from start to finish.',
+        name: 'Alex Johnson',
+        username: '@alexjohnson',
+    },
 ];
 
 export async function generateMetadata(
@@ -195,6 +203,7 @@ export default function Home(
             <RevealFx translateY="16" delay={0.6}>
                 <Projects range={[1, 1]} locale={locale} />
             </RevealFx>
+
             {routes['/blog'] && (
                 <Flex
                     fillWidth
@@ -215,6 +224,7 @@ export default function Home(
                     </Flex>
                 </Flex>
             )}
+
             <Projects range={[2]} locale={locale} />
 
             {/* Testimonials Section */}
@@ -230,7 +240,7 @@ export default function Home(
                 </Heading>
                 <Flex
                     direction="row"
-                    wrap
+                    wrap="wrap"
                     gap="l"
                     justifyContent="center"
                 >
@@ -246,15 +256,21 @@ export default function Home(
                                 boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                             }}
                         >
-                            <Text variant="body-strong">{testimonial.feedback}</Text>
-                            <Text variant="caption-default" marginTop="m" onBackground="neutral-weak">
-                                - {testimonial.name} <span style={{ color: '#bbb' }}>{testimonial.username}</span>
+                            <Text variant="body-strong-s">{testimonial.feedback}</Text>
+                            <Text
+                                variant="caption-default"
+                                marginTop="m"
+                                onBackground="neutral-weak"
+                            >
+                                - {testimonial.name}{' '}
+                                <span style={{ color: '#bbb' }}>{testimonial.username}</span>
                             </Text>
                         </Flex>
                     ))}
                 </Flex>
             </Flex>
 
+            {/* Newsletter Section */}
             {newsletter.display && <Mailchimp newsletter={newsletter} />}
         </Flex>
     );
