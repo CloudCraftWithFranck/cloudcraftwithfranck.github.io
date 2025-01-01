@@ -1,12 +1,9 @@
-"use client"; // Mark this file as a client component
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { Heading, Flex, Text } from '@/once-ui/components';
-import { useTranslations } from 'next-intl';
 
 export default function Home() {
-    const t = useTranslations();
-
     // Testimonials data
     const testimonials = [
         { feedback: "This platform has transformed the way I approach cloud projects.", name: "John Doe", username: "@johndoe" },
@@ -38,10 +35,14 @@ export default function Home() {
                 What People Are Saying
             </Heading>
             <Flex
-                direction="column"
-                alignItems="center"
+                direction="row"
                 justifyContent="center"
-                style={{ height: '150px', overflow: 'hidden' }}
+                alignItems="center"
+                style={{
+                    height: '150px',
+                    overflow: 'hidden',
+                    whiteSpace: 'nowrap',
+                }}
             >
                 {testimonials.map((testimonial, index) => (
                     <Flex
@@ -50,13 +51,12 @@ export default function Home() {
                         alignItems="center"
                         justifyContent="center"
                         style={{
-                            transform: `translateX(${-100 * currentTestimonialIndex}%)`,
+                            transform: `translateX(${(index - currentTestimonialIndex) * 100}%)`,
                             transition: 'transform 0.5s ease-in-out',
-                            whiteSpace: 'nowrap',
                         }}
                     >
                         <Text variant="body-strong-s">{testimonial.feedback}</Text>
-                        <Text variant="caption-default" marginTop="m" onBackground="neutral-weak">
+                        <Text variant="body-default-s" marginTop="m" onBackground="neutral-weak">
                             - {testimonial.name} <span style={{ color: '#bbb' }}>{testimonial.username}</span>
                         </Text>
                     </Flex>
