@@ -65,6 +65,11 @@ export default function Home(
             name: 'Dory Tchamdjeu',
             username: 'dory',
         },
+        {
+            feedback: 'If you need a clean portfolio for your cloud showcases, ask Cloudcraftwithfranck for help. They got you!',
+            name: 'Paola Djobissie',
+            username: 'pdjobissie',
+        },
     ];
 
     return (
