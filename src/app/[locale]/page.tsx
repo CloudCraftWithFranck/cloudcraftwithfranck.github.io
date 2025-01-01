@@ -1,17 +1,21 @@
 import React from 'react';
-
-import { Heading, Flex, Text, Button, Avatar, RevealFx, Arrow } from '@/once-ui/components';
+import {
+    Heading,
+    Flex,
+    Text,
+    Button,
+    Avatar,
+    RevealFx,
+    Arrow,
+} from '@/once-ui/components';
 import { Projects } from '@/components/work/Projects';
-
 import { baseURL, routes, renderContent } from '@/app/resources';
 import { Mailchimp } from '@/components';
 import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
-export async function generateMetadata(
-    { params: { locale } }: { params: { locale: string } }
-) {
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
     const t = await getTranslations();
     const { home } = renderContent(t);
     const title = home.title;
@@ -26,12 +30,7 @@ export async function generateMetadata(
             description,
             type: 'website',
             url: `https://${baseURL}/${locale}`,
-            images: [
-                {
-                    url: ogImage,
-                    alt: title,
-                },
-            ],
+            images: [{ url: ogImage, alt: title }],
         },
         twitter: {
             card: 'summary_large_image',
@@ -42,9 +41,7 @@ export async function generateMetadata(
     };
 }
 
-export default function Home(
-    { params: { locale } }: { params: { locale: string } }
-) {
+export default function Home({ params: { locale } }: { params: { locale: string } }) {
     unstable_setRequestLocale(locale);
     const t = useTranslations();
     const { home, about, person, newsletter } = renderContent(t);
@@ -61,7 +58,7 @@ export default function Home(
             username: 'popara',
         },
         {
-            feedback: 'CloudCraftWithFranck is very for beginners. I was coached not knowing anything on Azure, and now I am rocking it.',
+            feedback: 'CloudCraftWithFranck is great for beginners. I was coached not knowing anything on Azure, and now I am rocking it.',
             name: 'Dory Tchamdjeu',
             username: 'dory',
         },
@@ -111,21 +108,9 @@ export default function Home(
                 gap="l"
             >
                 {/* Left Column: Text Content */}
-                <Flex
-                    direction="column"
-                    fillWidth
-                    flex={2}
-                >
-                    <RevealFx
-                        translateY="4"
-                        fillWidth
-                        justifyContent="flex-start"
-                        paddingBottom="m"
-                    >
-                        <Heading
-                            wrap="balance"
-                            variant="display-strong-l"
-                        >
+                <Flex direction="column" fillWidth flex={2}>
+                    <RevealFx translateY="4" fillWidth justifyContent="flex-start" paddingBottom="m">
+                        <Heading wrap="balance" variant="display-strong-l">
                             {home.headline}
                         </Heading>
                     </RevealFx>
@@ -136,11 +121,7 @@ export default function Home(
                         justifyContent="flex-start"
                         paddingBottom="m"
                     >
-                        <Text
-                            wrap="balance"
-                            onBackground="neutral-weak"
-                            variant="heading-default-xl"
-                        >
+                        <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
                             {home.subline}
                         </Text>
                     </RevealFx>
@@ -171,54 +152,15 @@ export default function Home(
                         </Flex>
                     </RevealFx>
                 </Flex>
-
-                {/* Right Column: CloudCraft With Me */}
-                <Flex
-                    direction="column"
-                    flex={1}
-                    padding="20"
-                    border="neutral-medium"
-                    borderStyle="solid-1"
-                    radius="m"
-                    background="neutral-strong"
-                    style={{ textAlign: 'center' }}
-                >
-                    <Heading
-                        as="h2"
-                        variant="display-strong-s"
-                        marginBottom="m"
-                    >
-                        CloudCraft With Me
-                    </Heading>
-                    <iframe
-                        src="https://www.youtube.com/embed/example-video-id"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        style={{
-                            width: '100%',
-                            height: '300px',
-                            borderRadius: '8px',
-                        }}
-                    ></iframe>
-                </Flex>
             </Flex>
 
             <RevealFx translateY="16" delay={0.6}>
                 <Projects range={[1, 1]} locale={locale} />
             </RevealFx>
             {routes['/blog'] && (
-                <Flex
-                    fillWidth
-                    gap="24"
-                    mobileDirection="column"
-                >
+                <Flex fillWidth gap="24" mobileDirection="column">
                     <Flex flex={1} paddingLeft="l">
-                        <Heading
-                            as="h2"
-                            variant="display-strong-xs"
-                            wrap="balance"
-                        >
+                        <Heading as="h2" variant="display-strong-xs" wrap="balance">
                             Latest from the blog
                         </Heading>
                     </Flex>
@@ -230,11 +172,7 @@ export default function Home(
             <Projects range={[2]} locale={locale} />
 
             {/* Testimonials Section */}
-            <Flex
-                direction="column"
-                alignItems="center"
-                style={{ marginTop: '4rem' }}
-            >
+            <Flex direction="column" alignItems="center" style={{ marginTop: '4rem' }}>
                 <Heading as="h2" variant="display-strong-l" marginBottom="m">
                     What People Are Saying
                 </Heading>
@@ -261,14 +199,8 @@ export default function Home(
                                 margin: '8px',
                             }}
                         >
-                            <Text variant="body-strong-s">
-                                {testimonial.feedback}
-                            </Text>
-                            <Text
-                                variant="body-default-s"
-                                marginTop="m"
-                                style={{ color: '#bbb' }}
-                            >
+                            <Text variant="body-strong-s">{testimonial.feedback}</Text>
+                            <Text variant="body-default-s" marginTop="m" style={{ color: '#bbb' }}>
                                 - {testimonial.name}{' '}
                                 <span>@{testimonial.username}</span>
                             </Text>
@@ -281,28 +213,20 @@ export default function Home(
             <Flex
                 direction="column"
                 alignItems="center"
-                style={{ marginTop: '4rem' }}
+                style={{
+                    marginTop: '4rem',
+                }}
             >
-                <Flex
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="center"
+                <img
+                    src="/images/gallery/community-image.jpg"
+                    alt="Join our community"
                     style={{
-                        flexWrap: 'wrap',
-                        gap: '32px',
-                        width: '100%',
+                        borderRadius: '8px',
+                        maxWidth: '100%',
+                        height: 'auto',
+                        background: 'transparent',
                     }}
-                >
-                    <img
-                        src="/images/gallery/community-image.jpg"
-                        alt="Join our community"
-                        style={{
-                            borderRadius: '8px',
-                            maxWidth: '100%',
-                            height: 'auto',
-                        }}
-                    />
-                </Flex>
+                />
             </Flex>
 
             {newsletter.display && <Mailchimp newsletter={newsletter} />}
