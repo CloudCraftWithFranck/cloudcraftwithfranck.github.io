@@ -211,22 +211,44 @@ export default function Home({ params: { locale } }: { params: { locale: string 
 
             {/* Community Section */}
             <Flex
-                direction="column"
+                direction="row"
                 alignItems="center"
+                justifyContent="center"
                 style={{
                     marginTop: '4rem',
+                    gap: '32px',
+                    flexWrap: 'wrap',
                 }}
             >
-                <img
-                    src="/images/gallery/community-image.jpg"
-                    alt="Join our community"
-                    style={{
-                        borderRadius: '8px',
-                        maxWidth: '100%',
-                        height: 'auto',
-                        background: 'transparent',
-                    }}
-                />
+                {/* Left Column: Community Image */}
+                <Flex flex={1} justifyContent="center">
+                    <img
+                        src="/images/gallery/community-image.jpg"
+                        alt="Join our community"
+                        style={{
+                            borderRadius: '8px',
+                            maxWidth: '100%',
+                            height: 'auto',
+                        }}
+                    />
+                </Flex>
+
+                {/* Right Column: Community Text and Button */}
+                <Flex flex={1} direction="column" justifyContent="center" alignItems="center">
+                    <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                        Join our community
+                    </Heading>
+                    <Text variant="body-default-s" marginBottom="l" style={{ textAlign: 'center' }}>
+                        Join our community of design engineers and build without limits.
+                    </Text>
+                    <Button
+                        href="https://cloudcraftwithfranck.org"
+                        variant="primary"
+                        size="l"
+                    >
+                        Join Community
+                    </Button>
+                </Flex>
             </Flex>
 
             {newsletter.display && <Mailchimp newsletter={newsletter} />}
