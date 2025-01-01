@@ -234,7 +234,7 @@ export default function Home(
                         >
                             <Text variant="body-strong-s">{testimonial.feedback}</Text>
                             <Text
-                                variant="caption-default"
+                                variant="body-default-s"
                                 marginTop="m"
                                 onBackground="neutral-weak"
                             >
