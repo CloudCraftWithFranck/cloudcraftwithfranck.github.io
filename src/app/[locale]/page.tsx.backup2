@@ -51,19 +51,24 @@ export default function Home(
 
     const testimonials = [
         {
-            feedback: 'This platform has transformed the way I approach cloud projects.',
-            name: 'John Doe',
-            username: 'johndoe',
+            feedback: 'Franck has helped me with terraform fixes when I was struggling with VNET and subnet configurations.',
+            name: 'Viviane Huguette',
+            username: 'khugg',
         },
         {
-            feedback: 'A fantastic tool for beginners and experts alike!',
-            name: 'Jane Smith',
-            username: 'janesmith',
+            feedback: 'Franck is good at explaining azure pipelines with dotnet code deployments to web apps.',
+            name: 'Patience Opara',
+            username: 'popara',
         },
         {
-            feedback: 'The resources available here are second to none.',
-            name: 'Alice Johnson',
-            username: 'alicejohnson',
+            feedback: 'CloudCraftWithFranck is very for beginners. I was coached not knowing anything on Azure, and now I am rocking it.',
+            name: 'Dory Tchamdjeu',
+            username: 'dory',
+        },
+        {
+            feedback: 'If you need a clean portfolio for your cloud showcases, ask Cloudcraftwithfranck for help. They got you!',
+            name: 'Paola Djobissie',
+            username: 'pdjobissie',
         },
     ];
 
