@@ -9,25 +9,6 @@ import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
-// Dummy Testimonials Data
-const testimonials = [
-    {
-        feedback: 'This is an amazing product!',
-        name: 'John Doe',
-        username: '@johndoe',
-    },
-    {
-        feedback: 'I absolutely love using this service!',
-        name: 'Jane Smith',
-        username: '@janesmith',
-    },
-    {
-        feedback: 'A seamless experience from start to finish.',
-        name: 'Alex Johnson',
-        username: '@alexjohnson',
-    },
-];
-
 export async function generateMetadata(
     { params: { locale } }: { params: { locale: string } }
 ) {
@@ -60,6 +41,24 @@ export async function generateMetadata(
         },
     };
 }
+
+const testimonials = [
+    {
+        feedback: 'This platform has transformed the way I approach cloud projects.',
+        name: 'John Doe',
+        username: '@johndoe',
+    },
+    {
+        feedback: 'A fantastic tool for beginners and experts alike!',
+        name: 'Jane Smith',
+        username: '@janesmith',
+    },
+    {
+        feedback: 'The resources available here are second to none.',
+        name: 'Alice Johnson',
+        username: '@alicejohnson',
+    },
+];
 
 export default function Home(
     { params: { locale } }: { params: { locale: string } }
@@ -204,29 +203,6 @@ export default function Home(
                 <Projects range={[1, 1]} locale={locale} />
             </RevealFx>
 
-            {routes['/blog'] && (
-                <Flex
-                    fillWidth
-                    gap="24"
-                    mobileDirection="column"
-                >
-                    <Flex flex={1} paddingLeft="l">
-                        <Heading
-                            as="h2"
-                            variant="display-strong-xs"
-                            wrap="balance"
-                        >
-                            Latest from the blog
-                        </Heading>
-                    </Flex>
-                    <Flex flex={3} paddingX="20">
-                        <Posts range={[1, 2]} columns="2" locale={locale} />
-                    </Flex>
-                </Flex>
-            )}
-
-            <Projects range={[2]} locale={locale} />
-
             {/* Testimonials Section */}
             <Flex
                 direction="column"
@@ -240,7 +216,7 @@ export default function Home(
                 </Heading>
                 <Flex
                     direction="row"
-                    wrap="wrap"
+                    flexWrap="wrap"
                     gap="l"
                     justifyContent="center"
                 >
@@ -270,7 +246,27 @@ export default function Home(
                 </Flex>
             </Flex>
 
-            {/* Newsletter Section */}
+            {routes['/blog'] && (
+                <Flex
+                    fillWidth
+                    gap="24"
+                    mobileDirection="column"
+                >
+                    <Flex flex={1} paddingLeft="l">
+                        <Heading
+                            as="h2"
+                            variant="display-strong-xs"
+                            wrap="balance"
+                        >
+                            Latest from the blog
+                        </Heading>
+                    </Flex>
+                    <Flex flex={3} paddingX="20">
+                        <Posts range={[1, 2]} columns="2" locale={locale} />
+                    </Flex>
+                </Flex>
+            )}
+            <Projects range={[2]} locale={locale} />
             {newsletter.display && <Mailchimp newsletter={newsletter} />}
         </Flex>
     );
