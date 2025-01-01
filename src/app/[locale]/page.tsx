@@ -222,7 +222,7 @@ export default function Home(
                 direction="column"
                 fillWidth
                 padding="xl"
-                backgroundColor="neutral-strong"
+                background="neutral-strong"
                 style={{ textAlign: 'center', marginTop: '2rem' }}
             >
                 <Heading as="h2" variant="display-strong-s" marginBottom="m">
