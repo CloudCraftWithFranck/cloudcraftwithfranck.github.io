@@ -30,8 +30,8 @@ export const Footer = () => {
                         {person.name}
                     </Text>
                     <Text onBackground="neutral-weak">
-                        {/* Usage of this template requires attribution. Please don't remove the link to Once UI. */}
-                        / Build your portfolio with <SmartLink style={{marginLeft: '-0.125rem'}} href="https://once-ui.com/templates/magic-portfolio">Once UI</SmartLink>
+                        {/* Usage of this template requires attribution. Please don't remove the link to CloudCraftWithFranck. */}
+                        / Build your portfolio with <SmartLink style={{marginLeft: '-0.125rem'}} href="https://github.com/CloudCraftWithFranck/cloudcraftwithfranck.github.io">CloudCraftWithFranck</SmartLink>
                     </Text>
                 </Text>
                 <Flex
