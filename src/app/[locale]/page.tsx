@@ -51,7 +51,7 @@ export default function Home(
 
     const testimonials = [
         {
-            feedback: 'Franck has helped me with terraform fixes when I was struggling with VNET and subnet configurations. He has an easy way of explaining how modules work to make it simple.',
+            feedback: 'Franck has helped me with terraform fixes when I was struggling with VNET and subnet configurations.',
             name: 'Viviane Huguette',
             username: 'khugg',
         },
