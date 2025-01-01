@@ -279,43 +279,29 @@ export default function Home(
 
             {/* Community Section */}
             <Flex
-                direction="row"
+                direction="column"
                 alignItems="center"
-                justifyContent="space-between"
-                gap="8"
-                style={{
-                    marginTop: '4rem',
-                    padding: '2rem',
-                    background: '#fff',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                }}
+                style={{ marginTop: '4rem' }}
             >
-                {/* Left Image */}
-                <img
-                    src="/images/gallery/community-image.jpg" // Update this path if your image name is different
-                    alt="Community"
+                <Flex
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center"
                     style={{
-                        maxWidth: '50%',
-                        borderRadius: '8px',
+                        flexWrap: 'wrap',
+                        gap: '32px',
+                        width: '100%',
                     }}
-                />
-
-                {/* Right Content */}
-                <Flex direction="column" alignItems="flex-start" gap="2">
-                    <Text variant="body-strong-l">
-                        Join our community of design engineers and build without limits.
-                    </Text>
-                    <Button
-                        href="/community"
-                        variant="primary"
-                        size="l"
+                >
+                    <img
+                        src="/images/gallery/community-image.jpg"
+                        alt="Join our community"
                         style={{
-                            marginTop: '1rem',
+                            borderRadius: '8px',
+                            maxWidth: '100%',
+                            height: 'auto',
                         }}
-                    >
-                        Join community
-                    </Button>
+                    />
                 </Flex>
             </Flex>
 
