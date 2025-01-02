@@ -249,7 +249,7 @@ export default function Home(
                 </Text>
                 <Flex
                     direction="row"
-                    wrap="wrap"
+                    wrap={true}
                     justifyContent="space-around"
                     style={{
                         width: '100%',
