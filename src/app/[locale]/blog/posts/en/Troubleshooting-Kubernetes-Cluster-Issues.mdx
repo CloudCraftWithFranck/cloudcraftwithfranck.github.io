@@ -183,18 +183,7 @@ Verified binding status after redeployment:
 ## Step 3: Debugging Load Balancer Routing Issues
 The final issue was external connectivity: requests to services exposed via an Azure Load Balancer were failing with a 504 Gateway Timeout error. To debug, we inspected the service configuration:
 
-<CodeBlock
-    className="custom-code-block"
-    liveEditor
-    codeInstances={[
-        {
-            code: `kubectl describe service <service-name> -n production`,
-            label: "Git Configuration",
-            language: "bash",
-        },
-    ]}
-    copyButton
-/>
+`kubectl describe service <service-name> -n production`   
 
 ### Findings:
 1. The externalTrafficPolicy was set to Cluster, causing source IP address masking and improper routing.
