@@ -46,7 +46,6 @@ GitHub is built on Git, a distributed version control system. To manage your pro
   
 <CodeBlock
     className="custom-code-block"
-    liveEditor
     codeInstances={[
         {
             code: `git config --global user.name "Your Name"
@@ -56,7 +55,9 @@ git config --global user.email "your-email@example.com"`,
         },
     ]}
     copyButton
+    onCopy={() => alert("Code copied!")} // Simple alert or more elegant feedback
 />
+
 
    These details will be associated with your commits.
 Now Git is ready to work with GitHub.
