@@ -9,7 +9,7 @@ import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
-import './page.css'; // Importing the CSS for styling
+import './page.css'; // Importing CSS for the grid styling
 
 export async function generateMetadata(
     { params: { locale } }: { params: { locale: string } }
@@ -215,6 +215,81 @@ export default function Home(
                     <div className="grid-item">2,360</div>
                     <div className="grid-item">239</div>
                     <div className="grid-item">21</div>
+                </Flex>
+            </Flex>
+
+            <RevealFx translateY="16" delay={0.6}>
+                <Projects range={[1, 1]} locale={locale} />
+            </RevealFx>
+
+            {routes['/blog'] && (
+                <Flex
+                    fillWidth
+                    gap="24"
+                    mobileDirection="column"
+                >
+                    <Flex flex={1} paddingLeft="l">
+                        <Heading
+                            as="h2"
+                            variant="display-strong-xs"
+                            wrap="balance"
+                        >
+                            Latest from the Blog
+                        </Heading>
+                    </Flex>
+                    <Flex flex={3} paddingX="20">
+                        <Posts range={[1, 2]} columns="2" locale={locale} />
+                    </Flex>
+                </Flex>
+            )}
+
+            <Projects range={[2]} locale={locale} />
+
+            {/* Testimonials Section */}
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem' }}
+            >
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    What People Are Saying
+                </Heading>
+                <Flex
+                    direction="row"
+                    style={{
+                        flexWrap: 'wrap',
+                        gap: '16px',
+                        justifyContent: 'center',
+                    }}
+                >
+                    {testimonials.map((testimonial, index) => (
+                        <Flex
+                            key={index}
+                            direction="column"
+                            alignItems="center"
+                            padding="l"
+                            style={{
+                                borderRadius: '8px',
+                                background: '#000',
+                                color: '#fff',
+                                maxWidth: '300px',
+                                textAlign: 'center',
+                                margin: '8px',
+                            }}
+                        >
+                            <Text variant="body-strong-s">
+                                {testimonial.feedback}
+                            </Text>
+                            <Text
+                                variant="body-default-s"
+                                marginTop="m"
+                                style={{ color: '#bbb' }}
+                            >
+                                - {testimonial.name}{' '}
+                                <span>@{testimonial.username}</span>
+                            </Text>
+                        </Flex>
+                    ))}
                 </Flex>
             </Flex>
 
