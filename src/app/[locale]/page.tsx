@@ -103,45 +103,21 @@ export default function Home(
                 }}
             />
 
-            {/* YouTube Section */}
-            <Flex
-                direction="column"
-                alignItems="center"
-                fillWidth
-                style={{
-                    marginTop: '2rem',
-                }}
-            >
-                <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                    CloudCraft With Me
-                </Heading>
-                <iframe
-                    src="https://www.youtube.com/embed/example-video-id"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    style={{
-                        width: '100%',
-                        height: '400px',
-                        borderRadius: '8px',
-                        maxWidth: '800px',
-                    }}
-                ></iframe>
-            </Flex>
-
+            {/* Title and YouTube Section */}
             <Flex
                 fillWidth
                 direction="row"
-                alignItems="flex-start"
+                alignItems="center"
                 justifyContent="space-between"
-                paddingY="l"
                 gap="l"
+                style={{
+                    marginBottom: '2rem',
+                }}
             >
-                {/* Left Column: Text Content */}
+                {/* Left Column: Title and Text */}
                 <Flex
                     direction="column"
-                    fillWidth
-                    flex={2}
+                    flex={1}
                 >
                     <RevealFx
                         translateY="4"
@@ -153,7 +129,7 @@ export default function Home(
                             wrap="balance"
                             variant="display-strong-l"
                         >
-                            {home.headline}
+                            Cloud Advocate and Instructor
                         </Heading>
                     </RevealFx>
                     <RevealFx
@@ -168,7 +144,7 @@ export default function Home(
                             onBackground="neutral-weak"
                             variant="heading-default-xl"
                         >
-                            {home.subline}
+                            I'm Franck, a cloud advocate and instructor at CloudCraftWithFranck, where I craft intuitive cloud solutions for engineers.
                         </Text>
                     </RevealFx>
                     <RevealFx translateY="12" delay={0.4}>
@@ -191,12 +167,31 @@ export default function Home(
                                             size="m"
                                         />
                                     )}
-                                    {t('about.title')}
+                                    About Me
                                     <Arrow trigger="#about" />
                                 </Flex>
                             </Button>
                         </Flex>
                     </RevealFx>
+                </Flex>
+
+                {/* Right Column: YouTube Video */}
+                <Flex
+                    flex={1}
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    <iframe
+                        src="https://www.youtube.com/embed/example-video-id"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        style={{
+                            width: '100%',
+                            height: '300px',
+                            borderRadius: '8px',
+                        }}
+                    ></iframe>
                 </Flex>
             </Flex>
 
