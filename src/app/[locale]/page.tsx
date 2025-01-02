@@ -102,19 +102,22 @@ export default function Home(
                     }),
                 }}
             />
+
+            {/* Title and YouTube Section */}
             <Flex
                 fillWidth
                 direction="row"
-                alignItems="flex-start"
+                alignItems="center"
                 justifyContent="space-between"
-                paddingY="l"
                 gap="l"
+                style={{
+                    marginBottom: '2rem',
+                }}
             >
-                {/* Left Column: Text Content */}
+                {/* Left Column: Title and Text */}
                 <Flex
                     direction="column"
-                    fillWidth
-                    flex={2}
+                    flex={1}
                 >
                     <RevealFx
                         translateY="4"
@@ -126,7 +129,7 @@ export default function Home(
                             wrap="balance"
                             variant="display-strong-l"
                         >
-                            {home.headline}
+                            Cloud Advocate and Instructor
                         </Heading>
                     </RevealFx>
                     <RevealFx
@@ -141,7 +144,7 @@ export default function Home(
                             onBackground="neutral-weak"
                             variant="heading-default-xl"
                         >
-                            {home.subline}
+                            I'm Franck, a cloud advocate and instructor at CloudCraftWithFranck, where I craft intuitive cloud solutions for engineers.
                         </Text>
                     </RevealFx>
                     <RevealFx translateY="12" delay={0.4}>
@@ -164,7 +167,7 @@ export default function Home(
                                             size="m"
                                         />
                                     )}
-                                    {t('about.title')}
+                                    About Me
                                     <Arrow trigger="#about" />
                                 </Flex>
                             </Button>
@@ -172,24 +175,12 @@ export default function Home(
                     </RevealFx>
                 </Flex>
 
-                {/* Right Column: CloudCraft With Me */}
+                {/* Right Column: YouTube Video */}
                 <Flex
-                    direction="column"
                     flex={1}
-                    padding="20"
-                    border="neutral-medium"
-                    borderStyle="solid-1"
-                    radius="m"
-                    background="neutral-strong"
-                    style={{ textAlign: 'center' }}
+                    justifyContent="center"
+                    alignItems="center"
                 >
-                    <Heading
-                        as="h2"
-                        variant="display-strong-s"
-                        marginBottom="m"
-                    >
-                        CloudCraft With Me
-                    </Heading>
                     <iframe
                         src="https://www.youtube.com/embed/example-video-id"
                         frameBorder="0"
@@ -207,6 +198,64 @@ export default function Home(
             <RevealFx translateY="16" delay={0.6}>
                 <Projects range={[1, 1]} locale={locale} />
             </RevealFx>
+
+            {/* Metrics Section */}
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{
+                    marginTop: '4rem',
+                    background: '#111',
+                    padding: '2rem',
+                    borderRadius: '8px',
+                    width: '100%',
+                }}
+            >
+                <Heading as="h2" variant="display-strong-l" marginBottom="s">
+                    3.1M+ Deploys per Month (and Counting)
+                </Heading>
+                <Text
+                    variant="body-default-m"
+                    style={{
+                        color: '#aaa',
+                        marginBottom: '2rem',
+                        textAlign: 'center',
+                    }}
+                >
+                    Real-time usage showing totals for users and services, along with 30-day deploys, requests, and logs.
+                </Text>
+                <Flex
+                    fillWidth
+                    direction="row"
+                    justifyContent="space-between"
+                    style={{
+                        textAlign: 'center',
+                        gap: '1rem',
+                    }}
+                >
+                    <Flex direction="column" alignItems="center">
+                        <Text variant="heading-default-l" style={{ color: '#fff' }}>USERS</Text>
+                        <Text variant="display-strong-l">862,875</Text>
+                    </Flex>
+                    <Flex direction="column" alignItems="center">
+                        <Text variant="heading-default-l" style={{ color: '#fff' }}>SERVICES</Text>
+                        <Text variant="display-strong-l">2,264,078</Text>
+                    </Flex>
+                    <Flex direction="column" alignItems="center">
+                        <Text variant="heading-default-l" style={{ color: '#fff' }}>DEPLOYS</Text>
+                        <Text variant="display-strong-l">3,190,886</Text>
+                    </Flex>
+                    <Flex direction="column" alignItems="center">
+                        <Text variant="heading-default-l" style={{ color: '#fff' }}>LOGS</Text>
+                        <Text variant="display-strong-l">65,486,510,023</Text>
+                    </Flex>
+                    <Flex direction="column" alignItems="center">
+                        <Text variant="heading-default-l" style={{ color: '#fff' }}>REQUESTS</Text>
+                        <Text variant="display-strong-l">143,507,882,416</Text>
+                    </Flex>
+                </Flex>
+            </Flex>
+
             {routes['/blog'] && (
                 <Flex
                     fillWidth
@@ -219,7 +268,7 @@ export default function Home(
                             variant="display-strong-xs"
                             wrap="balance"
                         >
-                            Latest from the blog
+                            Latest from the Blog
                         </Heading>
                     </Flex>
                     <Flex flex={3} paddingX="20">
@@ -227,6 +276,7 @@ export default function Home(
                     </Flex>
                 </Flex>
             )}
+
             <Projects range={[2]} locale={locale} />
 
             {/* Testimonials Section */}
@@ -274,67 +324,6 @@ export default function Home(
                             </Text>
                         </Flex>
                     ))}
-                </Flex>
-            </Flex>
-
-            {/* Community Section */}
-            <Flex
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                style={{
-                    width: '100%',
-                    backgroundColor: 'transparent', // No white background
-                    padding: '2rem 0',
-                }}
-            >
-                {/* Community Image */}
-                <Flex
-                    flex={1}
-                    style={{
-                        borderRadius: '8px',
-                        overflow: 'hidden',
-                        marginRight: '1rem',
-                    }}
-                >
-                    <img
-                        src="/images/gallery/community-image.jpg"
-                        alt="Join Our Community"
-                        style={{
-                            width: '100%',
-                            height: 'auto',
-                            borderRadius: '8px',
-                        }}
-                    />
-                </Flex>
-
-                {/* Community Text */}
-                <Flex
-                    flex={1}
-                    direction="column"
-                    alignItems="flex-start"
-                    style={{
-                        color: '#fff',
-                        paddingLeft: '1rem',
-                    }}
-                >
-                    <Heading
-                        as="h2"
-                        variant="display-strong-l"
-                        style={{ marginBottom: '1rem' }}
-                    >
-                        Join Our Community
-                    </Heading>
-                    <Text variant="body-default-xl" style={{ marginBottom: '1.5rem' }}>
-                        Join our community of design engineers and build without limits.
-                    </Text>
-                    <Button
-                        href="https://cloudcraftwithfranck.org"
-                        variant="primary"
-                        size="l"
-                    >
-                        Join Community
-                    </Button>
                 </Flex>
             </Flex>
 
