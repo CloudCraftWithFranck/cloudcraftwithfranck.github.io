@@ -112,10 +112,10 @@ Next, several pods showed errors related to Persistent Volume Claims (PVCs). Usi
 
 Warning  ProvisioningFailed  persistentvolume-controller  Failed to provision volume with StorageClass "default": AzureDisk - SKU not available in the current region.
 
-###Root Cause:
+### Root Cause:
 The default StorageClass was configured to use a disk SKU (StandardSSD_LRS) unavailable in the West US region.
 
-###Solution:
+### Solution:
 
 Created a new StorageClass with a compatible SKU:
 
@@ -245,11 +245,11 @@ Scheduled periodic checks using kube-bench to ensure security and compliance wit
 3. Documentation:
 Updated internal playbooks with lessons learned to ensure faster resolution for similar issues in the future.
 
-###Key Takeaways
+### Key Takeaways
 1. Plan for Scalability: Always monitor and plan for resource growth to avoid node over-commitment.
 2. Region-Specific Configurations: Validate that your StorageClass parameters and other configurations align with the capabilities of your Azure region.
 3. Validate Health Probes: Misconfigured health probes can lead to unnecessary downtime. Always test and validate them before deployment.
 
 
-##Final Thoughts
+## Final Thoughts
 Kubernetes is powerful but complex, and issues can arise even in well-configured environments. By systematically identifying and resolving the challenges in our prod-cluster-westus, we ensured stability and gained insights to prevent future problems.
