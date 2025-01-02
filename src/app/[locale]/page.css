@@ -1,0 +1,15 @@
+.deploy-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.grid-item {
+    padding: 8px;
+    background: #222;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: bold;
+}

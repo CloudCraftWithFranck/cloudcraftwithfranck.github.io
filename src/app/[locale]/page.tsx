@@ -9,6 +9,8 @@ import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
+import './page.css'; // Importing the CSS for styling
+
 export async function generateMetadata(
     { params: { locale } }: { params: { locale: string } }
 ) {
@@ -114,7 +116,6 @@ export default function Home(
                     marginBottom: '2rem',
                 }}
             >
-                {/* Left Column: Title and Text */}
                 <Flex
                     direction="column"
                     flex={1}
@@ -175,7 +176,6 @@ export default function Home(
                     </RevealFx>
                 </Flex>
 
-                {/* Right Column: YouTube Video */}
                 <Flex
                     flex={1}
                     justifyContent="center"
@@ -222,116 +222,74 @@ export default function Home(
 
             <Projects range={[2]} locale={locale} />
 
-            {/* Metrics Section */}
+            {/* Testimonials Section */}
             <Flex
                 direction="column"
                 alignItems="center"
-                style={{
-                    marginTop: '4rem',
-                    background: '#111',
-                    padding: '2rem',
-                    borderRadius: '8px',
-                    width: '100%',
-                }}
+                style={{ marginTop: '4rem' }}
             >
-                <Heading as="h2" variant="display-strong-l" marginBottom="s">
-                    3.1M+ Deploys per Month (and Counting)
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    What People Are Saying
                 </Heading>
-                <Text
-                    variant="body-default-m"
-                    style={{
-                        color: '#aaa',
-                        marginBottom: '2rem',
-                        textAlign: 'center',
-                    }}
-                >
-                    Real-time usage showing totals for users and services, along with 30-day deploys, requests, and logs.
-                </Text>
                 <Flex
                     direction="row"
-                    wrap={true}
-                    justifyContent="space-around"
                     style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        gap: '1rem',
+                        flexWrap: 'wrap',
+                        gap: '16px',
+                        justifyContent: 'center',
                     }}
                 >
-                    <Flex direction="column" alignItems="center" style={{ flex: '1', minWidth: '150px' }}>
-                        <Text variant="heading-default-l" style={{ color: '#fff' }}>USERS</Text>
-                        <Text variant="display-strong-l">862,875</Text>
-                    </Flex>
-                    <Flex direction="column" alignItems="center" style={{ flex: '1', minWidth: '150px' }}>
-                        <Text variant="heading-default-l" style={{ color: '#fff' }}>SERVICES</Text>
-                        <Text variant="display-strong-l">2,264,078</Text>
-                    </Flex>
-                    <Flex direction="column" alignItems="center" style={{ flex: '1', minWidth: '150px' }}>
-                        <Text variant="heading-default-l" style={{ color: '#fff' }}>DEPLOYS</Text>
-                        <Text variant="display-strong-l">3,190,886</Text>
-                    </Flex>
-                    <Flex direction="column" alignItems="center" style={{ flex: '1', minWidth: '150px' }}>
-                        <Text variant="heading-default-l" style={{ color: '#fff' }}>LOGS</Text>
-                        <Text variant="display-strong-l">65,486,510,023</Text>
-                    </Flex>
-                    <Flex direction="column" alignItems="center" style={{ flex: '1', minWidth: '150px' }}>
-                        <Text variant="heading-default-l" style={{ color: '#fff' }}>REQUESTS</Text>
-                        <Text variant="display-strong-l">143,507,882,416</Text>
-                    </Flex>
+                    {testimonials.map((testimonial, index) => (
+                        <Flex
+                            key={index}
+                            direction="column"
+                            alignItems="center"
+                            padding="l"
+                            style={{
+                                borderRadius: '8px',
+                                background: '#000',
+                                color: '#fff',
+                                maxWidth: '300px',
+                                textAlign: 'center',
+                                margin: '8px',
+                            }}
+                        >
+                            <Text variant="body-strong-s">
+                                {testimonial.feedback}
+                            </Text>
+                            <Text
+                                variant="body-default-s"
+                                marginTop="m"
+                                style={{ color: '#bbb' }}
+                            >
+                                - {testimonial.name}{' '}
+                                <span>@{testimonial.username}</span>
+                            </Text>
+                        </Flex>
+                    ))}
                 </Flex>
             </Flex>
 
-            {/* Community Section */}
+            {/* Grid Section */}
             <Flex
-                direction="row"
+                direction="column"
                 alignItems="center"
-                justifyContent="center"
-                style={{
-                    marginTop: '4rem',
-                    gap: '32px',
-                }}
+                style={{ marginTop: '4rem' }}
             >
-                {/* Left Column: Community Image */}
-                <Flex flex={1} justifyContent="center">
-                    <img
-                        src="/images/gallery/community-image.jpg"
-                        alt="Join us on Discord"
-                        style={{
-                            borderRadius: '8px',
-                            maxWidth: '100%',
-                            height: 'auto',
-                        }}
-                    />
-                </Flex>
-
-                {/* Right Column: Community Text and Button */}
-                <Flex
-                    flex={1}
-                    direction="column"
-                    justifyContent="center"
-                    alignItems="flex-start"
-                    style={{
-                        textAlign: 'left',
-                    }}
-                >
-                    <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                        Join us on Discord
-                    </Heading>
-                    <Text
-                        variant="body-default-s"
-                        marginBottom="m"
-                        style={{
-                            marginBottom: '1rem',
-                        }}
-                    >
-                        Join our community of cloud engineers and grow without limits.
-                    </Text>
-                    <Button
-                        href="https://cloudcraftwithfranck.org"
-                        variant="primary"
-                        size="l"
-                    >
-                        Join Discord
-                    </Button>
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    3.1M+ Deploys per Month (and Counting)
+                </Heading>
+                <Flex className="deploy-grid">
+                    <div className="grid-item">USERS</div>
+                    <div className="grid-item">SERVICES</div>
+                    <div className="grid-item">DEPLOYS</div>
+                    <div className="grid-item">LOGS</div>
+                    <div className="grid-item">REQUESTS</div>
+                    <div className="grid-item">862,888</div>
+                    <div className="grid-item">2,264,187</div>
+                    <div className="grid-item">3,189,360</div>
+                    <div className="grid-item">65,489,937,439</div>
+                    <div className="grid-item">145,260,056,233</div>
                 </Flex>
             </Flex>
 
