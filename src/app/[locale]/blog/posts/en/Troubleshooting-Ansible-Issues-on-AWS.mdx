@@ -8,7 +8,7 @@ tag: "Ansible"
 What started as a routine playbook run to configure monitoring agents turned into a deep dive into debugging, performance tuning, and infrastructure adjustments. This blog shares the real issues we encountered and how we solved them.
 
 ---
-##The Scenario
+## The Scenario
 We were using Ansible to automate the deployment and configuration of a monitoring agent on 100 EC2 instances spread across multiple availability zones. The monitoring agent was responsible for collecting metrics like CPU, memory, disk usage, and network traffic.
 
 Our playbook used the following structure:
@@ -18,7 +18,7 @@ Our playbook used the following structure:
     liveEditor
     codeInstances={[
         {
-            code: `---
+            code: `
 - name: Deploy monitoring agents
   hosts: aws_ec2_instances
   tasks:
@@ -111,11 +111,11 @@ ssh_args = -o ControlMaster=auto -o ControlPersist=60s`,
 />
 
 ---
-Step 2: Optimize Playbook Performance
+## Step 2: Optimize Playbook Performance
 Ansible was attempting to connect to all 100 instances simultaneously, overloading both the control machine and the network. To optimize this, we grouped the hosts by availability zone and ran the playbook in batches.
 
 ---
-What We Did:
+## What We Did:
 
 Used Ansible’s serial keyword to limit the number of parallel connections:
 
@@ -140,11 +140,11 @@ Used Ansible’s serial keyword to limit the number of parallel connections:
 />
 
 ---
-Step 3: Debug and Fix Monitoring Agent Failures
+## Step 3: Debug and Fix Monitoring Agent Failures
 The monitoring agent failed on some instances due to outdated dependencies. Additionally, certain instances had corrupted repositories causing package installation failures.
 
 ---
-What We Did:
+## What We Did:
 
 Added a task to clean up and update the repository cache before installing the agent:
 
@@ -201,7 +201,7 @@ For instances with persistent issues, created an additional task to capture logs
 />
 
 ---
-Results
+## Results
 After applying these changes, the deployment stabilized:
 
 Reduced Connection Timeouts: Adjusted SSH settings and security group rules eliminated all SSH-related errors.
@@ -209,7 +209,7 @@ Improved Playbook Speed: Execution time dropped to under 20 minutes by batching 
 Resolved Agent Failures: Adding repository updates and debugging logs allowed us to identify and fix dependency issues, resulting in a 100% success rate.
 
 ---
-Lessons Learned
+## Lessons Learned
 Divide and Conquer: Breaking large-scale deployments into smaller, manageable batches prevents resource bottlenecks.
 Logging Is Key: Detailed logs are invaluable for troubleshooting issues in large environments.
 Test Before You Run: Use --check mode in Ansible to validate configurations before making changes.
