@@ -97,7 +97,7 @@ To work on your project locally, you need to clone the repository to your comput
     liveEditor
     codeInstances={[
         {
-            code: `git clone`,
+            code: `git clone URL`,
             label: "Git Configuration",
             language: "bash",
         },
@@ -117,18 +117,25 @@ After cloning your repository, you can start adding files and making changes.
 1. Navigate to the cloned repository folder on your computer.
 2. Add or modify files. For instance, create a file named `hello-world.txt` and add some content to it.
 3. Use the following commands to save your changes:
-   - Stage the changes:
-     ```bash
-     git add .
-     ```
-   - Commit the changes with a descriptive message:
-     ```bash
-     git commit -m "Added hello-world.txt"
-     ```
-   - Push the changes to GitHub:
-     ```bash
-     git push origin main
-     ```
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `git add .
+            git commit -m "Added hello-world.txt"
+            git push origin main`
+            ,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+   - Stage the changes
+   - Commit the changes with a descriptive message
+   - Push the changes to GitHub
 
 Check your GitHub repository to see the updated files.
 
