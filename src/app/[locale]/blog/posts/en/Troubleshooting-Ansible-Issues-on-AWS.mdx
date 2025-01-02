@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting Ansible Issues for 100 Machines Monitoring on AWS"
-publishedAt: "2025-02-01"
+publishedAt: "2025-01-02"
 summary: "At CreshIT, we recently faced a challenge while managing a monitoring setup for 100 EC2 instances on AWS using Ansible."
 tag: "Ansible"
 ---
@@ -204,12 +204,12 @@ For instances with persistent issues, created an additional task to capture logs
 ## Results
 After applying these changes, the deployment stabilized:
 
-Reduced Connection Timeouts: Adjusted SSH settings and security group rules eliminated all SSH-related errors.
-Improved Playbook Speed: Execution time dropped to under 20 minutes by batching hosts and optimizing Ansible configurations.
-Resolved Agent Failures: Adding repository updates and debugging logs allowed us to identify and fix dependency issues, resulting in a 100% success rate.
+1. Reduced Connection Timeouts: Adjusted SSH settings and security group rules eliminated all SSH-related errors.
+2. Improved Playbook Speed: Execution time dropped to under 20 minutes by batching hosts and optimizing Ansible configurations.
+3. Resolved Agent Failures: Adding repository updates and debugging logs allowed us to identify and fix dependency issues, resulting in a 100% success rate.
 
 ---
 ## Lessons Learned
-Divide and Conquer: Breaking large-scale deployments into smaller, manageable batches prevents resource bottlenecks.
-Logging Is Key: Detailed logs are invaluable for troubleshooting issues in large environments.
-Test Before You Run: Use --check mode in Ansible to validate configurations before making changes.
+- Divide and Conquer: Breaking large-scale deployments into smaller, manageable batches prevents resource bottlenecks.
+- Logging Is Key: Detailed logs are invaluable for troubleshooting issues in large environments.
+- Test Before You Run: Use --check mode in Ansible to validate configurations before making changes.
