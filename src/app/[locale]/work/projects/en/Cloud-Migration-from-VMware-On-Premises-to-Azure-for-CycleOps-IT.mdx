@@ -355,7 +355,12 @@ Below is the redesigned architecture of the Azure-based infrastructure, replicat
 
 ### Diagram: Final Azure Infrastructure
 
-+----------------------------------------+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `+----------------------------------------+
 | Azure Virtual Network                  |
 | +------------------------------------+ |
 | | Azure Kubernetes Service (AKS)     | |
@@ -379,7 +384,15 @@ Below is the redesigned architecture of the Azure-based infrastructure, replicat
 | +------------------------------------+ |
 | | Azure AD & Key Vault               | |
 | +------------------------------------+ |
-+----------------------------------------+
++----------------------------------------+`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+
 
 ## Lessons Learned
 Thorough Assessment Prevents Surprises: Not all applications were suitable for containerization, which required flexibility in deployment strategies.
