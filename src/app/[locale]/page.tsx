@@ -320,7 +320,7 @@ export default function Home(
                         variant="primary"
                         size="l"
                     >
-                        Join Community
+                        Join Discord
                     </Button>
                 </Flex>
             </Flex>
