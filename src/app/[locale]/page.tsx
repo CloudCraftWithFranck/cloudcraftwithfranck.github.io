@@ -284,7 +284,7 @@ export default function Home(
                 <Flex flex={1} justifyContent="center">
                     <img
                         src="/images/gallery/community-image.jpg"
-                        alt="Join our community"
+                        alt="Join us on Discord"
                         style={{
                             borderRadius: '8px',
                             maxWidth: '100%',
@@ -304,7 +304,7 @@ export default function Home(
                     }}
                 >
                     <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                        Join our community
+                        Join us on Discord
                     </Heading>
                     <Text
                         variant="body-default-s"
@@ -313,7 +313,7 @@ export default function Home(
                             marginBottom: '1rem',
                         }}
                     >
-                        Join our community of design engineers and build without limits.
+                        Join our community of cloud engineers and grow without limits.
                     </Text>
                     <Button
                         href="https://cloudcraftwithfranck.org"
