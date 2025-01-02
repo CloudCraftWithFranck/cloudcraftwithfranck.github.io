@@ -199,6 +199,29 @@ export default function Home(
                 <Projects range={[1, 1]} locale={locale} />
             </RevealFx>
 
+            {routes['/blog'] && (
+                <Flex
+                    fillWidth
+                    gap="24"
+                    mobileDirection="column"
+                >
+                    <Flex flex={1} paddingLeft="l">
+                        <Heading
+                            as="h2"
+                            variant="display-strong-xs"
+                            wrap="balance"
+                        >
+                            Latest from the Blog
+                        </Heading>
+                    </Flex>
+                    <Flex flex={3} paddingX="20">
+                        <Posts range={[1, 2]} columns="2" locale={locale} />
+                    </Flex>
+                </Flex>
+            )}
+
+            <Projects range={[2]} locale={locale} />
+
             {/* Metrics Section */}
             <Flex
                 direction="column"
@@ -225,105 +248,90 @@ export default function Home(
                     Real-time usage showing totals for users and services, along with 30-day deploys, requests, and logs.
                 </Text>
                 <Flex
-                    fillWidth
                     direction="row"
-                    justifyContent="space-between"
+                    wrap="wrap"
+                    justifyContent="space-around"
                     style={{
+                        width: '100%',
                         textAlign: 'center',
                         gap: '1rem',
                     }}
                 >
-                    <Flex direction="column" alignItems="center">
+                    <Flex direction="column" alignItems="center" style={{ flex: '1', minWidth: '150px' }}>
                         <Text variant="heading-default-l" style={{ color: '#fff' }}>USERS</Text>
                         <Text variant="display-strong-l">862,875</Text>
                     </Flex>
-                    <Flex direction="column" alignItems="center">
+                    <Flex direction="column" alignItems="center" style={{ flex: '1', minWidth: '150px' }}>
                         <Text variant="heading-default-l" style={{ color: '#fff' }}>SERVICES</Text>
                         <Text variant="display-strong-l">2,264,078</Text>
                     </Flex>
-                    <Flex direction="column" alignItems="center">
+                    <Flex direction="column" alignItems="center" style={{ flex: '1', minWidth: '150px' }}>
                         <Text variant="heading-default-l" style={{ color: '#fff' }}>DEPLOYS</Text>
                         <Text variant="display-strong-l">3,190,886</Text>
                     </Flex>
-                    <Flex direction="column" alignItems="center">
+                    <Flex direction="column" alignItems="center" style={{ flex: '1', minWidth: '150px' }}>
                         <Text variant="heading-default-l" style={{ color: '#fff' }}>LOGS</Text>
                         <Text variant="display-strong-l">65,486,510,023</Text>
                     </Flex>
-                    <Flex direction="column" alignItems="center">
+                    <Flex direction="column" alignItems="center" style={{ flex: '1', minWidth: '150px' }}>
                         <Text variant="heading-default-l" style={{ color: '#fff' }}>REQUESTS</Text>
                         <Text variant="display-strong-l">143,507,882,416</Text>
                     </Flex>
                 </Flex>
             </Flex>
 
-            {routes['/blog'] && (
-                <Flex
-                    fillWidth
-                    gap="24"
-                    mobileDirection="column"
-                >
-                    <Flex flex={1} paddingLeft="l">
-                        <Heading
-                            as="h2"
-                            variant="display-strong-xs"
-                            wrap="balance"
-                        >
-                            Latest from the Blog
-                        </Heading>
-                    </Flex>
-                    <Flex flex={3} paddingX="20">
-                        <Posts range={[1, 2]} columns="2" locale={locale} />
-                    </Flex>
-                </Flex>
-            )}
-
-            <Projects range={[2]} locale={locale} />
-
-            {/* Testimonials Section */}
+            {/* Community Section */}
             <Flex
-                direction="column"
+                direction="row"
                 alignItems="center"
-                style={{ marginTop: '4rem' }}
+                justifyContent="center"
+                style={{
+                    marginTop: '4rem',
+                    gap: '32px',
+                }}
             >
-                <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                    What People Are Saying
-                </Heading>
+                {/* Left Column: Community Image */}
+                <Flex flex={1} justifyContent="center">
+                    <img
+                        src="/images/gallery/community-image.jpg"
+                        alt="Join us on Discord"
+                        style={{
+                            borderRadius: '8px',
+                            maxWidth: '100%',
+                            height: 'auto',
+                        }}
+                    />
+                </Flex>
+
+                {/* Right Column: Community Text and Button */}
                 <Flex
-                    direction="row"
+                    flex={1}
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="flex-start"
                     style={{
-                        flexWrap: 'wrap',
-                        gap: '16px',
-                        justifyContent: 'center',
+                        textAlign: 'left',
                     }}
                 >
-                    {testimonials.map((testimonial, index) => (
-                        <Flex
-                            key={index}
-                            direction="column"
-                            alignItems="center"
-                            padding="l"
-                            style={{
-                                borderRadius: '8px',
-                                background: '#000',
-                                color: '#fff',
-                                maxWidth: '300px',
-                                textAlign: 'center',
-                                margin: '8px',
-                            }}
-                        >
-                            <Text variant="body-strong-s">
-                                {testimonial.feedback}
-                            </Text>
-                            <Text
-                                variant="body-default-s"
-                                marginTop="m"
-                                style={{ color: '#bbb' }}
-                            >
-                                - {testimonial.name}{' '}
-                                <span>@{testimonial.username}</span>
-                            </Text>
-                        </Flex>
-                    ))}
+                    <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                        Join us on Discord
+                    </Heading>
+                    <Text
+                        variant="body-default-s"
+                        marginBottom="m"
+                        style={{
+                            marginBottom: '1rem',
+                        }}
+                    >
+                        Join our community of cloud engineers and grow without limits.
+                    </Text>
+                    <Button
+                        href="https://cloudcraftwithfranck.org"
+                        variant="primary"
+                        size="l"
+                    >
+                        Join Discord
+                    </Button>
                 </Flex>
             </Flex>
 
