@@ -102,22 +102,19 @@ export default function Home(
                     }),
                 }}
             />
-
-            {/* Title and YouTube Section */}
             <Flex
                 fillWidth
                 direction="row"
-                alignItems="center"
+                alignItems="flex-start"
                 justifyContent="space-between"
+                paddingY="l"
                 gap="l"
-                style={{
-                    marginBottom: '2rem',
-                }}
             >
-                {/* Left Column: Title and Text */}
+                {/* Left Column: Text Content */}
                 <Flex
                     direction="column"
-                    flex={1}
+                    fillWidth
+                    flex={2}
                 >
                     <RevealFx
                         translateY="4"
@@ -129,7 +126,7 @@ export default function Home(
                             wrap="balance"
                             variant="display-strong-l"
                         >
-                            Cloud Advocate and Instructor
+                            {home.headline}
                         </Heading>
                     </RevealFx>
                     <RevealFx
@@ -144,7 +141,7 @@ export default function Home(
                             onBackground="neutral-weak"
                             variant="heading-default-xl"
                         >
-                            I'm Franck, a cloud advocate and instructor at CloudCraftWithFranck, where I craft intuitive cloud solutions for engineers.
+                            {home.subline}
                         </Text>
                     </RevealFx>
                     <RevealFx translateY="12" delay={0.4}>
@@ -167,7 +164,7 @@ export default function Home(
                                             size="m"
                                         />
                                     )}
-                                    About Me
+                                    {t('about.title')}
                                     <Arrow trigger="#about" />
                                 </Flex>
                             </Button>
@@ -175,12 +172,24 @@ export default function Home(
                     </RevealFx>
                 </Flex>
 
-                {/* Right Column: YouTube Video */}
+                {/* Right Column: CloudCraft With Me */}
                 <Flex
+                    direction="column"
                     flex={1}
-                    justifyContent="center"
-                    alignItems="center"
+                    padding="20"
+                    border="neutral-medium"
+                    borderStyle="solid-1"
+                    radius="m"
+                    background="neutral-strong"
+                    style={{ textAlign: 'center' }}
                 >
+                    <Heading
+                        as="h2"
+                        variant="display-strong-s"
+                        marginBottom="m"
+                    >
+                        CloudCraft With Me
+                    </Heading>
                     <iframe
                         src="https://www.youtube.com/embed/example-video-id"
                         frameBorder="0"
@@ -198,7 +207,6 @@ export default function Home(
             <RevealFx translateY="16" delay={0.6}>
                 <Projects range={[1, 1]} locale={locale} />
             </RevealFx>
-
             {routes['/blog'] && (
                 <Flex
                     fillWidth
@@ -211,7 +219,7 @@ export default function Home(
                             variant="display-strong-xs"
                             wrap="balance"
                         >
-                            Latest from the Blog
+                            Latest from the blog
                         </Heading>
                     </Flex>
                     <Flex flex={3} paddingX="20">
@@ -219,7 +227,6 @@ export default function Home(
                     </Flex>
                 </Flex>
             )}
-
             <Projects range={[2]} locale={locale} />
 
             {/* Testimonials Section */}
@@ -274,53 +281,59 @@ export default function Home(
             <Flex
                 direction="row"
                 alignItems="center"
-                justifyContent="center"
+                justifyContent="space-between"
                 style={{
-                    marginTop: '4rem',
-                    gap: '32px',
+                    width: '100%',
+                    backgroundColor: 'transparent', // No white background
+                    padding: '2rem 0',
                 }}
             >
-                {/* Left Column: Community Image */}
-                <Flex flex={1} justifyContent="center">
+                {/* Community Image */}
+                <Flex
+                    flex={1}
+                    style={{
+                        borderRadius: '8px',
+                        overflow: 'hidden',
+                        marginRight: '1rem',
+                    }}
+                >
                     <img
                         src="/images/gallery/community-image.jpg"
-                        alt="Join us on Discord"
+                        alt="Join Our Community"
                         style={{
-                            borderRadius: '8px',
-                            maxWidth: '100%',
+                            width: '100%',
                             height: 'auto',
+                            borderRadius: '8px',
                         }}
                     />
                 </Flex>
 
-                {/* Right Column: Community Text and Button */}
+                {/* Community Text */}
                 <Flex
                     flex={1}
                     direction="column"
-                    justifyContent="center"
                     alignItems="flex-start"
                     style={{
-                        textAlign: 'left',
+                        color: '#fff',
+                        paddingLeft: '1rem',
                     }}
                 >
-                    <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                        Join us on Discord
-                    </Heading>
-                    <Text
-                        variant="body-default-s"
-                        marginBottom="m"
-                        style={{
-                            marginBottom: '1rem',
-                        }}
+                    <Heading
+                        as="h2"
+                        variant="display-strong-l"
+                        style={{ marginBottom: '1rem' }}
                     >
-                        Join our community of cloud engineers and grow without limits.
+                        Join Our Community
+                    </Heading>
+                    <Text variant="body-default-xl" style={{ marginBottom: '1.5rem' }}>
+                        Join our community of design engineers and build without limits.
                     </Text>
                     <Button
                         href="https://cloudcraftwithfranck.org"
                         variant="primary"
                         size="l"
                     >
-                        Join Discord
+                        Join Community
                     </Button>
                 </Flex>
             </Flex>

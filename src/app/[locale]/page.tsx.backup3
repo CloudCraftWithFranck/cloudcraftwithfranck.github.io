@@ -1,21 +1,17 @@
 import React from 'react';
-import {
-    Heading,
-    Flex,
-    Text,
-    Button,
-    Avatar,
-    RevealFx,
-    Arrow,
-} from '@/once-ui/components';
+
+import { Heading, Flex, Text, Button, Avatar, RevealFx, Arrow } from '@/once-ui/components';
 import { Projects } from '@/components/work/Projects';
+
 import { baseURL, routes, renderContent } from '@/app/resources';
 import { Mailchimp } from '@/components';
 import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+export async function generateMetadata(
+    { params: { locale } }: { params: { locale: string } }
+) {
     const t = await getTranslations();
     const { home } = renderContent(t);
     const title = home.title;
@@ -30,7 +26,12 @@ export async function generateMetadata({ params: { locale } }: { params: { local
             description,
             type: 'website',
             url: `https://${baseURL}/${locale}`,
-            images: [{ url: ogImage, alt: title }],
+            images: [
+                {
+                    url: ogImage,
+                    alt: title,
+                },
+            ],
         },
         twitter: {
             card: 'summary_large_image',
@@ -41,7 +42,9 @@ export async function generateMetadata({ params: { locale } }: { params: { local
     };
 }
 
-export default function Home({ params: { locale } }: { params: { locale: string } }) {
+export default function Home(
+    { params: { locale } }: { params: { locale: string } }
+) {
     unstable_setRequestLocale(locale);
     const t = useTranslations();
     const { home, about, person, newsletter } = renderContent(t);
@@ -58,7 +61,7 @@ export default function Home({ params: { locale } }: { params: { locale: string 
             username: 'popara',
         },
         {
-            feedback: 'CloudCraftWithFranck is great for beginners. I was coached not knowing anything on Azure, and now I am rocking it.',
+            feedback: 'CloudCraftWithFranck is very for beginners. I was coached not knowing anything on Azure, and now I am rocking it.',
             name: 'Dory Tchamdjeu',
             username: 'dory',
         },
@@ -99,19 +102,34 @@ export default function Home({ params: { locale } }: { params: { locale: string 
                     }),
                 }}
             />
+
+            {/* Title and YouTube Section */}
             <Flex
                 fillWidth
                 direction="row"
-                alignItems="flex-start"
+                alignItems="center"
                 justifyContent="space-between"
-                paddingY="l"
                 gap="l"
+                style={{
+                    marginBottom: '2rem',
+                }}
             >
-                {/* Left Column: Text Content */}
-                <Flex direction="column" fillWidth flex={2}>
-                    <RevealFx translateY="4" fillWidth justifyContent="flex-start" paddingBottom="m">
-                        <Heading wrap="balance" variant="display-strong-l">
-                            {home.headline}
+                {/* Left Column: Title and Text */}
+                <Flex
+                    direction="column"
+                    flex={1}
+                >
+                    <RevealFx
+                        translateY="4"
+                        fillWidth
+                        justifyContent="flex-start"
+                        paddingBottom="m"
+                    >
+                        <Heading
+                            wrap="balance"
+                            variant="display-strong-l"
+                        >
+                            Cloud Advocate and Instructor
                         </Heading>
                     </RevealFx>
                     <RevealFx
@@ -121,8 +139,12 @@ export default function Home({ params: { locale } }: { params: { locale: string 
                         justifyContent="flex-start"
                         paddingBottom="m"
                     >
-                        <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-                            {home.subline}
+                        <Text
+                            wrap="balance"
+                            onBackground="neutral-weak"
+                            variant="heading-default-xl"
+                        >
+                            I'm Franck, a cloud advocate and instructor at CloudCraftWithFranck, where I craft intuitive cloud solutions for engineers.
                         </Text>
                     </RevealFx>
                     <RevealFx translateY="12" delay={0.4}>
@@ -145,23 +167,51 @@ export default function Home({ params: { locale } }: { params: { locale: string 
                                             size="m"
                                         />
                                     )}
-                                    {t('about.title')}
+                                    About Me
                                     <Arrow trigger="#about" />
                                 </Flex>
                             </Button>
                         </Flex>
                     </RevealFx>
                 </Flex>
+
+                {/* Right Column: YouTube Video */}
+                <Flex
+                    flex={1}
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    <iframe
+                        src="https://www.youtube.com/embed/example-video-id"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        style={{
+                            width: '100%',
+                            height: '300px',
+                            borderRadius: '8px',
+                        }}
+                    ></iframe>
+                </Flex>
             </Flex>
 
             <RevealFx translateY="16" delay={0.6}>
                 <Projects range={[1, 1]} locale={locale} />
             </RevealFx>
+
             {routes['/blog'] && (
-                <Flex fillWidth gap="24" mobileDirection="column">
+                <Flex
+                    fillWidth
+                    gap="24"
+                    mobileDirection="column"
+                >
                     <Flex flex={1} paddingLeft="l">
-                        <Heading as="h2" variant="display-strong-xs" wrap="balance">
-                            Latest from the blog
+                        <Heading
+                            as="h2"
+                            variant="display-strong-xs"
+                            wrap="balance"
+                        >
+                            Latest from the Blog
                         </Heading>
                     </Flex>
                     <Flex flex={3} paddingX="20">
@@ -169,10 +219,15 @@ export default function Home({ params: { locale } }: { params: { locale: string 
                     </Flex>
                 </Flex>
             )}
+
             <Projects range={[2]} locale={locale} />
 
             {/* Testimonials Section */}
-            <Flex direction="column" alignItems="center" style={{ marginTop: '4rem' }}>
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem' }}
+            >
                 <Heading as="h2" variant="display-strong-l" marginBottom="m">
                     What People Are Saying
                 </Heading>
@@ -199,8 +254,14 @@ export default function Home({ params: { locale } }: { params: { locale: string 
                                 margin: '8px',
                             }}
                         >
-                            <Text variant="body-strong-s">{testimonial.feedback}</Text>
-                            <Text variant="body-default-s" marginTop="m" style={{ color: '#bbb' }}>
+                            <Text variant="body-strong-s">
+                                {testimonial.feedback}
+                            </Text>
+                            <Text
+                                variant="body-default-s"
+                                marginTop="m"
+                                style={{ color: '#bbb' }}
+                            >
                                 - {testimonial.name}{' '}
                                 <span>@{testimonial.username}</span>
                             </Text>
@@ -217,14 +278,13 @@ export default function Home({ params: { locale } }: { params: { locale: string 
                 style={{
                     marginTop: '4rem',
                     gap: '32px',
-                    flexWrap: 'wrap',
                 }}
             >
                 {/* Left Column: Community Image */}
                 <Flex flex={1} justifyContent="center">
                     <img
                         src="/images/gallery/community-image.jpg"
-                        alt="Join our community"
+                        alt="Join us on Discord"
                         style={{
                             borderRadius: '8px',
                             maxWidth: '100%',
@@ -234,19 +294,33 @@ export default function Home({ params: { locale } }: { params: { locale: string 
                 </Flex>
 
                 {/* Right Column: Community Text and Button */}
-                <Flex flex={1} direction="column" justifyContent="center" alignItems="center">
+                <Flex
+                    flex={1}
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="flex-start"
+                    style={{
+                        textAlign: 'left',
+                    }}
+                >
                     <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                        Join our community
+                        Join us on Discord
                     </Heading>
-                    <Text variant="body-default-s" marginBottom="l" style={{ textAlign: 'center' }}>
-                        Join our community of design engineers and build without limits.
+                    <Text
+                        variant="body-default-s"
+                        marginBottom="m"
+                        style={{
+                            marginBottom: '1rem',
+                        }}
+                    >
+                        Join our community of cloud engineers and grow without limits.
                     </Text>
                     <Button
                         href="https://cloudcraftwithfranck.org"
                         variant="primary"
                         size="l"
                     >
-                        Join Community
+                        Join Discord
                     </Button>
                 </Flex>
             </Flex>
