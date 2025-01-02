@@ -9,7 +9,7 @@ import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
-import './page.css'; // Importing the CSS for styling
+import './page.css'; // Importing CSS for the grid styling
 
 export async function generateMetadata(
     { params: { locale } }: { params: { locale: string } }
@@ -195,6 +195,29 @@ export default function Home(
                 </Flex>
             </Flex>
 
+            {/* New Grid Section */}
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem' }}
+            >
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    Hundreds Of Hours Invested
+                </Heading>
+                <Flex className="grid-container" style={{ gap: '16px' }}>
+                    <div className="grid-item">STUDENTS</div>
+                    <div className="grid-item">JOBS</div>
+                    <div className="grid-item">ARTICLES</div>
+                    <div className="grid-item">PROJECTS</div>
+                    <div className="grid-item">COUNTRIES</div>
+                    <div className="grid-item">1,388</div>
+                    <div className="grid-item">187</div>
+                    <div className="grid-item">2,360</div>
+                    <div className="grid-item">239</div>
+                    <div className="grid-item">21</div>
+                </Flex>
+            </Flex>
+
             <RevealFx translateY="16" delay={0.6}>
                 <Projects range={[1, 1]} locale={locale} />
             </RevealFx>
@@ -267,29 +290,6 @@ export default function Home(
                             </Text>
                         </Flex>
                     ))}
-                </Flex>
-            </Flex>
-
-            {/* Grid Section */}
-            <Flex
-                direction="column"
-                alignItems="center"
-                style={{ marginTop: '4rem' }}
-            >
-                <Heading as="h3" variant="display-strong-l" marginBottom="m">
-                    Hundreds Of Hours Invested
-                </Heading>
-                <Flex className="deploy-grid">
-                    <div className="grid-item">STUDENTS</div>
-                    <div className="grid-item">JOBS</div>
-                    <div className="grid-item">ARTICLES</div>
-                    <div className="grid-item">PROJECTS</div>
-                    <div className="grid-item">COUNTRIES</div>
-                    <div className="grid-item">1,388</div>
-                    <div className="grid-item">187</div>
-                    <div className="grid-item">2,360</div>
-                    <div className="grid-item">239</div>
-                    <div className="grid-item">21</div>
                 </Flex>
             </Flex>
 
