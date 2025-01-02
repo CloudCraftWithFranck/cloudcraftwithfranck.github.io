@@ -1,0 +1,215 @@
+---
+title: "Troubleshooting Ansible Issues for 100 Machines Monitoring on AWS"
+publishedAt: "2025-02-01"
+summary: "At CreshIT, we recently faced a challenge while managing a monitoring setup for 100 EC2 instances on AWS using Ansible."
+tag: "Ansible"
+---
+
+What started as a routine playbook run to configure monitoring agents turned into a deep dive into debugging, performance tuning, and infrastructure adjustments. This blog shares the real issues we encountered and how we solved them.
+
+---
+##The Scenario
+We were using Ansible to automate the deployment and configuration of a monitoring agent on 100 EC2 instances spread across multiple availability zones. The monitoring agent was responsible for collecting metrics like CPU, memory, disk usage, and network traffic.
+
+Our playbook used the following structure:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `---
+- name: Deploy monitoring agents
+  hosts: aws_ec2_instances
+  tasks:
+    - name: Install monitoring agent
+      yum:
+        name: monitoring-agent
+        state: latest
+
+    - name: Start monitoring agent
+      service:
+        name: monitoring-agent
+        state: started
+        enabled: yes
+
+    - name: Verify monitoring agent status
+      shell: systemctl is-active monitoring-agent
+      register: agent_status
+
+    - name: Fail if monitoring agent is not running
+      fail:
+        msg: "Monitoring agent failed to start on {{ inventory_hostname }}"
+      when: agent_status.stdout != "active"`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+
+
+---
+## The Issues
+
+When running the playbook, we faced several issues:
+
+Intermittent Connection Timeouts
+Many hosts returned SSH timeout errors during the playbook execution.
+
+Playbook Performance Issues
+The playbook execution time was inconsistent, ranging from 15 minutes to over an hour.
+
+Monitoring Agent Failures
+The monitoring agent failed to start on some instances, and the playbook flagged them as failed tasks.
+
+
+---
+## The Solutions
+
+---
+Step 1: Address Connection Timeouts
+Upon investigation, we found that some instances had restrictive security group rules that limited SSH connectivity. Additionally, the forks value in Ansible’s configuration was too high for our control machine’s capacity, causing resource contention.
+
+---
+## What We Did:
+
+Updated the security group rules to allow inbound SSH traffic from the control machine’s IP.
+Adjusted the forks setting in the ansible.cfg file to a lower value (20).
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `[defaults]
+forks = 20
+timeout = 30`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+Added the following SSH settings to ansible.cfg for more robust connections:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `[ssh_connection]
+pipelining = True
+ssh_args = -o ControlMaster=auto -o ControlPersist=60s`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+---
+Step 2: Optimize Playbook Performance
+Ansible was attempting to connect to all 100 instances simultaneously, overloading both the control machine and the network. To optimize this, we grouped the hosts by availability zone and ran the playbook in batches.
+
+---
+What We Did:
+
+Used Ansible’s serial keyword to limit the number of parallel connections:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `- name: Deploy monitoring agents in batches
+  hosts: aws_ec2_instances
+  serial: 20
+  tasks:
+    - name: Install monitoring agent
+      yum:
+        name: monitoring-agent
+        state: latest`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+---
+Step 3: Debug and Fix Monitoring Agent Failures
+The monitoring agent failed on some instances due to outdated dependencies. Additionally, certain instances had corrupted repositories causing package installation failures.
+
+---
+What We Did:
+
+Added a task to clean up and update the repository cache before installing the agent:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `- name: Clean and update yum cache
+  yum:
+    name: "*"
+    state: latest`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+Improved the failure handling to provide more detailed debugging information:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `- name: Fail if monitoring agent is not running
+  fail:
+    msg: "Monitoring agent failed to start on {{ inventory_hostname }}. Error: {{ agent_status.stderr }}"
+  when: agent_status.stdout != "active"`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+For instances with persistent issues, created an additional task to capture logs:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `- name: Capture monitoring agent logs
+  shell: cat /var/log/monitoring-agent.log
+  when: agent_status.stdout != "active"
+  register: agent_logs`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+---
+Results
+After applying these changes, the deployment stabilized:
+
+Reduced Connection Timeouts: Adjusted SSH settings and security group rules eliminated all SSH-related errors.
+Improved Playbook Speed: Execution time dropped to under 20 minutes by batching hosts and optimizing Ansible configurations.
+Resolved Agent Failures: Adding repository updates and debugging logs allowed us to identify and fix dependency issues, resulting in a 100% success rate.
+
+---
+Lessons Learned
+Divide and Conquer: Breaking large-scale deployments into smaller, manageable batches prevents resource bottlenecks.
+Logging Is Key: Detailed logs are invaluable for troubleshooting issues in large environments.
+Test Before You Run: Use --check mode in Ansible to validate configurations before making changes.
