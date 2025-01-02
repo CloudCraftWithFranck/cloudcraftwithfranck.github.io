@@ -44,12 +44,27 @@ GitHub is built on Git, a distributed version control system. To manage your pro
 3. Once installed, open a terminal (Command Prompt, PowerShell, or Terminal on macOS/Linux).
 4. Configure your username and email address:
   
-  <CodeBlock className="custom-code-block" codeInstances={[ { code: 'git config --global user.name "Your Name"\ngit config --global user.email "your-email@example.com"', label: "Git Configuration", language: "bash", }, ]} copyButton />
-   
+<CodeBlock
+    className="custom-code-block"
+    codeInstances={[
+        {
+            code: `git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+    style={{
+        backgroundColor: "#1e1e1e",
+        borderRadius: "8px",
+        padding: "16px",
+        color: "#dcdcdc",
+    }}
+/>
    These details will be associated with your commits.
 
 Now Git is ready to work with GitHub.
-
 ---
 
 ## Step 3: Create Your First Repository
