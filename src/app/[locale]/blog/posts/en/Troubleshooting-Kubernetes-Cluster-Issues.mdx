@@ -108,7 +108,7 @@ Enabled cluster autoscaler to dynamically adjust node counts in the future:
 
 
 ## Step 2: Resolving PVC Binding Failures
-Next, several pods showed errors related to Persistent Volume Claims (PVCs). Using kubectl describe pvc <pvc-name>, we identified the following error:
+Next, several pods showed errors related to Persistent Volume Claims (PVCs). Using kubectl describe pvc name, we identified the following error:
 
 Warning  ProvisioningFailed  persistentvolume-controller  Failed to provision volume with StorageClass "default": AzureDisk - SKU not available in the current region.
 
