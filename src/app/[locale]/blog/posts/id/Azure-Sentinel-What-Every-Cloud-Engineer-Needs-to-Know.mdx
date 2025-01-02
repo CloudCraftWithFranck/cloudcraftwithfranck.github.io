@@ -1,0 +1,365 @@
+---
+title: "Azure Sentinel: What Every Cloud Engineer Needs to Know"
+publishedAt: "2025-01-01"
+summary: "Azure Sentinel is Microsoft’s cloud-native Security Information and Event Management (SIEM) and Security Orchestration Automated Response (SOAR) tool."
+tag: "Sentinel"
+---
+
+Azure Sentinel is Microsoft’s cloud-native Security Information and Event Management (SIEM) and Security Orchestration Automated Response (SOAR) tool. It plays a critical role in helping organizations detect, investigate, and respond to threats in modern cloud environments.
+
+Before diving into a real-world incident response scenario, let’s break down Azure Sentinel—what it is, how it works, and why it’s essential for cloud engineers, security professionals, and DevOps teams.
+
+What is Azure Sentinel?
+Azure Sentinel is a unified platform for threat detection and response. It provides intelligent security analytics, integrating data from cloud environments, on-premises systems, and third-party platforms to deliver comprehensive visibility into potential threats.
+
+### Key Features:
+1. Data Collection: Sentinel aggregates data from sources like Azure, AWS, firewalls, and on-premises environments.
+2. Threat Detection: Built-in analytics and machine learning detect suspicious activities and generate alerts.
+3. Incident Investigation: Advanced tools, like Investigation Graphs, help visualize and trace attacks.
+4. Automation: Sentinel uses playbooks (based on Azure Logic Apps) to automate responses to security incidents.
+5. Hunting: Proactively search for threats using Kusto Query Language (KQL).
+
+### Who Uses Azure Sentinel?
+- Cloud Engineers: Integrate and manage security across cloud workloads.
+- Security Analysts (Blue Team): Investigate incidents and respond to threats.
+- Red Teams: Test system vulnerabilities and simulate attacks for validation.
+- SOC Teams: Monitor alerts and automate incident responses.
+- DevOps Teams: Ensure secure CI/CD pipelines and infrastructure.
+
+## How to Use Azure Sentinel
+
+## 1. Setting Up Azure Sentinel
+To use Sentinel, you need an Azure subscription. Start by attaching Sentinel to an Azure Log Analytics workspace, which serves as its backbone for data ingestion and analysis.
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `az sentinel create \
+  --resource-group my-rg \
+  --workspace-name sentinel-workspace \
+  --name azure-sentinel`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+## 2. Connecting Data Sources
+Use built-in connectors to integrate services like Azure Active Directory (Azure AD), Office 365, AWS, and more.
+
+Example: Connecting Azure AD Logs
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `az sentinel data-connector create \
+  --workspace-name sentinel-workspace \
+  --connector-name AzureActiveDirectory`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+## 3. Writing Custom Rules
+Azure Sentinel allows you to create detection rules using KQL. These rules analyze ingested data and generate alerts.
+
+Example: Rule to Detect Brute Force Logins
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `SigninLogs
+| where ResultType != 0 // Failed logins
+| summarize Count = count() by UserPrincipalName, bin(TimeGenerated, 5m)
+| where Count > 10`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+## 4. Automating Responses
+Create playbooks with Azure Logic Apps to automate actions like disabling compromised accounts or isolating virtual machines.
+
+### Languages Used in Azure Sentinel
+Azure Sentinel primarily uses Kusto Query Language (KQL) for analyzing and querying logs. It also integrates with tools and languages for automation, such as:
+
+- PowerShell for scripting responses.
+- JSON for Logic App workflows.
+- REST APIs for custom integrations.
+
+### Plans and Pricing
+Azure Sentinel pricing depends on data ingestion and retention:
+
+- Pay-as-You-Go: Charged per GB of data ingested.
+- Capacity Reservation: Pre-purchase a fixed amount of daily data ingestion for cost savings.
+You can estimate costs using the Azure Pricing Calculator. Be mindful of data retention policies to avoid unexpected expenses.
+
+Benefits of Azure Sentinel
+- Scalability: Fully cloud-native, so it scales automatically with your workloads.
+- Integration: Connects to multiple environments (Azure, AWS, on-prem).
+- Automation: Playbooks streamline responses to incidents.
+- Unified View: Single dashboard for all security events and alerts.
+- Proactive Hunting: Enables security teams to proactively search for threats.
+- Cost Efficiency: Eliminates the need for on-premises SIEM infrastructure.
+
+### Limitations of Azure Sentinel
+- Learning Curve: Requires familiarity with KQL and Azure’s ecosystem.
+- Cost Control: High data ingestion rates can lead to unexpected costs.
+- Third-Party Integration: While extensive, not every third-party service has built-in connectors.
+- Custom Rule Complexity: Writing effective detection rules can be challenging for beginners.
+
+### When to Use Azure Sentinel
+Azure Sentinel is ideal for organizations:
+
+1. With multi-cloud or hybrid environments.
+2. Needing centralized monitoring for diverse workloads.
+3. Seeking automated responses to reduce incident handling time.
+4. Requiring advanced analytics to detect complex threats.
+
+## Our experience with Ontario IT Corp.
+
+## The Incident: What Happened?
+It began with a phishing email reported by a team member. Within hours, Azure Sentinel flagged unusual login behavior:
+
+Multiple failed sign-in attempts, followed by a successful login from a foreign IP.
+Suspicious PowerShell activity on a virtual machine within our production environment.
+The login anomalies suggested compromised credentials, and the PowerShell activity hinted at lateral movement attempts. This combination of user reporting and automated detection triggered an immediate response.
+
+Initial Detection Using Azure Sentinel
+Azure Sentinel raised two critical alerts:
+
+Impossible Travel Activity: Logins from two geographically distant locations within a short timeframe.
+Suspicious PowerShell Execution: Attempts to enumerate Azure AD users.
+
+### Step 1: Investigating the Login Anomalies
+Using Sentinel’s logs, we queried Azure AD sign-ins to analyze the timeline of events:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `SigninLogs
+| where ResultType == 0 // Success
+| extend Location = strcat(Todynamic(LocationDetails).countryOrRegion, " - ", tostring(LocationDetails.city))
+| where Location !in ("United States - New York") // Exclude known safe locations
+| summarize Count = count() by UserPrincipalName, Location, IPAddress, bin(TimeGenerated, 1h)`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+
+This query revealed:
+
+- A successful login from Warsaw, Poland, at 3:42 AM.
+- Multiple failed attempts from the same IP earlier that morning.
+
+### Step 2: PowerShell Activity
+Simultaneously, Sentinel detected unusual PowerShell commands on a production virtual machine. A KQL query for Azure Diagnostics logs confirmed an attempt to enumerate Azure AD users:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `AzureDiagnostics
+| where ResourceType == "VirtualMachine"
+| where Message has "Get-AzADUser"
+| summarize Count = count() by Computer, UserName, Message, bin(TimeGenerated, 1h)`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+We verified this activity was unauthorized and matched the timing of the suspicious login.
+
+## Response Plan: Collaboration Between Teams
+
+1. Blue Team: Immediate Actions
+Account Lockdown:
+The compromised account was disabled immediately to prevent further access:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `Set-AzADUser -UserPrincipalName "j.doe@ontarioit.com" -AccountEnabled $false`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+VM Isolation:
+The virtual machine running suspicious scripts was isolated from the network.
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `az vm update \
+  -g prod-resources \
+  -n prod-vm01 \
+  --set tags.Isolated="true"`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+2. Alert SOC Teams:
+Security Operations Center (SOC) was alerted for continuous monitoring.
+
+3. Red Team: Simulated Attack
+While the Blue Team worked on containment, the Red Team simulated a phishing attack to test user awareness and infrastructure weaknesses. Their findings included:
+
+- Weak email filtering rules allowed phishing emails to bypass defenses.
+- Lack of multi-factor authentication (MFA) on some accounts.
+
+## Challenges and Common Mistakes
+
+### Challenge 1: Response Time
+From the time Sentinel flagged the issue to full containment, it took 90 minutes. While quick, the delay in user reporting (email reported two hours after receipt) could have allowed the attacker to move laterally.
+
+Lesson: Encourage a security-first mindset among employees with regular training and phishing simulations.
+
+### Challenge 2: Dependency on Manual Processes
+While Sentinel automated detection, manual steps like account disabling and VM isolation introduced delays. Automating these steps could reduce response times.
+
+Improvement: Deploy Sentinel playbooks for incident automation.
+Here’s an example playbook to disable a compromised account:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `{
+    "actions": {
+        "DisableUser": {
+            "inputs": {
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['azuread']['connectionId']"
+                    }
+                },
+                "method": "post",
+                "path": "/v1.0/users/@{triggerBody()?['userPrincipalName']}/accountEnabled",
+                "body": { "accountEnabled": false }
+            },
+            "type": "ApiConnection"
+        }
+    },
+    "triggers": {
+        "When_a_response_to_an_Azure_Sentinel_alert_is_triggered": {
+            "type": "AlertTrigger"
+        }
+    }
+}`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+
+### Challenge 3: Critical Assets at Risk
+The compromised account had access to production databases. While no data was exfiltrated, the potential for escalation was significant.
+
+Lesson: Limit user permissions following the principle of least privilege. Regularly audit access levels.
+
+Proactive Measures: Preventing Future Incidents
+
+### 1. Enhanced Email Filtering
+Improved Microsoft Defender for Office 365 rules to block phishing attempts and flag suspicious links.
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `Set-PhishFilterPolicy -EnableSafeLinks $true -EnableSafeAttachments $true`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+### 2. Implementing Multi-Factor Authentication
+We enforced MFA on all Azure AD accounts, reducing the risk of compromised credentials being used effectively.
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `az ad user update --id j.doe@ontarioit.com --force-change-password-next-login --enable-mfa`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+### 3. Advanced Analytics Rules
+Created custom analytics rules in Sentinel to detect:
+
+- Sudden increases in failed logins.
+- Outbound data transfers exceeding normal thresholds.
+Sample Rule:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `SigninLogs
+| where ResultType != 0 // Failed sign-ins
+| summarize Count = count() by UserPrincipalName, bin(TimeGenerated, 15m)
+| where Count > 10`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+### Impact and Worst-Case Scenario
+Had the attack gone unnoticed, the attacker could have:
+
+1. Escalated privileges to access sensitive data.
+2. Installed backdoors for persistent access.
+3. Disrupted operations by tampering with critical assets.
+Thanks to Azure Sentinel and coordinated team efforts, we avoided these outcomes, but the incident highlighted the importance of proactive security practices.
+
+### Lessons Learned
+- Team Collaboration is Critical: Blue Teams need clear protocols for responding to incidents, while Red Teams must regularly test for weaknesses.
+- Automation Saves Time: Playbooks can eliminate delays in critical response actions.
+- User Awareness Reduces Risk: A well-informed workforce is your first line of defense against phishing and other social engineering attacks.
+
+### Final Thoughts
+This experience reinforced the importance of Azure Sentinel as a key tool in detecting, investigating, and responding to security incidents. It also underscored the need for constant vigilance and proactive measures in cloud environments.
+
+Have you faced similar challenges? Share your insights and strategies for improvement. Let’s keep learning and growing as a community.
