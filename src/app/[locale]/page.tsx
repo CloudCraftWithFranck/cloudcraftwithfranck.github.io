@@ -251,7 +251,7 @@ export default function Home({ params: { locale } }: { params: { locale: string 
                 <Flex flex={1} justifyContent="center">
                     <img
                         src="/images/gallery/community-image.jpg"
-                        alt="Join our community"
+                        alt="Join us on Discord!"
                         style={{
                             borderRadius: '8px',
                             maxWidth: '100%',
@@ -265,7 +265,7 @@ export default function Home({ params: { locale } }: { params: { locale: string 
                     <Heading as="h2" variant="display-strong-l" marginBottom="m">
                         Join our community
                     </Heading>
-                    <Text variant="body-default-s" marginBottom="l" style={{ textAlign: 'center' }}>
+                    <Text variant="body-default-s" marginBottom="l" style={{ textAlign: 'left' }}>
                         Join our community of design engineers and build without limits.
                     </Text>
                     <Button
