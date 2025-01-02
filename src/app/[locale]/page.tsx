@@ -277,15 +277,15 @@ export default function Home(
                 style={{ marginTop: '4rem' }}
             >
                 <Heading as="h3" variant="display-strong-l" marginBottom="m">
-                    Hundreds of hours invested per Month
+                    Hundreds Of Hours Invested
                 </Heading>
                 <Flex className="deploy-grid">
                     <div className="grid-item">STUDENTS</div>
                     <div className="grid-item">JOBS</div>
-                    <div className="grid-item">DEPLOYS</div>
+                    <div className="grid-item">ARTICLES</div>
                     <div className="grid-item">PROJECTS</div>
                     <div className="grid-item">COUNTRIES</div>
-                    <div className="grid-item">388</div>
+                    <div className="grid-item">1,388</div>
                     <div className="grid-item">187</div>
                     <div className="grid-item">2,360</div>
                     <div className="grid-item">239</div>
