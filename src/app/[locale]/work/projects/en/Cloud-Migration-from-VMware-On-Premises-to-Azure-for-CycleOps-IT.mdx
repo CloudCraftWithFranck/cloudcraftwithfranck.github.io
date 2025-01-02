@@ -1,0 +1,347 @@
+---
+title: "Cloud Migration from VMware On-Premises to Azure for CycleOps IT"
+publishedAt: "2024-07-08"
+summary: "Migrating from VMware on-prem to Azure is a complex but rewarding journey. For CycleOps IT, the move enabled better performance, scalability, and cost savings."
+images:
+  - "/images/projects/project-01/cover-01.jpg"
+  - "/images/projects/project-01/cover-02.jpg"
+  - "/images/projects/project-01/cover-03.jpg"
+  - "/images/projects/project-01/cover-04.jpg"
+team:
+  - name: "Franck Kengne"
+    role: "Cloud Advocate"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/franck-kengne-cloud-advocate-0822a6233/"
+---
+
+Cloud migrations are no longer a question of “if” but “when.” For CycleOps IT, a mid-sized technology services company managing 100 VMware virtual machines (VMs) on-premises, migrating to Azure was a strategic move to modernize their infrastructure, improve scalability, and optimize costs.
+
+This case study provides a detailed, step-by-step account of how the migration was planned and executed, transitioning from VMware on-prem to Azure, integrating Azure AD Connect, replacing Citrix with Azure Virtual Desktop (AVD), and rehosting IIS web servers and SQL Server databases. Along the way, we’ll discuss the technical challenges, solutions, best practices, and lessons learned.
+
+## The Challenge
+CycleOps IT's on-premises VMware environment hosted:
+
+1. Applications: IIS-hosted websites, legacy enterprise apps, and Citrix for virtual desktops.
+2. Databases: SQL Server instances critical for application data storage.
+3. Authentication: On-prem Active Directory for identity and access management.
+4. Users: Distributed teams accessing apps and desktops from multiple locations.
+
+The goal was not just a lift-and-shift migration but also a modernization effort, leveraging Azure-native tools like Docker, Azure Kubernetes Service (AKS), and Azure AD.
+
+## Phase 1: Planning and Assessment
+
+###1. Inventory of On-Premises Infrastructure
+Using Azure Migrate, we performed a full inventory of CycleOps IT’s on-premises environment to evaluate the following:
+
+- VM specifications (CPU, memory, disk size).
+- Application dependencies (IIS servers, SQL databases).
+- Citrix configurations for application delivery.
+- Active Directory setup.
+
+Key Findings:
+
+1. Applications hosted on IIS had dependencies on SQL databases running locally.
+2. 40% of the VMs were underutilized and could be optimized in Azure.
+3. Citrix workloads served a large user base, which needed equivalent performance in Azure.
+
+### 2. Choosing Migration Tools
+Based on the findings, the following tools were selected:
+
+1. Azure Migrate for VM discovery and migration.
+2. Azure AD Connect for directory synchronization.
+3. Azure SQL Migration Tool for database migration.
+4. FSLogix to manage user profiles in Azure Virtual Desktop.
+
+## Phase 2: Active Directory Integration
+
+### 1. Setting Up Azure AD Connect
+Azure AD Connect was configured to synchronize on-prem Active Directory with Azure AD. This ensured seamless Single Sign-On (SSO) for users accessing Azure resources.
+
+### Configuration Steps:
+
+- Installed Azure AD Connect on the on-prem domain controller.
+- Enabled Password Hash Synchronization for hybrid identity.
+- Configured filtering to sync only necessary OUs and attributes.
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `# Verify synchronization status
+Get-ADSyncScheduler
+# Force a synchronization cycle
+Start-ADSyncSyncCycle -PolicyType Delta`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+### Result:
+Users could log in to Azure Virtual Desktop and Azure-hosted applications using their existing credentials.
+
+## Phase 3: Migrating VMware VMs to Azure
+### 1. Discovery and Assessment
+Azure Migrate was used to assess VM readiness for migration:
+
+Network configurations were analyzed to replicate subnets and security groups in Azure.
+Performance metrics were evaluated to recommend the appropriate VM sizes in Azure.
+
+### 2. Replication and Migration
+VMs were replicated to Azure using Azure Migrate: Server Migration.
+
+### Key Steps:
+
+- Installed the replication appliance on the on-prem environment.
+- Configured replication for each VM:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `az migrate replication start \
+  --resource-group CycleOps-RG \
+  --vm-id vmw-001 \
+  --target-vm-size Standard_D4s_v3`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+- Validated the replication and initiated the cutover during a scheduled downtime window.
+
+### Result:
+All 100 VMs were successfully migrated, with some consolidated into fewer, more optimized instances to reduce costs.
+
+## Phase 4: Transitioning to Azure Virtual Desktop
+### 1. Deployment of AVD Host Pools
+AVD was deployed to replace Citrix for application and desktop delivery.
+
+### Steps:
+
+- Created host pools in Azure with session hosts running Windows 10 Enterprise multi-session.
+- Configured FSLogix for profile management:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `New-FSLogixConfiguration -ProfileType VHD -StorageAccountURI "https://cycleopsstorage.blob.core.windows.net/profiles"`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+- Published applications and desktops via the Azure portal.
+
+### 2. Testing and Rollout
+User profiles were migrated, and a pilot group tested AVD performance before rolling out to all users. Performance was closely monitored using Azure Monitor.
+
+## Phase 5: Rehosting IIS Web Servers and SQL Databases
+### 1. Migrating IIS Web Servers
+IIS web servers were rehosted in Azure Virtual Machines.
+
+### Steps:
+
+- Exported the IIS configurations from on-prem:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `appcmd add backup "IIS-Backup"`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+- Imported the configurations into Azure VMs:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `appcmd restore backup "IIS-Backup"`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+### 2. Migrating SQL Databases
+SQL databases were migrated to Azure SQL Managed Instances using the Azure Database Migration Service.
+
+### Steps:
+
+Created an Azure SQL Managed Instance in the same virtual network as the IIS servers.
+Migrated the databases with minimal downtime:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `az sql db migration start \
+  --source "vmw-sqlserver" \
+  --target "sql-cmi-instance" \
+  --database-name "ProductionDB"`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+## Phase 6: Application Redeployment with Containerization
+### 1. Identifying Candidates for Containerization
+Legacy applications hosted on IIS were analyzed for compatibility with containerization. Applications with minimal dependencies and stateless designs were prioritized for containerization, while those with tight coupling to hardware or legacy systems were rehosted in Azure VMs.
+
+### Key Candidates:
+
+1. Web apps hosted on IIS.
+2. Internal APIs supporting the company's business processes.
+
+### 2. Containerizing Applications
+Docker was chosen for containerization due to its simplicity and broad support. Each application was packaged into a Docker container with its configuration and dependencies.
+
+### Steps to Containerize IIS Web Applications:
+
+1. Create a Dockerfile for the IIS application:
+
+dockerfile
+Copy code
+FROM mcr.microsoft.com/windows/servercore/iis
+COPY ./myapp /inetpub/wwwroot
+
+2. Build and Tag the Image:
+
+bash
+Copy code
+docker build -t cycleops/myapp:v1 .
+
+3. Push the Image to Azure Container Registry (ACR):
+
+bash
+Copy code
+az acr login --name CycleOpsRegistry
+docker tag cycleops/myapp:v1 cycleopsregistry.azurecr.io/myapp:v1
+docker push cycleopsregistry.azurecr.io/myapp:v1
+
+4. Deploy the Containers to Azure Kubernetes Service (AKS):
+
+yaml
+Copy code
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp-container
+        image: cycleopsregistry.azurecr.io/myapp:v1
+        ports:
+        - containerPort: 80
+
+5. Deploy the configuration:
+
+bash
+Copy code
+kubectl apply -f deployment.yaml
+
+## Phase 7: User Migration and Authentication
+### 1. Migrating Users
+Azure Active Directory (Azure AD) was integrated with the on-prem AD using Azure AD Connect.
+
+### Key Actions:
+
+1. Synced all users and groups to Azure AD.
+2. Enabled Password Hash Synchronization to allow users to log in with their existing credentials.
+3. Configured Conditional Access Policies to enforce Multi-Factor Authentication (MFA).
+
+### 2. Authentication
+Post-migration, all application and desktop access was redirected to Azure AD.
+
+1. For web applications: Enabled Azure AD App Proxy for secure access.
+2. For AVD: Configured Azure AD authentication with FSLogix for profile management.
+
+
+Set-MsolUser -UserPrincipalName user@cycleops.com -PasswordPolicies DisablePasswordExpiration
+
+## Phase 8: Security Hardening
+1. Role-Based Access Control (RBAC): Ensured that only specific teams had access to their resources in Azure.
+2. Network Security Groups (NSGs): Deployed NSGs for every subnet to restrict inbound and outbound traffic.
+3. Azure Key Vault: Migrated all application secrets to Azure Key Vault for secure storage.
+
+az keyvault secret set --vault-name "CycleOpsKeyVault" --name "DbConnectionString" --value "your-connection-string"
+
+## Final Architecture
+Below is the redesigned architecture of the Azure-based infrastructure, replicating and modernizing the on-prem design:
+
+### Key Components
+- Azure Kubernetes Service (AKS): Hosts all containerized applications, ensuring scalability and manageability.
+- Azure Virtual Machines: For applications incompatible with containerization (legacy apps).
+- Azure SQL Managed Instance: Fully managed database hosting, replacing on-prem SQL servers.
+- Azure Virtual Desktop (AVD): Replacing Citrix for delivering virtual desktops to distributed users.
+- Azure Load Balancer: Distributes traffic to web applications.
+- Azure Monitor and Log Analytics: Monitors performance and logs for the entire infrastructure.
+- Azure AD and Conditional Access: Unified authentication and security policies.
+
+### Diagram: Final Azure Infrastructure
+
++----------------------------------------+
+| Azure Virtual Network                  |
+| +------------------------------------+ |
+| | Azure Kubernetes Service (AKS)     | |
+| |   - IIS Web Apps                   | |
+| |   - Internal APIs                  | |
+| +------------------------------------+ |
+|                                        |
+| +------------------------------------+ |
+| | Azure Virtual Machines             | |
+| |   - Legacy Applications            | |
+| +------------------------------------+ |
+|                                        |
+| +------------------------------------+ |
+| | Azure SQL Managed Instance         | |
+| +------------------------------------+ |
+|                                        |
+| +------------------------------------+ |
+| | Azure Virtual Desktop (AVD)        | |
+| +------------------------------------+ |
+|                                        |
+| +------------------------------------+ |
+| | Azure AD & Key Vault               | |
+| +------------------------------------+ |
++----------------------------------------+
+
+## Lessons Learned
+Thorough Assessment Prevents Surprises: Not all applications were suitable for containerization, which required flexibility in deployment strategies.
+User Experience is Key: AVD provided faster logins and better performance compared to the legacy Citrix environment.
+Security Can’t Be an Afterthought: Moving to Azure forced a rethink of how secrets, access policies, and network rules were managed.
+
+## Final Thoughts
+The migration of CycleOps IT’s infrastructure from VMware on-premises to Azure was not just a lift-and-shift but a transformation that modernized their entire environment. With containerized applications, seamless user access, and enhanced security, the new infrastructure is scalable, cost-effective, and ready for future growth.
+
+If you’re planning a similar migration, focus on planning, flexibility, and a strong post-deployment strategy. Have questions? Let’s discuss!
