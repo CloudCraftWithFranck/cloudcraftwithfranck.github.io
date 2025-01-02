@@ -276,20 +276,20 @@ export default function Home(
                 alignItems="center"
                 style={{ marginTop: '4rem' }}
             >
-                <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                    3.1M+ Deploys per Month (and Counting)
+                <Heading as="h3" variant="display-strong-l" marginBottom="m">
+                    Hundreds of hours invested per Month
                 </Heading>
                 <Flex className="deploy-grid">
-                    <div className="grid-item">USERS</div>
-                    <div className="grid-item">SERVICES</div>
+                    <div className="grid-item">STUDENTS</div>
+                    <div className="grid-item">JOBS</div>
                     <div className="grid-item">DEPLOYS</div>
-                    <div className="grid-item">LOGS</div>
-                    <div className="grid-item">REQUESTS</div>
-                    <div className="grid-item">862,888</div>
-                    <div className="grid-item">2,264,187</div>
-                    <div className="grid-item">3,189,360</div>
-                    <div className="grid-item">65,489,937,439</div>
-                    <div className="grid-item">145,260,056,233</div>
+                    <div className="grid-item">PROJECTS</div>
+                    <div className="grid-item">COUNTRIES</div>
+                    <div className="grid-item">388</div>
+                    <div className="grid-item">187</div>
+                    <div className="grid-item">2,360</div>
+                    <div className="grid-item">239</div>
+                    <div className="grid-item">21</div>
                 </Flex>
             </Flex>
 
