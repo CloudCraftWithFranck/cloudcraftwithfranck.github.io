@@ -195,91 +195,16 @@ export default function Home(
                 </Flex>
             </Flex>
 
-            <RevealFx translateY="16" delay={0.6}>
-                <Projects range={[1, 1]} locale={locale} />
-            </RevealFx>
-
-            {routes['/blog'] && (
-                <Flex
-                    fillWidth
-                    gap="24"
-                    mobileDirection="column"
-                >
-                    <Flex flex={1} paddingLeft="l">
-                        <Heading
-                            as="h2"
-                            variant="display-strong-xs"
-                            wrap="balance"
-                        >
-                            Latest from the Blog
-                        </Heading>
-                    </Flex>
-                    <Flex flex={3} paddingX="20">
-                        <Posts range={[1, 2]} columns="2" locale={locale} />
-                    </Flex>
-                </Flex>
-            )}
-
-            <Projects range={[2]} locale={locale} />
-
-            {/* Testimonials Section */}
+            {/* New Grid Section */}
             <Flex
                 direction="column"
                 alignItems="center"
                 style={{ marginTop: '4rem' }}
             >
                 <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                    What People Are Saying
-                </Heading>
-                <Flex
-                    direction="row"
-                    style={{
-                        flexWrap: 'wrap',
-                        gap: '16px',
-                        justifyContent: 'center',
-                    }}
-                >
-                    {testimonials.map((testimonial, index) => (
-                        <Flex
-                            key={index}
-                            direction="column"
-                            alignItems="center"
-                            padding="l"
-                            style={{
-                                borderRadius: '8px',
-                                background: '#000',
-                                color: '#fff',
-                                maxWidth: '300px',
-                                textAlign: 'center',
-                                margin: '8px',
-                            }}
-                        >
-                            <Text variant="body-strong-s">
-                                {testimonial.feedback}
-                            </Text>
-                            <Text
-                                variant="body-default-s"
-                                marginTop="m"
-                                style={{ color: '#bbb' }}
-                            >
-                                - {testimonial.name}{' '}
-                                <span>@{testimonial.username}</span>
-                            </Text>
-                        </Flex>
-                    ))}
-                </Flex>
-            </Flex>
-
-            {/* Grid Section */}
-            <Flex
-                direction="column"
-                alignItems="center"
-                style={{ marginTop: '4rem' }}
-            >
-                <Heading as="h3" variant="display-strong-l" marginBottom="m">
                     Hundreds Of Hours Invested
                 </Heading>
-                <Flex className="deploy-grid">
+                <Flex className="grid-container" style={{ gap: '16px' }}>
                     <div className="grid-item">STUDENTS</div>
                     <div className="grid-item">JOBS</div>
                     <div className="grid-item">ARTICLES</div>
