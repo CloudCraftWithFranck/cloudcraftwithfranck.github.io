@@ -254,7 +254,6 @@ export default function Home(
                 style={{
                     marginTop: '4rem',
                     gap: '32px',
-                    flexWrap: 'wrap',
                 }}
             >
                 {/* Left Column: Community Image */}
@@ -275,9 +274,9 @@ export default function Home(
                     flex={1}
                     direction="column"
                     justifyContent="center"
-                    alignItems="flex-start"
+                    alignItems="center"
                     style={{
-                        textAlign: 'left',
+                        textAlign: 'center',
                     }}
                 >
                     <Heading as="h2" variant="display-strong-l" marginBottom="m">
@@ -285,7 +284,7 @@ export default function Home(
                     </Heading>
                     <Text
                         variant="body-default-s"
-                        marginBottom="l"
+                        marginBottom="m"
                         style={{
                             marginBottom: '1rem',
                         }}
