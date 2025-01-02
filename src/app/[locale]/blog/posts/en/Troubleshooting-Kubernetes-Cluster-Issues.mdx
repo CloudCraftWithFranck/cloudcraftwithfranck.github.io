@@ -1,0 +1,264 @@
+---
+title: "How to Get Started on GitHub"
+publishedAt: "2024-12-30"
+summary: "Troubleshooting Kubernetes Cluster Issues on Azure."
+tag: "Kubernetes"
+---
+
+Managing Kubernetes clusters on Azure is a common task for many cloud engineers, DevOps practitioners, and SREs. Yet, even the most well-maintained environments can run into problems. In this blog, I’ll walk you through a real-world scenario we faced recently while managing a Kubernetes cluster named prod-cluster-westus in Azure.
+
+This isn’t just another example—it’s a hands-on, detailed breakdown of issues that many in our field encounter and the exact steps we took to resolve them.
+
+## The Scenario
+We had a production-grade AKS (Azure Kubernetes Service) cluster running in the prod-infra resource group, located in the West US region. The cluster supported critical workloads, including a monitoring stack, web APIs, and batch-processing jobs. While rolling out updates for a new microservice, we encountered three significant issues:
+
+Pods Stuck in Pending State: Some pods were not being scheduled, despite having enough nodes in the cluster.
+Persistent Volume Claims (PVCs) Failing to Bind: Storage provisioning for certain pods was failing due to misconfigurations.
+Load Balancer Routing Errors: External requests to our services were timing out, even though the services were up within the cluster.
+Each issue disrupted workloads and required careful troubleshooting.
+
+## Step 1: Investigating Pods in Pending State
+Using kubectl get pods, we found multiple pods in the Pending state for over 30 minutes. To dive deeper, we described one of the stuck pods:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `kubectl describe pod <pod-name> -n production`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+
+Findings:
+The error message indicated:
+
+- 0/5 nodes are available: 2 Insufficient CPU, 3 Insufficient memory.
+
+### Root Cause:
+The cluster nodes were over-committed. Resource limits for other running pods were consuming all available CPU and memory, leaving no room for new deployments.
+
+## Solution:
+
+Immediate Fix: Scaled the node pool to handle the increased demand.
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `az aks nodepool scale \
+  --resource-group prod-infra \
+  --cluster-name prod-cluster-westus \
+  --name default-nodepool \
+  --node-count 8`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+Preventive Action: Reviewed and updated the resource requests and limits in our deployment YAML files to prevent over-commitment.
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `resources:
+  requests:
+    memory: "512Mi"
+    cpu: "500m"
+  limits:
+    memory: "1Gi"
+    cpu: "1"`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+Enabled cluster autoscaler to dynamically adjust node counts in the future:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `az aks update \
+  --resource-group prod-infra \
+  --name prod-cluster-westus \
+  --enable-cluster-autoscaler \
+  --min-count 5 \
+  --max-count 15`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+
+##Step 2: Resolving PVC Binding Failures
+Next, several pods showed errors related to Persistent Volume Claims (PVCs). Using kubectl describe pvc <pvc-name>, we identified the following error:
+
+Warning  ProvisioningFailed  persistentvolume-controller  Failed to provision volume with StorageClass "default": AzureDisk - SKU not available in the current region.
+
+###Root Cause:
+The default StorageClass was configured to use a disk SKU (StandardSSD_LRS) unavailable in the West US region.
+
+###Solution:
+
+Created a new StorageClass with a compatible SKU:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: managed-premium
+provisioner: disk.csi.azure.com
+parameters:
+  skuName: Premium_LRS
+reclaimPolicy: Retain
+allowVolumeExpansion: true`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+Updated PVC configurations to use the new StorageClass:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: managed-premium`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+Verified binding status after redeployment:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `kubectl get pvc -n production`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+## Step 3: Debugging Load Balancer Routing Issues
+The final issue was external connectivity: requests to services exposed via an Azure Load Balancer were failing with a 504 Gateway Timeout error. To debug, we inspected the service configuration:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `kubectl describe service <service-name> -n production`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+### Findings:
+1. The externalTrafficPolicy was set to Cluster, causing source IP address masking and improper routing.
+2. The Load Balancer health probes were targeting incorrect paths, resulting in failed health checks.
+
+###Solution:
+
+Updated the service to use externalTrafficPolicy: Local to preserve source IP addresses:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+  namespace: production
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: web-app`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+Fixed the health probe path in the Azure portal to /healthz. This was configured on the AKS Load Balancer rule associated with the service.
+
+Verified connectivity:
+
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `curl -I http://<load-balancer-ip>`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
+
+### Additional Measures
+1. Integrated Monitoring:
+Used Azure Monitor and Prometheus to set up alerts for resource utilization and pod health.
+
+2. Cluster Health Checks:
+Scheduled periodic checks using kube-bench to ensure security and compliance with Kubernetes best practices.
+
+3. Documentation:
+Updated internal playbooks with lessons learned to ensure faster resolution for similar issues in the future.
+
+###Key Takeaways
+1. Plan for Scalability: Always monitor and plan for resource growth to avoid node over-commitment.
+2. Region-Specific Configurations: Validate that your StorageClass parameters and other configurations align with the capabilities of your Azure region.
+3. Validate Health Probes: Misconfigured health probes can lead to unnecessary downtime. Always test and validate them before deployment.
+
+
+##Final Thoughts
+Kubernetes is powerful but complex, and issues can arise even in well-configured environments. By systematically identifying and resolving the challenges in our prod-cluster-westus, we ensured stability and gained insights to prevent future problems.
