@@ -46,6 +46,7 @@ GitHub is built on Git, a distributed version control system. To manage your pro
   
 <CodeBlock
     className="custom-code-block"
+    theme={isDarkMode ? "dark" : "light"} // Dynamic theming
     codeInstances={[
         {
             code: `git config --global user.name "Your Name"
@@ -55,16 +56,11 @@ git config --global user.email "your-email@example.com"`,
         },
     ]}
     copyButton
-    style={{
-        backgroundColor: "#1e1e1e",
-        borderRadius: "8px",
-        padding: "16px",
-        color: "#dcdcdc",
-    }}
 />
-   These details will be associated with your commits.
 
+   These details will be associated with your commits.
 Now Git is ready to work with GitHub.
+
 ---
 
 ## Step 3: Create Your First Repository
