@@ -152,33 +152,6 @@ export default function Home({ params: { locale } }: { params: { locale: string 
                         </Flex>
                     </RevealFx>
                 </Flex>
-
-                {/* Right Column: YouTube Section */}
-                <Flex
-                    direction="column"
-                    flex={1}
-                    padding="20"
-                    border="neutral-medium"
-                    borderStyle="solid-1"
-                    radius="m"
-                    background="neutral-strong"
-                    style={{ textAlign: 'center' }}
-                >
-                    <Heading as="h2" variant="display-strong-s" marginBottom="m">
-                        CloudCraft With Me
-                    </Heading>
-                    <iframe
-                        src="https://www.youtube.com/embed/example-video-id"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        style={{
-                            width: '100%',
-                            height: '300px',
-                            borderRadius: '8px',
-                        }}
-                    ></iframe>
-                </Flex>
             </Flex>
 
             <RevealFx translateY="16" delay={0.6}>
