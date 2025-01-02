@@ -3,10 +3,10 @@ title: "Cloud Migration from VMware On-Premises to Azure for CycleOps IT"
 publishedAt: "2024-07-08"
 summary: "Migrating from VMware on-prem to Azure is a complex but rewarding journey. For CycleOps IT, the move enabled better performance, scalability, and cost savings."
 images:
-  - "/images/projects/project-01/cover-01.jpg"
-  - "/images/projects/project-01/cover-02.jpg"
-  - "/images/projects/project-01/cover-03.jpg"
-  - "/images/projects/project-01/cover-04.jpg"
+  - "/images/projects/project-01/cover-11.png"
+  - "/images/projects/project-01/cover-12.png"
+  - "/images/projects/project-01/cover-13.png"
+  - "/images/projects/project-01/cover-14.png"
 team:
   - name: "Franck Kengne"
     role: "Cloud Advocate"
@@ -221,30 +221,60 @@ Docker was chosen for containerization due to its simplicity and broad support. 
 
 1. Create a Dockerfile for the IIS application:
 
-dockerfile
-Copy code
-FROM mcr.microsoft.com/windows/servercore/iis
-COPY ./myapp /inetpub/wwwroot
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `FROM mcr.microsoft.com/windows/servercore/iis
+COPY ./myapp /inetpub/wwwroot`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
 
 2. Build and Tag the Image:
 
-bash
-Copy code
-docker build -t cycleops/myapp:v1 .
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `docker build -t cycleops/myapp:v1 .`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
 
 3. Push the Image to Azure Container Registry (ACR):
 
-bash
-Copy code
-az acr login --name CycleOpsRegistry
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `az acr login --name CycleOpsRegistry
 docker tag cycleops/myapp:v1 cycleopsregistry.azurecr.io/myapp:v1
-docker push cycleopsregistry.azurecr.io/myapp:v1
+docker push cycleopsregistry.azurecr.io/myapp:v1`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
 
 4. Deploy the Containers to Azure Kubernetes Service (AKS):
 
-yaml
-Copy code
-apiVersion: apps/v1
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: myapp-deployment
@@ -262,13 +292,28 @@ spec:
       - name: myapp-container
         image: cycleopsregistry.azurecr.io/myapp:v1
         ports:
-        - containerPort: 80
+        - containerPort: 80`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
 
 5. Deploy the configuration:
 
-bash
-Copy code
-kubectl apply -f deployment.yaml
+<CodeBlock
+    className="custom-code-block"
+    liveEditor
+    codeInstances={[
+        {
+            code: `kubectl apply -f deployment.yaml`,
+            label: "Git Configuration",
+            language: "bash",
+        },
+    ]}
+    copyButton
+/>
 
 ## Phase 7: User Migration and Authentication
 ### 1. Migrating Users
