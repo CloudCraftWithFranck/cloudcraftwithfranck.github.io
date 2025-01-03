@@ -76,19 +76,24 @@ export default function Home(
 
     const recommendedBooks = [
         {
-            title: 'Clean Code',
-            description: 'A Handbook of Agile Software Craftsmanship by Robert C. Martin.',
-            image: '/images/clean-code.jpg',
+            title: 'Cloud Computing 101',
+            description: 'An introduction to cloud computing concepts.',
+            image: '/images/cloud-01.png',
         },
         {
-            title: 'The Pragmatic Programmer',
-            description: 'Your Journey to Mastery by Andrew Hunt and David Thomas.',
-            image: '/images/pragmatic-programmer.jpg',
+            title: 'Advanced Cloud Solutions',
+            description: 'Deep dive into cloud architecture and best practices.',
+            image: '/images/cloud-02.png',
         },
         {
-            title: 'You Don’t Know JS',
-            description: 'A deep dive into JavaScript by Kyle Simpson.',
-            image: '/images/you-dont-know-js.jpg',
+            title: 'Cloud Security Essentials',
+            description: 'A comprehensive guide to securing your cloud environment.',
+            image: '/images/cloud-03.png',
+        },
+        {
+            title: 'DevOps for Cloud Engineers',
+            description: 'Master DevOps tools and methodologies in the cloud.',
+            image: '/images/cloud-04.png',
         },
     ];
 
@@ -324,7 +329,7 @@ export default function Home(
                     className="books-container"
                     style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                        gridTemplateColumns: 'repeat(4, 1fr)',
                         gap: '16px',
                         width: '100%',
                         justifyContent: 'center',
