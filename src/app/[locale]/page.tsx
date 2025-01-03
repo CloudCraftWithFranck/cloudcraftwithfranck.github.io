@@ -74,25 +74,6 @@ export default function Home(
         },
     ];
 
-    const recommendedVideos = [
-        {
-            title: 'Introduction to Cloud Computing',
-            videoId: '20QUNgFIrK0',
-        },
-        {
-            title: 'Advanced Cloud Architectures',
-            videoId: 'CdBtNQZH8a4',
-        },
-        {
-            title: 'Securing Your Cloud Infrastructure',
-            videoId: 'UbtB4sMaaNM',
-        },
-        {
-            title: 'DevOps Best Practices for Cloud Engineers',
-            videoId: 'vxJobGtqKVM',
-        },
-    ];
-
     return (
         <Flex
             maxWidth="m"
@@ -214,58 +195,173 @@ export default function Home(
                 </Flex>
             </Flex>
 
+            {/* New Grid Section */}
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem' }}
+            >
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    Hundreds Of Hours Invested
+                </Heading>
+                <Flex className="grid-container" style={{ gap: '16px' }}>
+                    <div className="grid-item">STUDENTS</div>
+                    <div className="grid-item">COMPANIES</div>
+                    <div className="grid-item">ARTICLES</div>
+                    <div className="grid-item">PROJECTS</div>
+                    <div className="grid-item">COUNTRIES</div>
+                    <div className="grid-item">1,388</div>
+                    <div className="grid-item">187</div>
+                    <div className="grid-item">2,360</div>
+                    <div className="grid-item">239</div>
+                    <div className="grid-item">21</div>
+                </Flex>
+            </Flex>
+
+            <RevealFx translateY="16" delay={0.6}>
+                <Projects range={[1, 1]} locale={locale} />
+            </RevealFx>
+
+            {routes['/blog'] && (
+                <Flex
+                    fillWidth
+                    gap="24"
+                    mobileDirection="column"
+                >
+                    <Flex flex={1} paddingLeft="l">
+                        <Heading
+                            as="h2"
+                            variant="display-strong-xs"
+                            wrap="balance"
+                        >
+                            Latest from the Blog
+                        </Heading>
+                    </Flex>
+                    <Flex flex={3} paddingX="20">
+                        <Posts range={[1, 2]} columns="2" locale={locale} />
+                    </Flex>
+                </Flex>
+            )}
+
+            <Projects range={[2]} locale={locale} />
+
+            {/* Testimonials Section */}
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem' }}
+            >
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    What People Are Saying
+                </Heading>
+                <Flex
+                    direction="row"
+                    style={{
+                        flexWrap: 'wrap',
+                        gap: '16px',
+                        justifyContent: 'center',
+                    }}
+                >
+                    {testimonials.map((testimonial, index) => (
+                        <Flex
+                            key={index}
+                            direction="column"
+                            alignItems="center"
+                            padding="l"
+                            style={{
+                                borderRadius: '8px',
+                                background: '#000',
+                                color: '#fff',
+                                maxWidth: '300px',
+                                textAlign: 'center',
+                                margin: '8px',
+                            }}
+                        >
+                            <Text variant="body-strong-s">
+                                {testimonial.feedback}
+                            </Text>
+                            <Text
+                                variant="body-default-s"
+                                marginTop="m"
+                                style={{ color: '#bbb' }}
+                            >
+                                - {testimonial.name}{' '}
+                                <span>@{testimonial.username}</span>
+                            </Text>
+                        </Flex>
+                    ))}
+                </Flex>
+            </Flex>
+
             {/* Recommended Videos Section */}
             <Flex
                 direction="column"
                 alignItems="center"
-                style={{ marginTop: '4rem', marginBottom: '4rem' }}
+                style={{ marginTop: '4rem' }}
             >
                 <Heading as="h2" variant="display-strong-l" marginBottom="m">
                     Recommended Videos
                 </Heading>
                 <Flex
-                    className="videos-container"
+                    className="grid-container"
                     style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(4, 1fr)',
                         gap: '16px',
-                        width: '100%',
                         justifyContent: 'center',
                     }}
                 >
-                    {recommendedVideos.map((video, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                padding: '1.5rem',
-                                borderRadius: '8px',
-                                background: '#fff',
-                                color: '#000',
-                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-                                textAlign: 'center',
-                            }}
-                        >
-                            <iframe
-                                src={`https://www.youtube.com/embed/${video.videoId}`}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                style={{
-                                    width: '100%',
-                                    height: '180px',
-                                    borderRadius: '8px',
-                                    marginBottom: '1rem',
-                                }}
-                            ></iframe>
-                            <Heading as="h3" variant="heading-default-m" marginBottom="s">
-                                {video.title}
-                            </Heading>
-                        </div>
-                    ))}
+                    <iframe
+                        src="https://www.youtube.com/embed/20QUNgFIrK0"
+                        title="Video 1"
+                        style={{
+                            width: '100%',
+                            height: '250px',
+                            borderRadius: '8px',
+                        }}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                    <iframe
+                        src="https://www.youtube.com/embed/CdBtNQZH8a4"
+                        title="Video 2"
+                        style={{
+                            width: '100%',
+                            height: '250px',
+                            borderRadius: '8px',
+                        }}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                    <iframe
+                        src="https://www.youtube.com/embed/UbtB4sMaaNM"
+                        title="Video 3"
+                        style={{
+                            width: '100%',
+                            height: '250px',
+                            borderRadius: '8px',
+                        }}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                    <iframe
+                        src="https://www.youtube.com/embed/vxJobGtqKVM"
+                        title="Video 4"
+                        style={{
+                            width: '100%',
+                            height: '250px',
+                            borderRadius: '8px',
+                        }}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
                 </Flex>
             </Flex>
 
-            {/* Newsletter Section */}
             {newsletter.display && <Mailchimp newsletter={newsletter} />}
         </Flex>
     );
