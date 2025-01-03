@@ -83,8 +83,8 @@ const createI18nContent = (t) => {
                     achievements: t("about.work.experiences.CSE.achievements").split(";"),
                     images: [ // optional: leave the array empty if you don't want to display images
                         {
-                            src: '/images/projects/project-01/cover-01.jpg',
-                            alt: 'Once UI Project',
+                            src: '/images/projects/project-01/kubernetes.png',
+                            alt: 'CSE Project',
                             width: 16,
                             height: 9
                         }
@@ -92,10 +92,17 @@ const createI18nContent = (t) => {
                 },
                 {
                     company: 'The OpenNMS Group',
-                    timeframe: t("about.work.experiences.Creativ3.timeframe"),
-                    role: t("about.work.experiences.Creativ3.role"),
-                    achievements: t("about.work.experiences.Creativ3.achievements").split(";"),
-                    images: [ ]
+                    timeframe: t("about.work.experiences.OpenNMS.timeframe"),
+                    role: t("about.work.experiences.OpenNMS.role"),
+                    achievements: t("about.work.experiences.OpenNMS.achievements").split(";"),
+                    images: [ // optional: leave the array empty if you don't want to display images
+                        {
+                            src: '/images/projects/project-01/cover-15.png',
+                            alt: 'OpenNMS Project',
+                            width: 16,
+                            height: 9
+                        }
+                    ]
                 }
             ]
         },
