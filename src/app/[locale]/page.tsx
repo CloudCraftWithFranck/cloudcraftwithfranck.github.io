@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Arrow } from '@/once-ui/components';
 import { Projects } from '@/components/work/Projects';
@@ -74,6 +74,23 @@ export default function Home(
         },
     ];
 
+    const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
+        if (savedTheme) {
+            setTheme(savedTheme);
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    }, []);
+
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+    };
+
     return (
         <Flex
             maxWidth="m"
@@ -104,6 +121,19 @@ export default function Home(
                     }),
                 }}
             />
+
+            {/* Theme Toggle Button */}
+            <Button
+                onClick={toggleTheme}
+                style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    right: '1rem',
+                    zIndex: 1000,
+                }}
+            >
+                {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+            </Button>
 
             {/* Title and YouTube Section */}
             <Flex
@@ -195,55 +225,27 @@ export default function Home(
                 </Flex>
             </Flex>
 
-            {/* New Support Section */}
+            {/* New Grid Section */}
             <Flex
-                direction="row"
-                justifyContent="center"
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '2rem',
-                    marginTop: '4rem',
-                }}
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem' }}
             >
-                <Button
-                    href="https://opencollective.com/nextui"
-                    target="_blank"
-                    variant="secondary"
-                    size="l"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        backgroundColor: '#252525',
-                        borderRadius: '8px',
-                        padding: '1rem',
-                        minWidth: '150px',
-                    }}
-                >
-                    <span>Open Collective</span>
-                    <Text variant="body-default-s">Sponsor the NextUI maintainers.</Text>
-                </Button>
-                <Button
-                    href="https://patreon.com/nextui"
-                    target="_blank"
-                    variant="secondary"
-                    size="l"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        backgroundColor: '#252525',
-                        borderRadius: '8px',
-                        padding: '1rem',
-                        minWidth: '150px',
-                    }}
-                >
-                    <span>Patreon</span>
-                    <Text variant="body-default-s">Sponsor the creator, Junior Garcia.</Text>
-                </Button>
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    Hundreds Of Hours Invested
+                </Heading>
+                <Flex className="grid-container" style={{ gap: '16px' }}>
+                    <div className="grid-item">STUDENTS</div>
+                    <div className="grid-item">COMPANIES</div>
+                    <div className="grid-item">ARTICLES</div>
+                    <div className="grid-item">PROJECTS</div>
+                    <div className="grid-item">COUNTRIES</div>
+                    <div className="grid-item">1,388</div>
+                    <div className="grid-item">187</div>
+                    <div className="grid-item">2,360</div>
+                    <div className="grid-item">239</div>
+                    <div className="grid-item">21</div>
+                </Flex>
             </Flex>
 
             <RevealFx translateY="16" delay={0.6}>

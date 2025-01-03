@@ -14,3 +14,19 @@
     font-weight: bold;
     border-radius: 8px;
 }
+
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+}
+
+[data-theme='dark'] {
+    --background-color: #000000;
+    --text-color: #ffffff;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
