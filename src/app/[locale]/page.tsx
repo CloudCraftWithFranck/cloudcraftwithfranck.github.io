@@ -223,7 +223,7 @@ export default function Home(
                     }}
                 >
                     <span>Open Collective</span>
-                    <Text variant="body-small-s">Sponsor the NextUI maintainers.</Text>
+                    <Text variant="body-default-s">Sponsor the NextUI maintainers.</Text>
                 </Button>
                 <Button
                     href="https://patreon.com/nextui"
@@ -242,7 +242,7 @@ export default function Home(
                     }}
                 >
                     <span>Patreon</span>
-                    <Text variant="body-small-s">Sponsor the creator, Junior Garcia.</Text>
+                    <Text variant="body-default-s">Sponsor the creator, Junior Garcia.</Text>
                 </Button>
             </Flex>
 
