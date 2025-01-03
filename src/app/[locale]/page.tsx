@@ -74,26 +74,22 @@ export default function Home(
         },
     ];
 
-    const recommendedBooks = [
+    const recommendedVideos = [
         {
-            title: 'Cloud Computing 101',
-            description: 'An introduction to cloud computing concepts.',
-            image: '/images/cloud-01.png',
+            title: 'Introduction to Cloud Computing',
+            videoId: '20QUNgFIrK0',
         },
         {
-            title: 'Advanced Cloud Solutions',
-            description: 'Deep dive into cloud architecture and best practices.',
-            image: '/images/cloud-02.png',
+            title: 'Advanced Cloud Architectures',
+            videoId: 'CdBtNQZH8a4',
         },
         {
-            title: 'Cloud Security Essentials',
-            description: 'A comprehensive guide to securing your cloud environment.',
-            image: '/images/cloud-03.png',
+            title: 'Securing Your Cloud Infrastructure',
+            videoId: 'UbtB4sMaaNM',
         },
         {
-            title: 'DevOps for Cloud Engineers',
-            description: 'Master DevOps tools and methodologies in the cloud.',
-            image: '/images/cloud-04.png',
+            title: 'DevOps Best Practices for Cloud Engineers',
+            videoId: 'vxJobGtqKVM',
         },
     ];
 
@@ -218,115 +214,17 @@ export default function Home(
                 </Flex>
             </Flex>
 
-            {/* New Grid Section */}
-            <Flex
-                direction="column"
-                alignItems="center"
-                style={{ marginTop: '4rem' }}
-            >
-                <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                    Hundreds Of Hours Invested
-                </Heading>
-                <Flex className="grid-container" style={{ gap: '16px' }}>
-                    <div className="grid-item">STUDENTS</div>
-                    <div className="grid-item">COMPANIES</div>
-                    <div className="grid-item">ARTICLES</div>
-                    <div className="grid-item">PROJECTS</div>
-                    <div className="grid-item">COUNTRIES</div>
-                    <div className="grid-item">1,388</div>
-                    <div className="grid-item">187</div>
-                    <div className="grid-item">2,360</div>
-                    <div className="grid-item">239</div>
-                    <div className="grid-item">21</div>
-                </Flex>
-            </Flex>
-
-            <RevealFx translateY="16" delay={0.6}>
-                <Projects range={[1, 1]} locale={locale} />
-            </RevealFx>
-
-            {routes['/blog'] && (
-                <Flex
-                    fillWidth
-                    gap="24"
-                    mobileDirection="column"
-                >
-                    <Flex flex={1} paddingLeft="l">
-                        <Heading
-                            as="h2"
-                            variant="display-strong-xs"
-                            wrap="balance"
-                        >
-                            Latest from the Blog
-                        </Heading>
-                    </Flex>
-                    <Flex flex={3} paddingX="20">
-                        <Posts range={[1, 2]} columns="2" locale={locale} />
-                    </Flex>
-                </Flex>
-            )}
-
-            <Projects range={[2]} locale={locale} />
-
-            {/* Testimonials Section */}
-            <Flex
-                direction="column"
-                alignItems="center"
-                style={{ marginTop: '4rem' }}
-            >
-                <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                    What People Are Saying
-                </Heading>
-                <Flex
-                    direction="row"
-                    style={{
-                        flexWrap: 'wrap',
-                        gap: '16px',
-                        justifyContent: 'center',
-                    }}
-                >
-                    {testimonials.map((testimonial, index) => (
-                        <Flex
-                            key={index}
-                            direction="column"
-                            alignItems="center"
-                            padding="l"
-                            style={{
-                                borderRadius: '8px',
-                                background: '#000',
-                                color: '#fff',
-                                maxWidth: '300px',
-                                textAlign: 'center',
-                                margin: '8px',
-                            }}
-                        >
-                            <Text variant="body-strong-s">
-                                {testimonial.feedback}
-                            </Text>
-                            <Text
-                                variant="body-default-s"
-                                marginTop="m"
-                                style={{ color: '#bbb' }}
-                            >
-                                - {testimonial.name}{' '}
-                                <span>@{testimonial.username}</span>
-                            </Text>
-                        </Flex>
-                    ))}
-                </Flex>
-            </Flex>
-
-            {/* Recommended Books Section */}
+            {/* Recommended Videos Section */}
             <Flex
                 direction="column"
                 alignItems="center"
                 style={{ marginTop: '4rem', marginBottom: '4rem' }}
             >
                 <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                    Recommended Books
+                    Recommended Videos
                 </Heading>
                 <Flex
-                    className="books-container"
+                    className="videos-container"
                     style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(4, 1fr)',
@@ -335,7 +233,7 @@ export default function Home(
                         justifyContent: 'center',
                     }}
                 >
-                    {recommendedBooks.map((book, index) => (
+                    {recommendedVideos.map((video, index) => (
                         <div
                             key={index}
                             style={{
@@ -347,20 +245,21 @@ export default function Home(
                                 textAlign: 'center',
                             }}
                         >
-                            <img
-                                src={book.image}
-                                alt={book.title}
+                            <iframe
+                                src={`https://www.youtube.com/embed/${video.videoId}`}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
                                 style={{
                                     width: '100%',
-                                    height: 'auto',
+                                    height: '180px',
                                     borderRadius: '8px',
                                     marginBottom: '1rem',
                                 }}
-                            />
+                            ></iframe>
                             <Heading as="h3" variant="heading-default-m" marginBottom="s">
-                                {book.title}
+                                {video.title}
                             </Heading>
-                            <Text variant="body-default-m">{book.description}</Text>
                         </div>
                     ))}
                 </Flex>
