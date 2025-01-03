@@ -83,7 +83,7 @@ const createI18nContent = (t) => {
                     achievements: t("about.work.experiences.CSE.achievements").split(";"),
                     images: [ // optional: leave the array empty if you don't want to display images
                         {
-                            src: '/images/projects/project-01/kubernetes.png',
+                            src: '/images/projects/project-01/cover-18.jpg',
                             alt: 'CSE Project',
                             width: 16,
                             height: 9
@@ -97,7 +97,7 @@ const createI18nContent = (t) => {
                     achievements: t("about.work.experiences.OpenNMS.achievements").split(";"),
                     images: [ // optional: leave the array empty if you don't want to display images
                         {
-                            src: '/images/projects/project-01/cover-15.png',
+                            src: '/images/projects/project-01/cover-17.jpg',
                             alt: 'OpenNMS Project',
                             width: 16,
                             height: 9
