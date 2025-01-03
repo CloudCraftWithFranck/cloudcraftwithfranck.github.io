@@ -8,7 +8,7 @@ const person = {
     },
     role:      'Cloud Advocate and Instructor',
     avatar:    '/images/avatar.jpg',
-    location:  'Asia/Jakarta',        // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+    location:  'America/New_York',        // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
     languages: ['English', 'Spanish', 'German']  // optional: Leave the array empty if you don't want to display languages
 }
 
@@ -85,7 +85,7 @@ const about = {
                 ],
                 images: [ // optional: leave the array empty if you don't want to display images
                     {
-                        src: '/images/projects/project-01/cover-01.jpg',
+                        src: '/images/projects/project-01/cover-18.jpg',
                         alt: 'Once UI Project',
                         width: 16,
                         height: 9
@@ -100,7 +100,14 @@ const about = {
                     <>Expert in deploying and managing AWS cloud solutions, leveraging EC2, S3, VPC, and IAM for scalable, secure, and cost-effective cloud operations</>,
                     <>Proficient in Infrastructure as Code (IaC) using Terraform, automating infrastructure provisioning and configuration for both on-premises and cloud environments.</>
                 ],
-                images: [ ]
+                images: [ // optional: leave the array empty if you don't want to display images
+                    {
+                        src: '/images/projects/project-01/cover-17.jpg',
+                        alt: 'OpenNMS Project',
+                        width: 16,
+                        height: 9
+                    }
+                ]
             }
         ]
     },
