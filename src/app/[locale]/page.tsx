@@ -74,6 +74,24 @@ export default function Home(
         },
     ];
 
+    const recommendedBooks = [
+        {
+            title: 'Clean Code',
+            description: 'A Handbook of Agile Software Craftsmanship by Robert C. Martin.',
+            image: '/images/clean-code.jpg',
+        },
+        {
+            title: 'The Pragmatic Programmer',
+            description: 'Your Journey to Mastery by Andrew Hunt and David Thomas.',
+            image: '/images/pragmatic-programmer.jpg',
+        },
+        {
+            title: 'You Don’t Know JS',
+            description: 'A deep dive into JavaScript by Kyle Simpson.',
+            image: '/images/you-dont-know-js.jpg',
+        },
+    ];
+
     return (
         <Flex
             maxWidth="m"
@@ -293,6 +311,57 @@ export default function Home(
                 </Flex>
             </Flex>
 
+            {/* Recommended Books Section */}
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem', marginBottom: '4rem' }}
+            >
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    Recommended Books
+                </Heading>
+                <Flex
+                    className="books-container"
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                        gap: '16px',
+                        width: '100%',
+                        justifyContent: 'center',
+                    }}
+                >
+                    {recommendedBooks.map((book, index) => (
+                        <div
+                            key={index}
+                            style={{
+                                padding: '1.5rem',
+                                borderRadius: '8px',
+                                background: '#fff',
+                                color: '#000',
+                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                                textAlign: 'center',
+                            }}
+                        >
+                            <img
+                                src={book.image}
+                                alt={book.title}
+                                style={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    borderRadius: '8px',
+                                    marginBottom: '1rem',
+                                }}
+                            />
+                            <Heading as="h3" variant="heading-default-m" marginBottom="s">
+                                {book.title}
+                            </Heading>
+                            <Text variant="body-default-m">{book.description}</Text>
+                        </div>
+                    ))}
+                </Flex>
+            </Flex>
+
+            {/* Newsletter Section */}
             {newsletter.display && <Mailchimp newsletter={newsletter} />}
         </Flex>
     );
