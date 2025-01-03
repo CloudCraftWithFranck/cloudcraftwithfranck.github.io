@@ -195,6 +195,57 @@ export default function Home(
                 </Flex>
             </Flex>
 
+            {/* New Support Section */}
+            <Flex
+                direction="row"
+                justifyContent="center"
+                style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '2rem',
+                    marginTop: '4rem',
+                }}
+            >
+                <Button
+                    href="https://opencollective.com/nextui"
+                    target="_blank"
+                    variant="secondary"
+                    size="l"
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        backgroundColor: '#252525',
+                        borderRadius: '8px',
+                        padding: '1rem',
+                        minWidth: '150px',
+                    }}
+                >
+                    <span>Open Collective</span>
+                    <Text variant="body-small-s">Sponsor the NextUI maintainers.</Text>
+                </Button>
+                <Button
+                    href="https://patreon.com/nextui"
+                    target="_blank"
+                    variant="secondary"
+                    size="l"
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        backgroundColor: '#252525',
+                        borderRadius: '8px',
+                        padding: '1rem',
+                        minWidth: '150px',
+                    }}
+                >
+                    <span>Patreon</span>
+                    <Text variant="body-small-s">Sponsor the creator, Junior Garcia.</Text>
+                </Button>
+            </Flex>
+
             <RevealFx translateY="16" delay={0.6}>
                 <Projects range={[1, 1]} locale={locale} />
             </RevealFx>
@@ -267,76 +318,6 @@ export default function Home(
                             </Text>
                         </Flex>
                     ))}
-                </Flex>
-            </Flex>
-
-            {/* Support NextUI Section */}
-            <Flex
-                direction="column"
-                alignItems="center"
-                justifyContent="center"
-                gap="l"
-                style={{
-                    marginTop: '4rem',
-                    padding: '2rem',
-                    backgroundColor: '#000',
-                    color: '#fff',
-                    borderRadius: '8px',
-                    textAlign: 'center',
-                }}
-            >
-                <Heading as="h2" variant="display-strong-l" style={{ marginBottom: '1rem' }}>
-                    Support NextUI 💖
-                </Heading>
-                <Text variant="body-default-s" style={{ marginBottom: '2rem' }}>
-                    Using NextUI in a profit-making product, as a freelancer, or for fun projects? Your contributions will help to make NextUI better.
-                </Text>
-                <Flex
-                    direction="row"
-                    justifyContent="center"
-                    gap="large" // Use a valid SpacingToken from your library (e.g., "large", "xl", etc.)
-                    style={{
-                        flexWrap: 'wrap',
-                    }}
-                >
-                    <Button
-                        href="https://opencollective.com/nextui"
-                        target="_blank"
-                        variant="secondary"
-                        size="l"
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            backgroundColor: '#252525',
-                            borderRadius: '8px',
-                            padding: '1rem',
-                            minWidth: '150px',
-                        }}
-                    >
-                        <span>Open Collective</span>
-                        <Text variant="body-small-s">Sponsor the NextUI maintainers.</Text>
-                    </Button>
-                    <Button
-                        href="https://patreon.com/nextui"
-                        target="_blank"
-                        variant="secondary"
-                        size="l"
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            backgroundColor: '#252525',
-                            borderRadius: '8px',
-                            padding: '1rem',
-                            minWidth: '150px',
-                        }}
-                    >
-                        <span>Patreon</span>
-                        <Text variant="body-small-s">Sponsor the creator, Junior Garcia.</Text>
-                    </Button>
                 </Flex>
             </Flex>
 
