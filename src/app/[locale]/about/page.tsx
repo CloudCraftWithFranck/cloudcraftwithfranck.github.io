@@ -166,7 +166,7 @@ export default function About(
                                     Schedule a call
                                 </Flex>
                                 <IconButton
-                                    href={about.calendar.link}
+                                    href="https://cal.com/cloudcraftwithfranck"
                                     data-border="rounded"
                                     variant="tertiary"
                                     icon="chevronRight"/>
