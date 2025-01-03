@@ -26,7 +26,7 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = 'en-GB' })
         const updateTime = () => {
             const now = new Date();
             const options: Intl.DateTimeFormatOptions = {
-                timeZone,
+                timeZone: 'America/New_York',
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit',
