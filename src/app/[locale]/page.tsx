@@ -1,3 +1,6 @@
+'use client'; // Mark this file as a client component
+
+
 import React, { useState, useEffect } from 'react';
 
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Arrow } from '@/once-ui/components';
