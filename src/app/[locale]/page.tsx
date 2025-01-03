@@ -206,7 +206,7 @@ export default function Home(
                 </Heading>
                 <Flex className="grid-container" style={{ gap: '16px' }}>
                     <div className="grid-item">STUDENTS</div>
-                    <div className="grid-item">JOBS</div>
+                    <div className="grid-item">COMPANIES</div>
                     <div className="grid-item">ARTICLES</div>
                     <div className="grid-item">PROJECTS</div>
                     <div className="grid-item">COUNTRIES</div>
