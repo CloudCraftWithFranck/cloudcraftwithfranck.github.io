@@ -375,6 +375,17 @@ export default function About(
                     )}
                 </Flex>
             </Flex>
+            {/* Community Section */}
+            <Flex
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                style={{
+                    marginTop: '4rem',
+                    gap: '32px',
+                    flexWrap: 'wrap',
+                }}
+            ></Flex>
               {/* Left Column: Community Image */}
               <Flex flex={1} justifyContent="center">
                     <img
