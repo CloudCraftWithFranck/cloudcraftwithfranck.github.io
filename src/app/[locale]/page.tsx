@@ -294,7 +294,7 @@ export default function Home(
                 <Flex
                     direction="row"
                     justifyContent="center"
-                    gap="2rem"
+                    gap="large" // Use a valid SpacingToken from your library (e.g., "large", "xl", etc.)
                     style={{
                         flexWrap: 'wrap',
                     }}
