@@ -1,56 +1,16 @@
-'use client'; // Mark this file as a client component
-
+'use client';
 
 import React, { useState, useEffect } from 'react';
-
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Arrow } from '@/once-ui/components';
 import { Projects } from '@/components/work/Projects';
-
 import { baseURL, routes, renderContent } from '@/app/resources';
 import { Mailchimp } from '@/components';
 import { Posts } from '@/components/blog/Posts';
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
-import './page.css'; // Importing CSS for the grid styling
+import './page.css'; // Importing CSS for styling
 
-export async function generateMetadata(
-    { params: { locale } }: { params: { locale: string } }
-) {
-    const t = await getTranslations();
-    const { home } = renderContent(t);
-    const title = home.title;
-    const description = home.description;
-    const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
-
-    return {
-        title,
-        description,
-        openGraph: {
-            title,
-            description,
-            type: 'website',
-            url: `https://${baseURL}/${locale}`,
-            images: [
-                {
-                    url: ogImage,
-                    alt: title,
-                },
-            ],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title,
-            description,
-            images: [ogImage],
-        },
-    };
-}
-
-export default function Home(
-    { params: { locale } }: { params: { locale: string } }
-) {
-    unstable_setRequestLocale(locale);
+export default function Home({ params: { locale } }: { params: { locale: string } }) {
     const t = useTranslations();
     const { home, about, person, newsletter } = renderContent(t);
 
@@ -102,29 +62,6 @@ export default function Home(
             direction="column"
             alignItems="center"
         >
-            <script
-                type="application/ld+json"
-                suppressHydrationWarning
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        '@context': 'https://schema.org',
-                        '@type': 'WebPage',
-                        name: home.title,
-                        description: home.description,
-                        url: `https://${baseURL}`,
-                        image: `${baseURL}/og?title=${encodeURIComponent(home.title)}`,
-                        publisher: {
-                            '@type': 'Person',
-                            name: person.name,
-                            image: {
-                                '@type': 'ImageObject',
-                                url: `${baseURL}${person.avatar}`,
-                            },
-                        },
-                    }),
-                }}
-            />
-
             {/* Theme Toggle Button */}
             <Button
                 onClick={toggleTheme}
@@ -149,36 +86,16 @@ export default function Home(
                     marginBottom: '2rem',
                 }}
             >
-                <Flex
-                    direction="column"
-                    flex={1}
-                >
-                    <RevealFx
-                        translateY="4"
-                        fillWidth
-                        justifyContent="flex-start"
-                        paddingBottom="m"
-                    >
-                        <Heading
-                            wrap="balance"
-                            variant="display-strong-l"
-                        >
+                <Flex direction="column" flex={1}>
+                    <RevealFx translateY="4" fillWidth justifyContent="flex-start" paddingBottom="m">
+                        <Heading wrap="balance" variant="display-strong-l">
                             Cloud Advocate and Instructor
                         </Heading>
                     </RevealFx>
-                    <RevealFx
-                        translateY="8"
-                        delay={0.2}
-                        fillWidth
-                        justifyContent="flex-start"
-                        paddingBottom="m"
-                    >
-                        <Text
-                            wrap="balance"
-                            onBackground="neutral-weak"
-                            variant="heading-default-xl"
-                        >
-                            I'm Franck, a cloud advocate and instructor at CloudCraftWithFranck, where I craft intuitive cloud solutions for engineers.
+                    <RevealFx translateY="8" delay={0.2} fillWidth justifyContent="flex-start" paddingBottom="m">
+                        <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
+                            I'm Franck, a cloud advocate and instructor at CloudCraftWithFranck, where I craft intuitive
+                            cloud solutions for engineers.
                         </Text>
                     </RevealFx>
                     <RevealFx translateY="12" delay={0.4}>
@@ -209,11 +126,7 @@ export default function Home(
                     </RevealFx>
                 </Flex>
 
-                <Flex
-                    flex={1}
-                    justifyContent="center"
-                    alignItems="center"
-                >
+                <Flex flex={1} justifyContent="center" alignItems="center">
                     <iframe
                         src="https://www.youtube.com/embed/example-video-id"
                         frameBorder="0"
@@ -228,73 +141,12 @@ export default function Home(
                 </Flex>
             </Flex>
 
-            {/* New Grid Section */}
-            <Flex
-                direction="column"
-                alignItems="center"
-                style={{ marginTop: '4rem' }}
-            >
-                <Heading as="h2" variant="display-strong-l" marginBottom="m">
-                    Hundreds Of Hours Invested
-                </Heading>
-                <Flex className="grid-container" style={{ gap: '16px' }}>
-                    <div className="grid-item">STUDENTS</div>
-                    <div className="grid-item">COMPANIES</div>
-                    <div className="grid-item">ARTICLES</div>
-                    <div className="grid-item">PROJECTS</div>
-                    <div className="grid-item">COUNTRIES</div>
-                    <div className="grid-item">1,388</div>
-                    <div className="grid-item">187</div>
-                    <div className="grid-item">2,360</div>
-                    <div className="grid-item">239</div>
-                    <div className="grid-item">21</div>
-                </Flex>
-            </Flex>
-
-            <RevealFx translateY="16" delay={0.6}>
-                <Projects range={[1, 1]} locale={locale} />
-            </RevealFx>
-
-            {routes['/blog'] && (
-                <Flex
-                    fillWidth
-                    gap="24"
-                    mobileDirection="column"
-                >
-                    <Flex flex={1} paddingLeft="l">
-                        <Heading
-                            as="h2"
-                            variant="display-strong-xs"
-                            wrap="balance"
-                        >
-                            Latest from the Blog
-                        </Heading>
-                    </Flex>
-                    <Flex flex={3} paddingX="20">
-                        <Posts range={[1, 2]} columns="2" locale={locale} />
-                    </Flex>
-                </Flex>
-            )}
-
-            <Projects range={[2]} locale={locale} />
-
             {/* Testimonials Section */}
-            <Flex
-                direction="column"
-                alignItems="center"
-                style={{ marginTop: '4rem' }}
-            >
+            <Flex direction="column" alignItems="center" style={{ marginTop: '4rem' }}>
                 <Heading as="h2" variant="display-strong-l" marginBottom="m">
                     What People Are Saying
                 </Heading>
-                <Flex
-                    direction="row"
-                    style={{
-                        flexWrap: 'wrap',
-                        gap: '16px',
-                        justifyContent: 'center',
-                    }}
-                >
+                <Flex direction="row" style={{ flexWrap: 'wrap', gap: '16px', justifyContent: 'center' }}>
                     {testimonials.map((testimonial, index) => (
                         <Flex
                             key={index}
@@ -310,16 +162,9 @@ export default function Home(
                                 margin: '8px',
                             }}
                         >
-                            <Text variant="body-strong-s">
-                                {testimonial.feedback}
-                            </Text>
-                            <Text
-                                variant="body-default-s"
-                                marginTop="m"
-                                style={{ color: '#bbb' }}
-                            >
-                                - {testimonial.name}{' '}
-                                <span>@{testimonial.username}</span>
+                            <Text variant="body-strong-s">{testimonial.feedback}</Text>
+                            <Text variant="body-default-s" marginTop="m" style={{ color: '#bbb' }}>
+                                - {testimonial.name} <span>@{testimonial.username}</span>
                             </Text>
                         </Flex>
                     ))}
