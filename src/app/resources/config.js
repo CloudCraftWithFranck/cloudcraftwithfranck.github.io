@@ -21,6 +21,7 @@ const routes = {
 // Set password in pages/api/authenticate.ts
 const protectedRoutes = {
     '/work/automate-design-handovers-with-a-figma-to-code-pipeline': true
+    '/work/Building-OpenStrata-Streamlining-Power-Platform-Governance-and-ALM': true
 }
 
 const effects = {
