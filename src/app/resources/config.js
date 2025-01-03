@@ -20,8 +20,8 @@ const routes = {
 // Enable password protection on selected routes
 // Set password in pages/api/authenticate.ts
 const protectedRoutes = {
-    '/work/automate-design-handovers-with-a-figma-to-code-pipeline': true,
-    '/work/Building-OpenStrata-Streamlining-Power-Platform-Governance-and-ALM': true
+    '/work/Building-OpenStrata-Streamlining-Power-Platform-Governance-and-ALM': true,
+    '/work/Cloud-Migration-from-VMware-On-Premises-to-Azure-for-CycleOps-IT': true
 }
 
 const effects = {
