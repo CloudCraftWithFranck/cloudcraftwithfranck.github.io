@@ -1,7 +1,6 @@
 import { Flex } from '@/once-ui/components';
 import { baseURL, renderContent } from '@/app/resources';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
-import { useTranslations } from 'next-intl';
 import ConsultationClient from './ConsultationClient';
 
 export async function generateMetadata(
