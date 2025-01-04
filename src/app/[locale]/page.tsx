@@ -60,7 +60,7 @@ const StatsSection: React.FC = () => {
 
   return (
     <section className="bg-black py-16">
-      <div className="container mx-auto text-center text-white">
+      <div className="container mx-auto text-center text-white px-4">
         <h2 className="text-4xl font-bold mb-4">
           3.1M+ deploys per month (and counting)
         </h2>
@@ -68,9 +68,15 @@ const StatsSection: React.FC = () => {
           Real-time usage showing totals for users and services, along with
           30-day deploys, requests, and logs.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-left"
+          style={{ justifyContent: 'center' }}
+        >
           {stats.map((stat, index) => (
-            <div key={index} className="text-center">
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center space-y-2"
+            >
               <p className="text-3xl font-bold text-white">
                 {stat.value.toLocaleString()}
               </p>
