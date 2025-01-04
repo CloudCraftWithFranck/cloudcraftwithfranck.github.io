@@ -15,7 +15,6 @@ const renderContent = (t) => {
             about,
             blog,
             work,
-            consultation,
             gallery
         }
     }
