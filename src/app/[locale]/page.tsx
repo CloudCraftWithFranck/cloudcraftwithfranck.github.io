@@ -407,7 +407,7 @@ export default function Home(
                         Join our community of cloud engineers and grow without limits.
                     </Text>
                     <Button
-                        href="https://cloudcraftwithfranck.org"
+                        href="https://discord.com/invite/CpK4e2VPTf"
                         variant="primary"
                         size="l"
                     >
