@@ -181,6 +181,14 @@ const work = {
     // All projects will be listed on the /home and /work routes
 }
 
+const consultation = {
+    label: 'Consultation',
+    title: 'Writing about cloud, AI and security...',
+    description: `Read what ${person.name} has been up to recently`
+    // Create new blog posts by adding a new .mdx file to app/blog/posts
+    // All posts will be listed on the /blog route
+}
+
 const gallery = {
     label: 'Gallery',
     title: 'My photo gallery',
@@ -258,6 +266,8 @@ const gallery = {
             orientation: 'horizontal'
         },
     ]
+
 }
+
 
 export { person, social, newsletter, home, about, blog, work, gallery };
