@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  Heading,
-  Flex,
-  Text,
-  Button,
-  Avatar,
-  RevealFx,
-  Arrow,
-} from '@/once-ui/components';
+
+import { Heading, Flex, Text, Button, Avatar, RevealFx, Arrow } from '@/once-ui/components';
 import { Projects } from '@/components/work/Projects';
 
 import { baseURL, routes, renderContent } from '@/app/resources';
@@ -16,225 +9,414 @@ import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
-import './page.css';
+import './page.css'; // Importing CSS for the grid styling
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
-  const t = await getTranslations();
-  const { home } = renderContent(t);
-  const title = home.title;
-  const description = home.description;
-  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
+export async function generateMetadata(
+    { params: { locale } }: { params: { locale: string } }
+) {
+    const t = await getTranslations();
+    const { home } = renderContent(t);
+    const title = home.title;
+    const description = home.description;
+    const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
 
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-      url: `https://${baseURL}/${locale}`,
-      images: [
-        {
-          url: ogImage,
-          alt: title,
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            type: 'website',
+            url: `https://${baseURL}/${locale}`,
+            images: [
+                {
+                    url: ogImage,
+                    alt: title,
+                },
+            ],
         },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [ogImage],
-    },
-  };
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+            images: [ogImage],
+        },
+    };
 }
 
-const StatsSection: React.FC = () => {
-  const stats = [
-    { label: 'Users', value: 866292 },
-    { label: 'Services', value: 2277910 },
-    { label: 'Deploys', value: 3163659 },
-    { label: 'Logs', value: 660826205 },
-    { label: 'Requests', value: 232696223316 },
-  ];
+export default function Home(
+    { params: { locale } }: { params: { locale: string } }
+) {
+    unstable_setRequestLocale(locale);
+    const t = useTranslations();
+    const { home, about, person, newsletter } = renderContent(t);
 
-  return (
-    <section className="bg-black py-16">
-      <div className="container mx-auto text-center text-white px-4">
-        <h2 className="text-4xl font-bold mb-4">
-          3.1M+ deploys per month (and counting)
-        </h2>
-        <p className="text-gray-400 mb-10">
-          Real-time usage showing totals for users and services, along with
-          30-day deploys, requests, and logs.
-        </p>
-        <div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-left"
-          style={{ justifyContent: 'center' }}
+    const testimonials = [
+        {
+            feedback: 'Franck has helped me with terraform fixes when I was struggling with VNET and subnet configurations.',
+            name: 'Viviane Huguette',
+            username: 'khugg',
+        },
+        {
+            feedback: 'Franck is good at explaining azure pipelines with dotnet code deployments to web apps.',
+            name: 'Patience Opara',
+            username: 'popara',
+        },
+        {
+            feedback: 'CloudCraftWithFranck is very for beginners. I was coached not knowing anything on Azure, and now I am rocking it.',
+            name: 'Dory Tchamdjeu',
+            username: 'dory',
+        },
+        {
+            feedback: 'If you need a clean portfolio for your cloud showcases, ask Cloudcraftwithfranck for help. They got you!',
+            name: 'Paola Djobissie',
+            username: 'pdjobissie',
+        },
+    ];
+
+    return (
+        <Flex
+            maxWidth="m"
+            fillWidth
+            gap="xl"
+            direction="column"
+            alignItems="center"
         >
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center space-y-2"
+            <script
+                type="application/ld+json"
+                suppressHydrationWarning
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@type': 'WebPage',
+                        name: home.title,
+                        description: home.description,
+                        url: `https://${baseURL}`,
+                        image: `${baseURL}/og?title=${encodeURIComponent(home.title)}`,
+                        publisher: {
+                            '@type': 'Person',
+                            name: person.name,
+                            image: {
+                                '@type': 'ImageObject',
+                                url: `${baseURL}${person.avatar}`,
+                            },
+                        },
+                    }),
+                }}
+            />
+
+            {/* Title and YouTube Section */}
+            <Flex
+                fillWidth
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                gap="l"
+                style={{
+                    marginBottom: '2rem',
+                }}
             >
-              <p className="text-3xl font-bold text-white">
-                {stat.value.toLocaleString()}
-              </p>
-              <p className="text-gray-400 text-sm uppercase">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default function Home({ params: { locale } }: { params: { locale: string } }) {
-  unstable_setRequestLocale(locale);
-  const t = useTranslations();
-  const { home, about, person, newsletter } = renderContent(t);
-
-  const testimonials = [
-    {
-      feedback: 'Franck has helped me with terraform fixes when I was struggling with VNET and subnet configurations.',
-      name: 'Viviane Huguette',
-      username: 'khugg',
-    },
-    {
-      feedback: 'Franck is good at explaining azure pipelines with dotnet code deployments to web apps.',
-      name: 'Patience Opara',
-      username: 'popara',
-    },
-    {
-      feedback: 'CloudCraftWithFranck is very for beginners. I was coached not knowing anything on Azure, and now I am rocking it.',
-      name: 'Dory Tchamdjeu',
-      username: 'dory',
-    },
-    {
-      feedback: 'If you need a clean portfolio for your cloud showcases, ask Cloudcraftwithfranck for help. They got you!',
-      name: 'Paola Djobissie',
-      username: 'pdjobissie',
-    },
-  ];
-
-  return (
-    <Flex
-      maxWidth="m"
-      fillWidth
-      gap="xl"
-      direction="column"
-      alignItems="center"
-    >
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebPage',
-            name: home.title,
-            description: home.description,
-            url: `https://${baseURL}`,
-            image: `${baseURL}/og?title=${encodeURIComponent(home.title)}`,
-            publisher: {
-              '@type': 'Person',
-              name: person.name,
-              image: {
-                '@type': 'ImageObject',
-                url: `${baseURL}${person.avatar}`,
-              },
-            },
-          }),
-        }}
-      />
-      {/* Existing Sections */}
-      <Flex
-        fillWidth
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        gap="l"
-        style={{ marginBottom: '2rem' }}
-      >
-        {/* Title Section */}
-        <Flex direction="column" flex={1}>
-          <RevealFx translateY="4" fillWidth justifyContent="flex-start" paddingBottom="m">
-            <Heading wrap="balance" variant="display-strong-l">
-              Cloud Advocate and Instructor
-            </Heading>
-          </RevealFx>
-          <RevealFx translateY="8" delay={0.2} fillWidth justifyContent="flex-start" paddingBottom="m">
-            <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-              I'm Franck, a cloud advocate and instructor at CloudCraftWithFranck, where I craft intuitive cloud
-              solutions for engineers.
-            </Text>
-          </RevealFx>
-          <RevealFx translateY="12" delay={0.4}>
-            <Flex fillWidth>
-              <Button
-                id="about"
-                data-border="rounded"
-                href={`/${locale}/about`}
-                variant="tertiary"
-                size="m"
-              >
-                <Flex gap="8" alignItems="center">
-                  {about.avatar.display && (
-                    <Avatar
-                      style={{
-                        marginLeft: '-0.75rem',
-                        marginRight: '0.25rem',
-                      }}
-                      src={person.avatar}
-                      size="m"
-                    />
-                  )}
-                  About Me
-                  <Arrow trigger="#about" />
+                <Flex
+                    direction="column"
+                    flex={1}
+                >
+                    <RevealFx
+                        translateY="4"
+                        fillWidth
+                        justifyContent="flex-start"
+                        paddingBottom="m"
+                    >
+                        <Heading
+                            wrap="balance"
+                            variant="display-strong-l"
+                        >
+                            Cloud Advocate and Instructor
+                        </Heading>
+                    </RevealFx>
+                    <RevealFx
+                        translateY="8"
+                        delay={0.2}
+                        fillWidth
+                        justifyContent="flex-start"
+                        paddingBottom="m"
+                    >
+                        <Text
+                            wrap="balance"
+                            onBackground="neutral-weak"
+                            variant="heading-default-xl"
+                        >
+                            I'm Franck, a cloud advocate and instructor at CloudCraftWithFranck, where I craft intuitive cloud solutions for engineers.
+                        </Text>
+                    </RevealFx>
+                    <RevealFx translateY="12" delay={0.4}>
+                        <Flex fillWidth>
+                            <Button
+                                id="about"
+                                data-border="rounded"
+                                href={`/${locale}/about`}
+                                variant="tertiary"
+                                size="m"
+                            >
+                                <Flex gap="8" alignItems="center">
+                                    {about.avatar.display && (
+                                        <Avatar
+                                            style={{
+                                                marginLeft: '-0.75rem',
+                                                marginRight: '0.25rem',
+                                            }}
+                                            src={person.avatar}
+                                            size="m"
+                                        />
+                                    )}
+                                    About Me
+                                    <Arrow trigger="#about" />
+                                </Flex>
+                            </Button>
+                        </Flex>
+                    </RevealFx>
                 </Flex>
-              </Button>
+
+                <Flex
+                    flex={1}
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    <iframe
+                        src="https://www.youtube.com/embed/phLPKVx3Cl4?si=zghOhcozdSlmhKDG"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        style={{
+                            width: '100%',
+                            height: '300px',
+                            borderRadius: '8px',
+                        }}
+                    ></iframe>
+                </Flex>
             </Flex>
-          </RevealFx>
+
+            {/* New Grid Section */}
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem' }}
+            >
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    Hundreds Of Hours Invested
+                </Heading>
+                <Flex className="grid-container" style={{ gap: '16px' }}>
+                    <div className="grid-item">STUDENTS</div>
+                    <div className="grid-item">COMPANIES</div>
+                    <div className="grid-item">ARTICLES</div>
+                    <div className="grid-item">PROJECTS</div>
+                    <div className="grid-item">COUNTRIES</div>
+                    <div className="grid-item">1,388</div>
+                    <div className="grid-item">187</div>
+                    <div className="grid-item">2,360</div>
+                    <div className="grid-item">239</div>
+                    <div className="grid-item">21</div>
+                </Flex>
+            </Flex>
+
+            <RevealFx translateY="16" delay={0.6}>
+                <Projects range={[1, 1]} locale={locale} />
+            </RevealFx>
+
+            {routes['/blog'] && (
+                <Flex
+                    fillWidth
+                    gap="24"
+                    mobileDirection="column"
+                >
+                    <Flex flex={1} paddingLeft="l">
+                        <Heading
+                            as="h2"
+                            variant="display-strong-xs"
+                            wrap="balance"
+                        >
+                            Latest from the Blog
+                        </Heading>
+                    </Flex>
+                    <Flex flex={3} paddingX="20">
+                        <Posts range={[1, 2]} columns="2" locale={locale} />
+                    </Flex>
+                </Flex>
+            )}
+
+            <Projects range={[2]} locale={locale} />
+
+            {/* Testimonials Section */}
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem' }}
+            >
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    What People Are Saying
+                </Heading>
+                <Flex
+                    direction="row"
+                    style={{
+                        flexWrap: 'wrap',
+                        gap: '16px',
+                        justifyContent: 'center',
+                    }}
+                >
+                    {testimonials.map((testimonial, index) => (
+                        <Flex
+                            key={index}
+                            direction="column"
+                            alignItems="center"
+                            padding="l"
+                            style={{
+                                borderRadius: '8px',
+                                background: '#000',
+                                color: '#fff',
+                                maxWidth: '300px',
+                                textAlign: 'center',
+                                margin: '8px',
+                            }}
+                        >
+                            <Text variant="body-strong-s">
+                                {testimonial.feedback}
+                            </Text>
+                            <Text
+                                variant="body-default-s"
+                                marginTop="m"
+                                style={{ color: '#bbb' }}
+                            >
+                                - {testimonial.name}{' '}
+                                <span>@{testimonial.username}</span>
+                            </Text>
+                        </Flex>
+                    ))}
+                </Flex>
+            </Flex>
+
+            {/* Recommended Videos Section */}
+            <Flex
+                direction="column"
+                alignItems="center"
+                style={{ marginTop: '4rem' }}
+            >
+                <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                    Recommended Videos
+                </Heading>
+                <Flex
+                    className="grid-container"
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(4, 1fr)',
+                        gap: '16px',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <iframe
+                        src="https://www.youtube.com/embed/20QUNgFIrK0"
+                        title="Video 1"
+                        style={{
+                            width: '100%',
+                            height: '250px',
+                            borderRadius: '8px',
+                        }}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                    <iframe
+                        src="https://www.youtube.com/embed/CdBtNQZH8a4"
+                        title="Video 2"
+                        style={{
+                            width: '100%',
+                            height: '250px',
+                            borderRadius: '8px',
+                        }}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                    <iframe
+                        src="https://www.youtube.com/embed/UbtB4sMaaNM"
+                        title="Video 3"
+                        style={{
+                            width: '100%',
+                            height: '250px',
+                            borderRadius: '8px',
+                        }}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                    <iframe
+                        src="https://www.youtube.com/embed/vxJobGtqKVM"
+                        title="Video 4"
+                        style={{
+                            width: '100%',
+                            height: '250px',
+                            borderRadius: '8px',
+                        }}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                </Flex>
+            </Flex>
+            {/* Community Section */}
+            <Flex
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                style={{
+                    marginTop: '4rem',
+                    gap: '32px',
+                }}
+            >
+                {/* Left Column: Community Image */}
+                <Flex flex={1} justifyContent="center">
+                    <img
+                        src="/images/gallery/community-image.jpg"
+                        alt="Join us on Discord"
+                        style={{
+                            borderRadius: '8px',
+                            maxWidth: '100%',
+                            height: 'auto',
+                        }}
+                    />
+                </Flex>
+
+                {/* Right Column: Community Text and Button */}
+                <Flex
+                    flex={1}
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="flex-start"
+                    style={{
+                        textAlign: 'left',
+                    }}
+                >
+                    <Heading as="h2" variant="display-strong-l" marginBottom="m">
+                        Join us on Discord
+                    </Heading>
+                    <Text
+                        variant="body-default-s"
+                        marginBottom="m"
+                        style={{
+                            marginBottom: '1rem',
+                        }}
+                    >
+                        Join our community of cloud engineers and grow without limits.
+                    </Text>
+                    <Button
+                        href="https://discord.com/invite/CpK4e2VPTf"
+                        variant="primary"
+                        size="l"
+                    >
+                        Join Discord
+                    </Button>
+                </Flex>
+            </Flex>
+
+            {newsletter.display && <Mailchimp newsletter={newsletter} />}
         </Flex>
-
-        {/* YouTube Section */}
-        <Flex flex={1} justifyContent="center" alignItems="center">
-          <iframe
-            src="https://www.youtube.com/embed/phLPKVx3Cl4?si=zghOhcozdSlmhKDG"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            style={{
-              width: '100%',
-              height: '300px',
-              borderRadius: '8px',
-            }}
-          ></iframe>
-        </Flex>
-      </Flex>
-
-      {/* Stats Section */}
-      <StatsSection />
-
-      {/* Existing Content */}
-      <RevealFx translateY="16" delay={0.6}>
-        <Projects range={[1, 1]} locale={locale} />
-      </RevealFx>
-
-      {routes['/blog'] && (
-        <Flex fillWidth gap="24" mobileDirection="column">
-          <Flex flex={1} paddingLeft="l">
-            <Heading as="h2" variant="display-strong-xs" wrap="balance">
-              Latest from the Blog
-            </Heading>
-          </Flex>
-          <Flex flex={3} paddingX="20">
-            <Posts range={[1, 2]} columns="2" locale={locale} />
-          </Flex>
-        </Flex>
-      )}
-
-      <Projects range={[2]} locale={locale} />
-    </Flex>
-  );
+    );
 }
