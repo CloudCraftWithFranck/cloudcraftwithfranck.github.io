@@ -181,14 +181,6 @@ const work = {
     // All projects will be listed on the /home and /work routes
 }
 
-const consultation = {
-    label: 'Consultation',
-    title: 'All the support you need to thrive in Cloud...',
-    description: `Lean or request a consultation from ${person.name} to cloud and deploy faster`
-    // Create new blog posts by adding a new .mdx file to app/blog/posts
-    // All posts will be listed on the /blog route
-}
-
 const gallery = {
     label: 'Gallery',
     title: 'My photo gallery',
@@ -270,4 +262,4 @@ const gallery = {
 }
 
 
-export { person, social, newsletter, home, about, blog, work, gallery, consultation };
+export { person, social, newsletter, home, about, blog, work, gallery };
