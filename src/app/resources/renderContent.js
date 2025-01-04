@@ -1,6 +1,7 @@
 import { person, newsletter, social, home, about, blog, work, gallery } from './content';
 import { createI18nContent } from './content-i18n';
 import { i18n } from './config';
+import ConsultationPage from '../[locale]/consultation/page';
 
 const renderContent = (t) => {
     if ( i18n ) {
@@ -14,6 +15,7 @@ const renderContent = (t) => {
             about,
             blog,
             work,
+            consultation,
             gallery
         }
     }
