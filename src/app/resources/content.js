@@ -45,7 +45,7 @@ const social = [
 
 const home = {
     label: 'Home',
-    title: `${person.name}'s Portfolio`,
+    title: `${person.name}'s Website`,
     description: `View my last post on Youtube as a ${person.role}`,
     headline: <>Cloud Advocate and Instructor</>,
     subline: <>I'm Franck, a cloud advocate and Instructor at <InlineCode>CloudCraftWithFranck</InlineCode>, where I craft intuitive<br/> cloud solution for engineers.</>
@@ -86,7 +86,7 @@ const about = {
                 images: [ // optional: leave the array empty if you don't want to display images
                     {
                         src: '/images/projects/project-01/cover-18.jpg',
-                        alt: 'Once UI Project',
+                        alt: 'CSE Project',
                         width: 16,
                         height: 9
                     }
@@ -183,8 +183,8 @@ const work = {
 
 const consultation = {
     label: 'Consultation',
-    title: 'Writing about cloud, AI and security...',
-    description: `Read what ${person.name} has been up to recently`
+    title: 'All the support you need to thrive in Cloud...',
+    description: `Lean or request a consultation from ${person.name} to cloud and deploy faster`
     // Create new blog posts by adding a new .mdx file to app/blog/posts
     // All posts will be listed on the /blog route
 }
@@ -198,7 +198,7 @@ const gallery = {
         { 
             src: '/images/gallery/img-01.jpg', 
             alt: 'image',
-            orientation: 'vertical'
+            orientation: 'horizontal'
         },
         { 
             src: '/images/gallery/img-02.jpg', 
@@ -208,7 +208,7 @@ const gallery = {
         { 
             src: '/images/gallery/img-03.jpg', 
             alt: 'image',
-            orientation: 'vertical'
+            orientation: 'horizontal'
         },
         { 
             src: '/images/gallery/img-04.jpg', 
@@ -223,7 +223,7 @@ const gallery = {
         { 
             src: '/images/gallery/img-06.jpg', 
             alt: 'image',
-            orientation: 'vertical'
+            orientation: 'horizontal'
         },
         { 
             src: '/images/gallery/img-07.jpg', 
@@ -233,7 +233,7 @@ const gallery = {
         { 
             src: '/images/gallery/img-08.jpg', 
             alt: 'image',
-            orientation: 'vertical'
+            orientation: 'horizontal'
         },
         { 
             src: '/images/gallery/img-09.jpg', 
@@ -248,7 +248,7 @@ const gallery = {
         { 
             src: '/images/gallery/img-11.jpg', 
             alt: 'image',
-            orientation: 'vertical'
+            orientation: 'horizontal'
         },
         { 
             src: '/images/gallery/img-12.jpg', 
@@ -270,4 +270,4 @@ const gallery = {
 }
 
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+export { person, social, newsletter, home, about, blog, work, gallery, consultation };
