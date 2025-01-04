@@ -2,6 +2,7 @@ import { Flex } from '@/once-ui/components';
 import { baseURL, renderContent } from '@/app/resources';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
+import ConsultationClient from './ConsultationClient';
 
 export async function generateMetadata(
     { params: { locale } }: { params: { locale: string } }
@@ -45,19 +46,6 @@ export default function Consultation(
     const t = useTranslations();
     const { consultation } = renderContent(t);
 
-    const pricingPlans = [
-        {
-            title: t('consultation.basicPlanTitle'),
-            description: t('consultation.basicPlanDescription'),
-            price: t('consultation.basicPlanPrice'),
-        },
-        {
-            title: t('consultation.premiumPlanTitle'),
-            description: t('consultation.premiumPlanDescription'),
-            price: t('consultation.premiumPlanPrice'),
-        },
-    ];
-
     return (
         <Flex
             fillWidth
@@ -67,43 +55,7 @@ export default function Consultation(
         >
             <h1>{consultation.title}</h1>
             <p>{consultation.description}</p>
-            <Flex
-                justify="space-around"
-                direction="row"
-                wrap="wrap"
-                gap="m"
-            >
-                {pricingPlans.map((plan, index) => (
-                    <div
-                        key={index}
-                        style={{
-                            border: '1px solid #ccc',
-                            borderRadius: '8px',
-                            padding: '16px',
-                            maxWidth: '300px',
-                            textAlign: 'center',
-                        }}
-                    >
-                        <h2>{plan.title}</h2>
-                        <p>{plan.description}</p>
-                        <p style={{ fontSize: '24px', fontWeight: 'bold' }}>
-                            {plan.price}
-                        </p>
-                        <button
-                            style={{
-                                backgroundColor: '#0070f3',
-                                color: 'white',
-                                padding: '10px 20px',
-                                border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer',
-                            }}
-                        >
-                            {t('consultation.bookNow')}
-                        </button>
-                    </div>
-                ))}
-            </Flex>
+            <ConsultationClient />
         </Flex>
     );
 }
