@@ -167,6 +167,7 @@ const about = {
     Credentials: {
         display: true, // set to false to hide this section
         title: t("about.Credentials.title"),
+        description: <>{t("about.technical.skills.Certifications.description")}</>,
         images: [
             {
                 src: '/images/projects/project-01/badge-04.jpg',
