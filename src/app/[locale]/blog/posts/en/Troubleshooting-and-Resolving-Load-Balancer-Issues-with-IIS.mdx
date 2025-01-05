@@ -56,19 +56,9 @@ Root Cause Identified: Application pool misconfiguration on VMSS2 was causing he
 Fixing the Application Pool
 Updated the application pool configuration on VMSS2 to ensure it started automatically:
 
-<CodeBlock
-    className="custom-code-block"
-    liveEditor
-    codeInstances={[
-        {
-            code: `appcmd set apppool /apppool.name:"DefaultAppPool" /autoStart:true
-appcmd start apppool /apppool.name:"DefaultAppPool"`,
-            label: "Git Configuration",
-            language: "bash",
-        },
-    ]}
-    copyButton
-/>
+```bash
+appcmd set apppool /apppool.name:"DefaultAppPool" /autoStart:true
+appcmd start apppool /apppool.name:"DefaultAppPool"
 
 Restarted IIS:
 
