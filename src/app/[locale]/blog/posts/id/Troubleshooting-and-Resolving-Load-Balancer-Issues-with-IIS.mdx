@@ -61,55 +61,23 @@ appcmd start apppool /apppool.name:"DefaultAppPool"
 
 c. Restarted IIS:
 
-<CodeBlock
-    className="custom-code-block"
-    liveEditor
-    codeInstances={[
-        {
-            code: `iisreset`,
-            label: "Git Configuration",
-            language: "bash",
-        },
-    ]}
-    copyButton
-/>
+iisreset
 
 d. Automated the fix for all instances in VMSS2 using an Azure Custom Script Extension. The script ensured consistent configuration across scale set instances:
 
-<CodeBlock
-    className="custom-code-block"
-    liveEditor
-    codeInstances={[
-        {
-            code: `# Custom Script for IIS Configuration
+# Custom Script for IIS Configuration
 appcmd set apppool /apppool.name:"DefaultAppPool" /autoStart:true
-iisreset`,
-            label: "Git Configuration",
-            language: "bash",
-        },
-    ]}
-    copyButton
-/>
+iisreset
+
 
 e. Updating Health Probe Configuration
 f. Changed the health probe path to point to a more reliable endpoint (/default.aspx) instead of the custom /healthcheck endpoint:
 
-<CodeBlock
-    className="custom-code-block"
-    liveEditor
-    codeInstances={[
-        {
-            code: `Path: /default.aspx
+Path: /default.aspx
 Protocol: HTTP
 Port: 80
 Interval: 5 seconds
-Unhealthy Threshold: 2 failures`,
-            label: "Git Configuration",
-            language: "bash",
-        },
-    ]}
-    copyButton
-/>
+Unhealthy Threshold: 2 failures
 
 - Reason: IIS serves /default.aspx as part of its default configuration, reducing the likelihood of probe failures.
 
