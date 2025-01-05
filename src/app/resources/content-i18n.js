@@ -129,6 +129,12 @@ const createI18nContent = (t) => {
                     description: <>{t("about.technical.skills.Azure.description")}</>,
                     images: [
                         {
+                            src: '/images/projects/project-01/cover-01.jpg',
+                            alt: 'Project image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
                             src: '/images/projects/project-01/cover-02.jpg',
                             alt: 'Project image',
                             width: 16,
@@ -136,6 +142,12 @@ const createI18nContent = (t) => {
                         },
                         {
                             src: '/images/projects/project-01/cover-03.jpg',
+                            alt: 'Project image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/cover-04.jpg',
                             alt: 'Project image',
                             width: 16,
                             height: 9
