@@ -107,24 +107,14 @@ Used Terraform to manage VMSS configurations, ensuring consistency and preventin
 
 ### Example Terraform snippet for VMSS configuration:
 
-<CodeBlock
-    className="custom-code-block"
-    liveEditor
-    codeInstances={[
-        {
-            code: `resource "azurerm_virtual_machine_scale_set" "example" {
+resource "azurerm_virtual_machine_scale_set" "example" {
   name                = "vmss-example"
   ...
   os_profile {
     custom_data = filebase64("${path.module}/init-script.sh")
   }
-}`,
-            label: "Git Configuration",
-            language: "bash",
-        },
-    ]}
-    copyButton
-/>
+}
+
 
 ### Proactive Maintenance:
 
