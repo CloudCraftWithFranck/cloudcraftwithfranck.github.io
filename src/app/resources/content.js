@@ -131,8 +131,8 @@ const about = {
         title: 'Technical skills',
         skills: [
             {
-                title: 'Azure',
-                description: <>Able to configure, deploy, and manage any azure service.</>,
+                title: 'Personal Deployments',
+                description: <>Able to configure, deploy, and manage any service to cloud.</>,
                 // optional: leave the array empty if you don't want to display images
                 images: [
                     {

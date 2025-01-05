@@ -125,7 +125,7 @@ const createI18nContent = (t) => {
             title: t("about.technical.title"),
             skills: [
                 {
-                    title: 'Azure',
+                    title: 'Personal Deployments',
                     description: <>{t("about.technical.skills.Azure.description")}</>,
                     images: [
                         {
