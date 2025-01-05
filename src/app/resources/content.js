@@ -160,7 +160,7 @@ const about = {
                         height: 9
                     },
                 ]
-            }
+            },
             {
                 title: 'Certifications',
                 description: <>{t("about.technical.skills.Certifications.description")}</>, // "." not accepted in next-intl namespace
