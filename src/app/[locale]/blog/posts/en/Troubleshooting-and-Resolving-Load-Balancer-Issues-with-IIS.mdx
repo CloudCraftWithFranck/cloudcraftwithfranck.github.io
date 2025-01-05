@@ -53,14 +53,13 @@ Errors indicated that the application pool was not starting correctly during ins
 Root Cause Identified: Application pool misconfiguration on VMSS2 was causing health probe failures.
 
 ## Step 2: Resolving the Issue
-Fixing the Application Pool
-Updated the application pool configuration on VMSS2 to ensure it started automatically:
+a. Fixing the Application Pool
+b. Updated the application pool configuration on VMSS2 to ensure it started automatically:
 
-```bash
 appcmd set apppool /apppool.name:"DefaultAppPool" /autoStart:true
 appcmd start apppool /apppool.name:"DefaultAppPool"
 
-Restarted IIS:
+c. Restarted IIS:
 
 <CodeBlock
     className="custom-code-block"
@@ -75,7 +74,7 @@ Restarted IIS:
     copyButton
 />
 
-Automated the fix for all instances in VMSS2 using an Azure Custom Script Extension. The script ensured consistent configuration across scale set instances:
+d. Automated the fix for all instances in VMSS2 using an Azure Custom Script Extension. The script ensured consistent configuration across scale set instances:
 
 <CodeBlock
     className="custom-code-block"
@@ -92,8 +91,8 @@ iisreset`,
     copyButton
 />
 
-Updating Health Probe Configuration
-Changed the health probe path to point to a more reliable endpoint (/default.aspx) instead of the custom /healthcheck endpoint:
+e. Updating Health Probe Configuration
+f. Changed the health probe path to point to a more reliable endpoint (/default.aspx) instead of the custom /healthcheck endpoint:
 
 <CodeBlock
     className="custom-code-block"
