@@ -187,7 +187,49 @@ const createI18nContent = (t) => {
                             alt: 'Certification image',
                             width: 16,
                             height: 9
-                        },            
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-08.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-09.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-10.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-11.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-12.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-13.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-14.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },                    
                     ]
                 },
             ]
