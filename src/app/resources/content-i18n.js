@@ -143,15 +143,51 @@ const createI18nContent = (t) => {
                     ]
                 },
                 {
-                    title: 'Terraform',
-                    description: <>{t("about.technical.skills.Terraform.description")}</>, // "." not accepted in next-intl namespace
+                    title: 'Certifications',
+                    description: <>{t("about.technical.skills.Certifications.description")}</>, // "." not accepted in next-intl namespace
                     images: [
                         {
-                            src: '/images/projects/project-01/cover-04.jpg',
-                            alt: 'Project image',
+                            src: '/images/projects/project-01/badge-04.jpg',
+                            alt: 'Certification image',
                             width: 16,
                             height: 9
                         },
+                        {
+                            src: '/images/projects/project-01/badge-03.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-02.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-01.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-05.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-06.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },
+                        {
+                            src: '/images/projects/project-01/badge-07.jpg',
+                            alt: 'Certification image',
+                            width: 16,
+                            height: 9
+                        },            
                     ]
                 },
             ]
