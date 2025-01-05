@@ -404,7 +404,7 @@ export default function Home(
                             marginBottom: '1rem',
                         }}
                     >
-                        Join our community of cloud engineers and grow without limits.
+                        Join our CloudCraftWithFranck's community of cloud engineers and grow without limits.
                     </Text>
                     <Button
                         href="https://discord.com/invite/CpK4e2VPTf"
