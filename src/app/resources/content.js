@@ -35,7 +35,7 @@ const social = [
     {
         name: 'X',
         icon: 'x',
-        link: 'https://x.com/',
+        link: 'https://x.com/cloudcwfranck',
     },
     {
         name: 'Email',

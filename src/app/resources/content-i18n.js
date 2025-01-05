@@ -35,7 +35,7 @@ const createI18nContent = (t) => {
         {
             name: 'X',
             icon: 'x',
-            link: '',
+            link: 'https://x.com/cloudcwfranck',
         },
         {
             name: 'Email',
