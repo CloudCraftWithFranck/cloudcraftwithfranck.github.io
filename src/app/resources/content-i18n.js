@@ -25,7 +25,7 @@ const createI18nContent = (t) => {
         {
             name: 'GitHub',
             icon: 'github',
-            link: 'https://github.com/CloudCraftWithFranck',
+            link: 'https://github.com/cloudcwfranck',
         },
         {
             name: 'LinkedIn',
