@@ -70,7 +70,7 @@ const about = {
     intro: {
         display: true,
         title: 'Introduction',
-        description: <>Franck Kengne is a US-based Cloud Advocate with a passion for transforming complex cloud challenges into simple, and straightforward solutions. His work spans cloud challenges, problem solving, and critical thinking as well as interviews in cloud technology.</>
+        description: <>I am a 6X Azure and 4X AWS certified and US-based Cloud Advocate with a passion for transforming complex cloud challenges into simple, and straightforward solutions. My work spans cloud challenges, problem solving, and critical thinking as well as interviews tips in cloud technology.</>
     },
     work: {
         display: true, // set to false to hide this section
