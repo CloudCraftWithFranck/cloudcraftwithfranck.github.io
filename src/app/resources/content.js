@@ -47,7 +47,7 @@ const social = [
 const home = {
     label: 'Home',
     title: `${person.name}'s Website`,
-    description: `View my last post on Youtube as a ${person.role}`,
+    description: `Hi, I’m Franck! I’m a ${person.role} passionate about simplifying cloud technologies that frustrate engineers and hold back businesses, while advocating, designing, teaching, and mentoring to create innovative solutions.`,
     headline: <>Cloud Advocate and Instructor</>,
     subline: <>I'm Franck, a cloud advocate and Instructor at <InlineCode>CloudCraftWithFranck</InlineCode>, where I craft intuitive<br/> cloud solution for engineers.</>
 }
