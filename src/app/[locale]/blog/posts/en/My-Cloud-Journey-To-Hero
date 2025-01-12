@@ -1,0 +1,86 @@
+---
+title: "My cloud journey"
+publishedAt: "2025-01-12"
+summary: "Read how I started my cloud journey and see if you can benefit from it."
+tag: "Journey"
+---
+
+## The Pivot That Changed Everything
+When I began my associate degree in cybersecurity at Rowan College, I envisioned myself as a security engineer, defending systems and networks against threats. But life had other plans. My passion shifted when I discovered automation tools—pipelines, workflows, and the magic of making systems work seamlessly together.
+
+This passion ignited a desire to explore cloud engineering, but I knew I had to master the fundamentals first. That’s when Linux entered the picture.
+
+### The Linux Foundation
+Understanding Linux wasn’t optional; it was essential. I dedicated six months to an advanced Linux course focused on open-source systems. This foundation was pivotal not just for cloud engineering but also for unlocking the world of automation tools like Terraform, Ansible, and monitoring tools such as Grafana and Prometheus.
+
+Linux isn’t just an operating system; it’s the backbone of countless open-source projects and scripts. You don’t need to master it, but you need to be comfortable enough to navigate, script, and troubleshoot.
+
+### My First Break
+At 24, I landed my first IT job as a technician. It wasn’t glamorous, but it was a critical stepping stone. I approached every task as a learning opportunity, absorbing everything I could about IT infrastructure, troubleshooting, and system management. Over the years, I advanced from an IT Technician Analyst to a Cloud Advocate, exposing myself to tools like ElasticSearch, OpenNMS, and Red Hat Linux.
+
+What started as a small entry point into IT became a career defined by continuous learning, curiosity, and adaptability.
+
+### The Certifications That Shaped My Path
+Certifications were my way of structuring my learning and validating my skills. Here are the 
+certifications I’ve earned:
+
+- Microsoft Azure Fundamentals (AZ-900): A great starting point for anyone new to cloud computing. It covers foundational cloud concepts and Azure services.
+- Microsoft Azure Architect Design (AZ-305): This advanced certification focuses on designing scalable and reliable Azure solutions.
+- Microsoft Azure Security Technologies (AZ-500): For those aiming to specialize in cloud security, this certification teaches you how to secure Azure environments.
+- AWS Certified Solutions Architect – Associate (SAA-C03): This certification is perfect for understanding how to design resilient and cost-effective solutions on AWS.
+
+## Guidance for Earning Certifications
+1. Start with Fundamentals:
+Begin with entry-level certifications like AZ-900 or AWS Cloud Practitioner. These provide a high-level understanding of cloud services and their benefits.
+
+2. Build Incrementally:
+Once you’re comfortable with the basics, move on to certifications aligned with your career goals. For instance, if you’re interested in architecture, AZ-305 or AWS SAA-C03 are ideal.
+
+3. Hands-On Practice:
+Certifications are more than just theory. Use free-tier accounts on Azure and AWS to practice deploying virtual machines, setting up networks, and using automation tools. Hands-on experience solidifies your learning.
+
+4. Leverage Learning Platforms:
+Resources like Microsoft Learn, A Cloud Guru, and YouTube tutorials are invaluable. I recommend pairing video tutorials with practical labs to reinforce concepts.
+
+5. Focus on Key Topics:
+
+- For AZ-900: Cloud models (IaaS, PaaS, SaaS), pricing, and Azure services.
+- For AZ-305: Design principles, scalability, high availability, and security.
+- For AZ-500: Security configurations, identity management, and compliance.
+- For SAA-C03: AWS architectural best practices, storage solutions, and networking.
+
+6. Schedule and Commit:
+Set a timeline for each certification and stick to it. A structured plan helps you maintain focus and momentum.
+
+7. Join Study Groups and Forums:
+Communities like Reddit, LinkedIn groups, or Discord channels provide support and insights from others on the same path.
+
+8. Don’t Just Memorize—Understand:
+Focus on understanding the "why" behind concepts. This not only helps with exams but also prepares you for real-world scenarios.
+
+### The Power of Projects
+One of the most valuable lessons I learned was the importance of starting small. My first project? Building a simple website using HTML and CSS. I deployed it with GitHub Pages—nothing fancy, but it was mine. That small project taught me about hosting, deploying, and working with version control.
+
+Every engineer should start with something meaningful to them. Use three to five tools at a time, such as:
+
+- Linux: To host your work.
+- VSCode: To write code.
+- WSL (Windows Subsystem for Linux): If you’re on a Windows machine.
+- GitHub: For version control and deployment.
+The goal isn’t perfection; it’s progress. Each project builds confidence and exposes you to the tools and processes you’ll need in the cloud engineering world.
+
+### My Advice for Aspiring Cloud Engineers
+If I could give one piece of advice to aspiring cloud engineers, it would be this: learn Linux. Not because you need to become an expert, but because so much of what you’ll do integrates seamlessly with it. From automation scripts to open-source tools, Linux is the common denominator.
+
+And don’t just study—build. Think of a simple project where you can combine tools like Terraform, Ansible, or Docker with your Linux knowledge. Each step will make the cloud engineering path clearer and more exciting.
+
+### Where I Am Today
+Today, as a cloud advocate specializing in Azure and AWS, I design, build, and deploy scalable cloud solutions. My work involves using tools like Terraform and Ansible, monitoring systems with Grafana and Prometheus, and guiding others through the cloud engineering journey.
+
+The road wasn’t always smooth, but every challenge was an opportunity to learn and grow.
+
+### Your Cloud Journey Awaits
+If you’re considering a career in cloud engineering, start where you are with what you have. Experiment with small projects, dive into Linux, and explore open-source communities. Remember, the cloud isn’t just about technology—it’s about creating solutions that make an impact.
+
+Are you ready to take your first step? Share your projects and connect with others in the field. Let’s build the future of technology together.
+
