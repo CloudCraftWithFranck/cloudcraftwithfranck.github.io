@@ -1,0 +1,104 @@
+---
+title: "Building My Personal Cloud Engineering Website: CloudCraft with Franck"
+publishedAt: "2025-01-12"
+summary: "In this article, I’ll share how I built my website step by step, the tools I used, and lessons learned along the way."
+tag: "CloudCraftWithFranck"
+---
+Creating my personal website, CloudCraft with Franck, was one of the most fulfilling projects I’ve undertaken as a cloud engineer. It’s my platform to showcase my work, write blogs, publish case studies, and share insights with the cloud engineering community. And the best part? I built and deployed it using free tools and resources, which made the journey both rewarding and cost-effective.
+
+In this article, I’ll share how I built my website step by step, the tools I used, and lessons learned along the way.
+
+## Why I Built CloudCraft with Franck
+
+### I wanted a centralized space to:
+
+- Showcase My Work: Highlight personal projects, case studies, and contributions to open source.
+- Write Blogs: Share technical insights, solutions to challenges, and best practices for cloud engineering.
+- Engage with the Community: Build credibility and connect with others in the tech industry.
+
+## How I Built the Website
+Here’s a step-by-step breakdown of how I created my website:
+
+### 1. Planning the Project
+Before writing a single line of code, I focused on planning:
+
+- Content: What sections the website should include (blogs, projects, case studies).
+- Tools: I decided on Next.js as the framework, GitHub for version control, Vercel for hosting, and Canva for visuals.
+- Structure: I designed the repository structure to keep things organized and scalable (refer to the screenshot for details).
+
+### 2. Setting Up the Development Environment
+Since I was working on a Windows machine, I relied on WSL (Windows Subsystem for Linux) to streamline development:
+
+Installed Node.js and npm within WSL for managing dependencies.
+Used Visual Studio Code (VSCode) as my IDE to write and manage the project’s codebase.
+Connected GitHub for version control, enabling seamless commits and pushes.
+
+### 3. Using Next.js for the Website
+I chose Next.js because it’s a powerful framework for building React-based applications, and it integrates well with modern tools like Vercel. Here's how I structured the project:
+
+### Repository Structure
+
+- /src/app: Contains core components like layout and page templates.
+- /blog/posts: Articles are written in .mdx format for Markdown with React components. This allows dynamic, interactive blog content.
+- /resources: Stores configuration files (e.g., sitemap.ts, robots.ts).
+- /components: Houses reusable components for layouts, buttons, and other UI elements.
+- /public: Includes static assets like images and icons.
+
+### Key Features
+Dynamic Routing: Next.js allowed me to create dynamic blog post pages based on .mdx files stored in blog/posts.
+Static Site Generation (SSG): Ensured fast load times by pre-rendering pages during build time.
+
+### 4. Writing Articles with MDX
+I leveraged .mdx files to write and publish my articles. Why MDX?
+
+Combines Markdown simplicity with the power of React components.
+Allows embedding custom elements like charts or interactive code snippets directly in blog posts.
+For example, articles like “Troubleshooting Kubernetes Cluster Issues” and “Ansible Tips for AWS” were written in MDX, and the structure made it easy to manage content.
+
+### 5. Designing Visuals with Canva
+To enhance the website’s aesthetic and make the blogs visually appealing, I used Canva to create images, graphics, and banners. Canva is user-friendly and, most importantly, free!
+
+Tip for Graphics
+Keep visuals consistent with your site’s theme.
+Use clean, professional designs to make the content more engaging.
+
+### 6. Hosting and Deployment with Vercel
+I deployed the website on Vercel, which offers free hosting for personal projects. Vercel is a perfect match for Next.js because it simplifies deployment with a one-click setup.
+
+Deployment Process
+- Pushed my code to GitHub.
+- Connected the GitHub repository to Vercel.
+Every time I pushed new changes to the main branch, Vercel automatically built and deployed the site.
+
+### 7. Staying Organized
+One of the most critical lessons I learned during this project was the importance of staying organized:
+
+Focus on One Task at a Time: I started with the blog section before adding case studies or gallery features.
+Keep Your Repository Structured: The clean folder structure helped me manage components, posts, and resources efficiently.
+Use Version Control: I committed small changes often to avoid losing progress.
+
+### 8. Learning from the Community
+Throughout this project, I leaned heavily on the open-source community. When I faced challenges:
+
+- I searched for answers on GitHub Discussions, Stack Overflow, and the Next.js documentation.
+- I asked for help and collaborated with others who had faced similar issues.
+Remember, no one builds alone—there’s always someone willing to help!
+
+### What I Learned from the Process
+- Start Small: Begin with a single feature or page, then expand as your confidence grows.
+- Iterate: Your first version doesn’t have to be perfect. Get it running, then refine.
+- Leverage Free Tools: From Canva to Vercel, there are many free resources to build a professional-quality site.
+- Stay Consistent: Regular updates and maintenance keep the site fresh and relevant.
+
+Features of CloudCraft with Franck
+
+Today, my website serves as:
+
+- A Blog Hub: Articles written in MDX cover topics like Kubernetes, Ansible, and cloud-native tools.
+- A Portfolio: Showcases my case studies, open-source contributions, and professional projects.
+- A Resource for Others: I aim to inspire and help others by sharing insights, solutions, and lessons learned.
+
+## Conclusion
+Building CloudCraft with Franck was more than just a technical exercise—it was a creative journey that allowed me to combine my skills, passion, and a love for sharing knowledge. Whether you’re a cloud engineer or aspiring developer, creating a personal website is one of the best ways to showcase your work, build credibility, and engage with the tech community.
+
+Ready to start your journey? Visit CloudCraft with Franck to see the result of my efforts and get inspired to build your own!
