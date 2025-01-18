@@ -1,81 +1,81 @@
 {
     "person": {
-        "role": "Insinyur Desain"
+        "role": "Cloud Advocate"
     },
     "newsletter": {
-        "title": "Langganan Buletin {firstName}",
-        "description": "Saya sesekali menulis tentang desain, teknologi, dan berbagi pemikiran tentang persimpangan kreativitas dan rekayasa",
-        "button": "Daftar"
+        "title": "Subscribe to {firstName}'s Newsletter",
+        "description": "I occasionally write about cloud, AI, security, and share thoughts on the problem solving and critical solutions for cloud engineering",
+        "button": "Sign up"
     },
     "home": {
-        "label": "Beranda",
-        "title": "Portofolio {name}",
-        "description": "Situs web portofolio yang menampilkan karya saya sebagai {role}",
-        "headline": "Insinyur desain dan pembangun",
-        "subline": "Saya Selene, seorang insinyur desain di FLY, di mana saya membuat pengalaman pengguna yang intuitif. Setelah jam kerja, saya mengerjakan proyek-proyek pribadi."
+        "label": "Home",
+        "title": "{name}'s Portfolio",
+        "description": "Portfolio website showcasing my work as a {role}",
+        "headline": "Cloud Advocate and Instructor",
+        "subline": "I'm Franck, a Cloud Advocate at CLOUDCRAFTWITHFRANCK, where I craft cloud solutions for engineers. After hours, I build my own projects."
     },
     "about": {
-        "label": "Tentang",
-        "title": "Tentang Saya",
-        "description": "Kenali {name}, {role} dari {location}",
+        "label": "About",
+        "title": "About me",
+        "description": "Meet {name}, {role} from {location}",
         "intro": {
-            "title": "Pengantar",
-            "description": "Selene adalah seorang insinyur desain yang berbasis di Jakarta dengan hasrat untuk mengubah tantangan kompleks menjadi solusi desain yang sederhana dan elegan. Karyanya meliputi antarmuka digital, pengalaman interaktif, dan pertemuan antara desain dan teknologi."
+            "title": "Introduction",
+            "description": "Franck Kengne is a US-based Cloud Advocate with a passion for transforming complex cloud challenges into simple, and straightforward solutions. His work spans cloud challenges, problem solving, and critical thinking as well as interviews in cloud technology."
         },
         "work": {
-            "title": "Pengalaman Kerja",
+            "title": "Work Experience",
             "experiences": {
-                "FLY": {
-                    "timeframe": "2022 - Sekarang",
-                    "role": "Senior Design Engineer",
-                    "achievements": "Mendesain ulang UI/UX untuk platform FLY, menghasilkan peningkatan keterlibatan pengguna sebesar 20% dan waktu muat lebih cepat sebesar 30%.;Memimpin integrasi alat AI ke dalam alur kerja desain, memungkinkan desainer untuk iterasi 50% lebih cepat."
+                "CSE": {
+                    "timeframe": "2023 - Present",
+                    "role": "Senior Azure Cloud Engineer",
+                    "achievements": "Redesigned, architected and managed Microsoft PowerApps solutions in enterprise Azure environments, integrating custom APIs, automation workflows, and complex logic apps"
                 },
-                "Creativ3": {
-                    "timeframe": "2018 - 2022",
-                    "role": "Desainer Utama",
-                    "achievements": "Mengembangkan sistem desain yang menyatukan merek di berbagai platform, meningkatkan konsistensi desain sebesar 40%.;Memimpin tim lintas fungsi untuk meluncurkan lini produk baru, berkontribusi pada peningkatan pendapatan perusahaan sebesar 15%."
+                "The OpenNMS Group": {
+                    "timeframe": "2022 - 2023",
+                    "role": "Senior IT Operations Engineer",
+                    "achievements": "Developed a Proficient in Infrastructure as Code (IaC) using Terraform, automating infrastructure provisioning and configuration for both on-premises and cloud environments."
                 }
             }
         },
         "studies": {
-            "title": "Pendidikan",
+            "title": "Studies",
             "institutions": {
-                "University of Jakarta": {
-                    "description": "Belajar teknik perangkat lunak."
+                "University of Maryland Global Campus": {
+                    "description": "Studied software engineering and cybersecurity"
                 },
-                "Build the Future": {
-                    "description": "Belajar pemasaran online dan personal branding."
+                "Rowan College Burlington County": {
+                    "description": "Studied information insurance and cybersecurity."
                 }
             }
         },
         "technical": {
-            "title": "Kemampuan Teknis",
+            "title": "Technical skills",
             "skills": {
-                "Figma": {
-                    "description": "Mampu membuat prototipe di Figma dengan Once UI dengan kecepatan luar biasa."
+                "Azure": {
+                    "description": "Able to configure, deploy, and manage any azure service."
                 },
-                "Nextjs": {
-                    "description": "Membangun aplikasi generasi berikutnya dengan Next.js + Once UI + Supabase."
+                "Terraform": {
+                    "description": "Building scalable infrastructure using terraform is my passion."
                 }
             }
         }
     },
     "blog": {
         "label": "Blog",
-        "title": "Menulis tentang desain dan teknologi...",
-        "description": "Baca apa yang {name} lakukan baru-baru ini"
+        "title": "Writing about cloud, AI and security...",
+        "description": "Read what {name} has been up to recently"
     },
     "work": {
-        "label": "Karya",
-        "title": "Proyek Saya",
-        "description": "Proyek desain dan pengembangan oleh {name}"
+        "label": "Work",
+        "title": "My projects",
+        "description": "Design and dev projects by {name}"
     },
     "gallery": {
-        "label": "Galeri",
-        "title": "Galeri Foto Saya",
-        "description": "Koleksi foto oleh {name}"
+        "label": "Gallery",
+        "title": "My photo gallery",
+        "description": "A photo collection by {name}"
     },
     "projectCard": {
-        "label": "Baca Studi Kasus"
+        "label": "Read Case Study"
     }
 }
